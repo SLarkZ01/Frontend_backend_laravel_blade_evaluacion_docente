@@ -96,27 +96,27 @@
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="{{ route('user.index') }}">
                             <i class="fas fa-home"></i> Inicio
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="acta-compromiso.html">
+                        <a class="nav-link" href="{{ route('decano.acta_compromiso') }}">
                             <i class="fas fa-file-signature"></i> Generar Acta de compromiso
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="seguimiento-plan-mejora.html">
+                        <a class="nav-link active" href="{{ route('decano.spm') }}">
                             <i class="fas fa-tasks"></i> Seguimiento a plan de mejora
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="alertas-bajo-desempeno.html">
+                        <a class="nav-link" href="{{ route('decano.abd') }}">
                             <i class="fas fa-exclamation-triangle"></i> Alertas de bajo desempeño
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="proceso-sancion-retiro.html">
+                        <a class="nav-link" href="{{ route('decano.psr') }}">
                             <i class="fas fa-user-minus"></i> Proceso de Sanciones/Retiro
                         </a>
                     </li>
