@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\DecanoCordinadorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,3 +48,16 @@ Route::get('/Admin/reportes', [AdminController::class, 'reportes'])->name('admin
 // rutas para los roles y permisos
 Route::get('/Admin/roles_permisos', [AdminController::class, 'roles_permisos'])
 ->name('admin.roles_permisos');
+
+
+// rutas de decano docente //
+// acta de compromiso
+Route::get('/decano/actaCompromiso', [DecanoCordinadorController::class, 'acta_compromiso'])->name('decano.acta_compromiso');
+// alertas bajo desempeño
+Route::get('/decano/alertasBajoDesempeno', [DecanoCordinadorController::class, 'abd'])->name('decano.abd');
+// modales seguimiento
+Route::get('/decano/modalesSeguimiento', [DecanoCordinadorController::class, 'seguimiento'])->name('decano.seguimiento');
+// proceso sancion retiro
+Route::get('/decano/procesoSancionRetiro', [DecanoCordinadorController::class, 'psr'])->name('decano.psr');
+// seguimiento plan de mejora
+Route::get('/decano/seguimientoPlanMejora', [DecanoCordinadorController::class, 'spm'])->name('decano.spm');
