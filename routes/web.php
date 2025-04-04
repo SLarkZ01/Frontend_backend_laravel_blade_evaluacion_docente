@@ -5,6 +5,7 @@ use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\DecanoCordinadorController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,8 +27,8 @@ Route::get("/docente/PDmejorado", [DocenteController::class, 'pde'])->name('doce
 //resultados
 Route::get("/docente/resultados", [DocenteController::class, 'result'])->name('docente.result');
 
-
-
+//
+Route::post('/login', [loginController::class, 'validation'])->name('login.process');
 
 
 

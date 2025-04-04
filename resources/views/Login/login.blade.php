@@ -52,14 +52,15 @@
         <div class="card p-4 shadow-lg">
             <h2 class="card-title text-center mb-4">Iniciar sesión</h2>
             <div id="loginAlert" class="alert alert-danger d-none"></div>
-            <form id="loginForm">
+            <form  action="{{ route('login.process') }}" method="POST">
+                @csrf <!-- Protección contra ataques CSRF  id="loginForm"  -->
                 <div class="mb-3">
                     <label for="username" class="form-label">Usuario</label>
-                    <input type="text" id="username" class="form-control" required>
+                    <input type="text" id="username" name="username" class="form-control" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" id="password" class="form-control" required>
+                    <input type="password" id="password" name="password" class="form-control" required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Entrar</button>
             </form>
