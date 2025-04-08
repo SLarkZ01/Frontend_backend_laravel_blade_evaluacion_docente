@@ -11,7 +11,7 @@ class loginController extends Controller
     //
     public function Login()
     {
-        
+
         return view('Login.login');
     }
 
@@ -22,15 +22,15 @@ class loginController extends Controller
             'username' => 'required',
             'password' => 'required'
         ]);
-    
+
         // Buscar el usuario en la base de datos
         $usuario = Usuario::where('correo', $request->username)->first();
-    
+
         // Verificar si el usuario existe y la contraseña es correcta
-       if ($usuario && $request->password === $usuario->contrasena) {
+        if ($usuario && $request->password === $usuario->contrasena) {
             // Guardar usuario en la sesión
-        //    Auth::login($usuario);
-    
+            //    Auth::login($usuario);
+
             // Redirigir según el rol del usuario
             switch ($usuario->id_rol) {
                 case 1:
@@ -47,7 +47,4 @@ class loginController extends Controller
             return back()->withErrors(['error' => 'Credenciales incorrectas']);
         }
     }
-
-    
-    
 }

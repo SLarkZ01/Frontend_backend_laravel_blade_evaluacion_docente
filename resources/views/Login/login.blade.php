@@ -55,8 +55,8 @@
             <form  action="{{ route('login.process') }}" method="POST">
                 @csrf <!-- Protección contra ataques CSRF  id="loginForm"  -->
                 <div class="mb-3">
-                    <label for="username" class="form-label">Usuario</label>
-                    <input type="text" id="username" name="username" class="form-control" required>
+                    <label for="username" class="form-label">Correo</label>
+                    <input type="email" id="username" name="username" class="form-control" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Contraseña</label>

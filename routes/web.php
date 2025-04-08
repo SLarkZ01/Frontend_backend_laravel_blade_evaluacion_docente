@@ -32,7 +32,7 @@ Route::post('/login', [loginController::class, 'validation'])->name('login.proce
 
 
 
-Route::get("/user", [HomeController::class, 'index'])->name('user.index');
+Route::get("/decano", [HomeController::class, 'index'])->name('user.index');
 
 Route::get('/', [loginController::class, 'Login'])->name('user.login');
 
