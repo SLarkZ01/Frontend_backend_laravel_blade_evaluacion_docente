@@ -1,3 +1,7 @@
+@extends('layouts.app')
+@section('titulo', 'Panel de Administrador')
+@section('contenido')
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -649,3 +653,4 @@
 </body>
 
 </html>
+@endsection
