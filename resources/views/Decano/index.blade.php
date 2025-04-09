@@ -106,7 +106,7 @@
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.index') }}">
+                        <a class="nav-link active" href="{{ route('user.index') }}">
                             <i class="fas fa-home"></i> Inicio
                         </a>
                     </li>
@@ -116,7 +116,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('decano.spm') }}">
+                        <a class="nav-link" href="{{ route('decano.spm') }}">
                             <i class="fas fa-tasks"></i> Seguimiento a plan de mejora
                         </a>
                     </li>
