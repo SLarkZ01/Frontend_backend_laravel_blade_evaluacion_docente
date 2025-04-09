@@ -27,7 +27,7 @@ Route::get("/docente/PDmejorado", [DocenteController::class, 'pde'])->name('doce
 //resultados
 Route::get("/docente/resultados", [DocenteController::class, 'result'])->name('docente.result');
 
-//
+//Login 
 Route::post('/login', [loginController::class, 'validation'])->name('login.process');
 
 
