@@ -17,7 +17,7 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{asset('resources/css/styles.css')}}">
+    <link rel="stylesheet" href="{{asset('css/styles.css')}}">
     <style>
         .header-card {
             background-color: #f8f9fa;
@@ -610,7 +610,7 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     <!-- Script personalizado -->
-    <script src="admin-script.js"></script>
+    <script src="js/LogicaAdministrador/Admin-script.js"></script>
 
     <script>
         // Script específico para la página de roles y permisos

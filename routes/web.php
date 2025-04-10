@@ -51,7 +51,7 @@ Route::get('/Admin/roles_permisos', [AdminController::class, 'roles_permisos'])
 ->name('admin.roles_permisos');
 
 
-// rutas de decano docente //
+// rutas de decano coordinador//
 // acta de compromiso
 Route::get('/decano/actaCompromiso', [DecanoCordinadorController::class, 'acta_compromiso'])->name('decano.acta_compromiso');
 // alertas bajo desempeño

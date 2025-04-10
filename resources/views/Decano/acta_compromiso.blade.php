@@ -15,7 +15,7 @@
     <!-- Summernote para editor de texto enriquecido -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
     <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{asset('resources/css/styles.css')}}">
+    <link rel="stylesheet" href="{{asset('css/styles.css')}}">
     <style>
         .header-acta {
             background-color: #0d6efd;
@@ -278,11 +278,11 @@
     <!-- html2pdf JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <!-- Script específico para acta de compromiso -->
-    <script src="{{asset('resources/js/LogicaDecanoCoordinador/acta_script.js')}}"></script>
+    <script src="{{asset('js/LogicaDecanoCoordinador/acta_script.js')}}"></script>
     <!-- Script para generación profesional de PDF -->
-    <script src="{{asset('resources/js/LogicaDecanoCoordinador/pdf_generator.js')}}"></script>
+    <script src="{{asset('js/LogicaDecanoCoordinador/pdf_generator.js')}}"></script>
     <!-- Script para navegación -->
-    <script src="{{asset('resources/js/LogicaDecanoCoordinador/navigation.js}')}}"></script>
+    <script src="{{asset('js/LogicaDecanoCoordinador/navigation.js}')}}"></script>
 
     <script>
         $(document).ready(function () {
