@@ -15,7 +15,7 @@
     <!-- Summernote para editor de texto enriquecido -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
     <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{asset('resources/css/styles.css')}}">
+    <link rel="stylesheet" href="{{asset('css/styles.css')}}">
     <style>
         .header-sancion {
             background-color: #dc3545;
@@ -322,12 +322,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <!-- Script específico para sanciones -->
-    <script src="{{asset('resources/js/LogicaDecanoCoordinador/sancion-script.js')}}"></script>
-    <!-- Script para generación de PDF -->
-    <script src="{{asset('resources/js/LogicaDecanoCoordinador/sancion-pdf-generator.js')}}"></script>
-    <!-- Script para navegación -->
-    <script src="{{asset('resources/js/LogicaDecanoCoordinador/navigation.js')}}"></script>
 </body>
 
 </html>

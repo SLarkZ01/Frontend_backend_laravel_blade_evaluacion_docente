@@ -15,7 +15,7 @@
     <!-- html2pdf.js para generar PDFs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{ asset('resources/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <style>
         /* Estilos específicos para la página de resultados */
         .dashboard-card {
@@ -336,6 +336,4 @@
 
     <!-- Bootstrap JS y scripts personalizados -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('resources/js/LogicaDocente/auth.js')}}"></script>
-    <script src="{{ asset('resources/js/LogicaDocente/script.js')}}"></script>
-    <script src="{{ asset('resources/js/LogicaDocente/acta-docente.js')}}"></script>
+    <script src="{{ asset('js/LogicaDocente/script.js')}}"></script>

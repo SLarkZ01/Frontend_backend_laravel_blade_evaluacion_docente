@@ -13,7 +13,7 @@
     <!-- DataTables CSS -->
     <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{asset('resources/css/styles.css')}}">
+    <link rel="stylesheet" href="{{asset('css/styles.css')}}">
     <style>
         .header-seguimiento {
             background-color: #198754;
@@ -222,15 +222,11 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     <!-- Script específico para seguimiento -->
-    <script src="{{asset('resources/js/LogicaDecanoCoordinador/seguimiento-script.js')}}"></script>
+    <script src="{{asset('js/LogicaDecanoCoordinador/seguimiento_script.js')}}"></script>
     <!-- Script para generación de PDF -->
-    <script src="{{asset('resources/js/LogicaDecanoCoordinador/seguimiento-pdf-generator.js')}}"></script>
-    <!-- Script para navegación -->
-    <script src="{{asset('resources/js/LogicaDecanoCoordinador/navigation.js')}}"></script>
+    <script src="{{asset('js/LogicaDecanoCoordinador/seguimiento_pdf_generator.js')}}"></script>
     <!-- HTML2PDF Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <!-- PDF Generator para seguimiento -->
-    <script src="{{asset('resources/js/LogicaDecanoCoordinador/seguimiento_pdf_generator.js')}}"></script>
 
     <!-- Modal de Detalles de Seguimiento -->
     <div class="modal fade" id="modalDetallesSeguimiento" tabindex="-1" aria-labelledby="modalDetallesSeguimientoLabel"

@@ -8,7 +8,7 @@
     <link rel="icon" href="../images/Logo Uniautonoma.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link href="{{ asset('resources/css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <style>
         .dashboard-card {
             border-radius: 12px;
@@ -273,8 +273,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('resources/js/LogicaDocente/auth.js')}}"></script>
-    <script src="{{ asset('resources/js/LogicaDocente/configuracion.js')}}"></script>
+    <script src="{{ asset('js/LogicaDocente/configuracion.js')}}"></script>
 </body>
 
 </html>

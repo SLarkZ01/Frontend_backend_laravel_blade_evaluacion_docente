@@ -565,7 +565,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/LogicaDecanoCoordinador/script.js') }}"></script>
     <!-- Script para dashboard interactivo -->
-    <script src="{{ asset('js/LogicaDecanoCoordinador/dashboard-interactivo.js') }}"></script>
+    <script src="{{ asset('js/LogicaDecanoCoordinador/dashboard_interactivo.js') }}"></script>
 
     <!-- Scripts para los gráficos -->
     <script>

@@ -13,7 +13,7 @@
     <!-- Select2 para mejorar los selectores -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{asset('resources/css/styles.css')}}">
+    <link rel="stylesheet" href="{{asset('css/styles.css')}}">
     <style>
         .header-alertas {
             background-color: #dc3545;
@@ -214,9 +214,7 @@
     <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Script específico para alertas -->
-    <script src="{{asset('resources/js/LogicaDecanoCoordinador/alertas_script.js')}}"></script>
-    <!-- Script para navegación -->
-    <script src="{{asset('resources/js/LogicaDecanoCoordinador/navigation.js')}}"></script>
+    <script src="{{asset('js/LogicaDecanoCoordinador/alertas_script.js')}}"></script>
 </body>
 
 </html>
