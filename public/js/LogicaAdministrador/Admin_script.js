@@ -14,25 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Configurar botón de salir
-function setupLogoutButton() {
-    const logoutButton = document.querySelector('.sidebar .nav-link:has(i.fas.fa-sign-out-alt)');
-    
-    if (logoutButton) {
-        logoutButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            if (confirm('¿Está seguro que desea salir del sistema?')) {
-                localStorage.removeItem('userLoggedIn');
-                localStorage.removeItem('userRole');
-                
-                alert('Sesión finalizada');
-                window.location.href = '../login.html';
-            }
-        });
-    }
-}
-
 // Inicializar gráficos
 function initializeCharts() {
     // Gráfico de distribución de usuarios por rol
