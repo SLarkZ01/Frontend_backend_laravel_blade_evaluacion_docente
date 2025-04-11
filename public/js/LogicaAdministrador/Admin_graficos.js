@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeCharts();
     setupDataTables();
     setupEventListeners();
-    checkUserSession();
     
     // Añadir tooltips de Bootstrap
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
