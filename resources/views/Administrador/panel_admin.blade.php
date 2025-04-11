@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('titulo', 'Panel de Administrador')
 @section('contenido')
+<!-- Incluir Chart.js y nuestro script personalizado -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+<script src="{{ asset('js/LogicaAdministrador/Admin_Dashboard.js') }}"></script>
 <div class="row g-0">
     <!-- Sidebar / Menú lateral -->
     <div class="col-md-2 sidebar">
@@ -181,7 +184,7 @@
                         </div>
                         <div class="card-body">
                             <div class="chart-container">
-                                <canvas id="usuariosChart"></canvas>
+                                <canvas id="initializeCharts"></canvas>
                             </div>
                         </div>
                     </div>
@@ -200,9 +203,9 @@
                 </div>
             </div>
 
-            <!-- Actividad Reciente -->
+            <!-- Actividad Reciente y Evaluaciones Pendientes -->
             <div class="row mb-4">
-                <div class="col-12">
+                <div class="col-md-8">
                     <div class="card">
                         <div class="card-header bg-white d-flex justify-content-between align-items-center">
                             <h5 class="mb-0">Actividad Reciente</h5>
@@ -249,8 +252,6 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                        <i class="fas fa-user-shield fa-sm text-white"></i>
-                                                    </div>
                                                     <div>
                                                         <p class="mb-0 fw-medium">Juan Pérez</p>
                                                         <small class="text-muted">Administrador</small>
@@ -260,19 +261,6 @@
                                             <td>Modificó periodo</td>
                                             <td>Ayer, 15:20 PM</td>
                                             <td><span class="badge bg-warning text-dark">Pendiente</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div>
-                                                        <p class="mb-0 fw-medium">María López</p>
-                                                        <small class="text-muted">Docente</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>Inició evaluación</td>
-                                            <td>Ayer, 14:10 PM</td>
-                                            <td><span class="badge bg-info">En progreso</span></td>
                                         </tr>
                                     </tbody>
                                 </table>
