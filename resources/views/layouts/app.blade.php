@@ -170,7 +170,7 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     <!-- Script personalizado -->
-    <script src="{{ asset('admin-script.js') }}"></script>
+    <script src="{{ asset('js/LogicaAdministrador/Admin_script.js') }}"></script>
 </body>
 
 </html>

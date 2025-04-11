@@ -14,21 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Verificar sesión de usuario
-function checkUserSession() {
-    const userLoggedIn = localStorage.getItem('userLoggedIn');
-    const userRole = localStorage.getItem('userRole');
-    
-    // Si no está logueado o no es admin, redirigir al login
-    if (!userLoggedIn || userRole !== 'admin') {
-        window.location.href = '../login.html';
-        return;
-    }
-    
-    // Configurar botón de salir
-    setupLogoutButton();
-}
-
 // Configurar botón de salir
 function setupLogoutButton() {
     const logoutButton = document.querySelector('.sidebar .nav-link:has(i.fas.fa-sign-out-alt)');
