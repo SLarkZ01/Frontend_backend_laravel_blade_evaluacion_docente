@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Usuario;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session; // <--- Asegúrate de importar esto
 
 class loginController extends Controller
 {
-    //
     public function Login()
     {
-
         return view('Login.login');
     }
 
@@ -23,13 +21,16 @@ class loginController extends Controller
             'password' => 'required'
         ]);
 
-        // Buscar el usuario en la base de datos
-        $usuario = Usuario::where('correo', $request->username)->first();
+        // Llamar al procedimiento almacenado
+        $usuario = DB::select('CALL ObtenerUsuarioPorCorreo(?)', [$request->username]);
+        $usuario = $usuario[0] ?? null;
 
         // Verificar si el usuario existe y la contraseña es correcta
         if ($usuario && $request->password === $usuario->contrasena) {
-            // Guardar usuario en la sesión
-            //    Auth::login($usuario);
+
+            // ✅ GUARDAR EN SESIÓN
+            Session::put('correo_usuario', $usuario->correo);
+            Session::put('rol_usuario', $usuario->id_rol); // También puedes guardar el rol si lo necesitas
 
             // Redirigir según el rol del usuario
             switch ($usuario->id_rol) {
@@ -42,8 +43,8 @@ class loginController extends Controller
                 default:
                     return redirect()->route('Admin.Dashboard');
             }
+
         } else {
-            // Redirigir con mensaje de error
             return back()->withErrors(['error' => 'Credenciales incorrectas']);
         }
     }
