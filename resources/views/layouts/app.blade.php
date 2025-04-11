@@ -169,8 +169,10 @@
     <!-- DataTables -->
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+        <!-- Incluir Chart.js y nuestro script personalizado -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
     <!-- Script personalizado -->
-    <script src="{{ asset('js/LogicaAdministrador/Admin_script.js') }}"></script>
+    <script src="{{ asset('js/LogicaAdministrador/Admin_graficos.js') }}"></script>
 </body>
 
 </html>

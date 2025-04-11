@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeCharts();
     setupDataTables();
     setupEventListeners();
-    checkUserSession();
     
     // Añadir tooltips de Bootstrap
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -13,6 +12,40 @@ document.addEventListener('DOMContentLoaded', function() {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     });
 });
+
+// Verificar sesión de usuario
+function checkUserSession() {
+    const userLoggedIn = localStorage.getItem('userLoggedIn');
+    const userRole = localStorage.getItem('userRole');
+    
+    // Si no está logueado o no es admin, redirigir al login
+    if (!userLoggedIn || userRole !== 'admin') {
+        window.location.href = '../login.html';
+        return;
+    }
+    
+    // Configurar botón de salir
+    setupLogoutButton();
+}
+
+// Configurar botón de salir
+function setupLogoutButton() {
+    const logoutButton = document.querySelector('.sidebar .nav-link:has(i.fas.fa-sign-out-alt)');
+    
+    if (logoutButton) {
+        logoutButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            if (confirm('¿Está seguro que desea salir del sistema?')) {
+                localStorage.removeItem('userLoggedIn');
+                localStorage.removeItem('userRole');
+                
+                alert('Sesión finalizada');
+                window.location.href = '../login.html';
+            }
+        });
+    }
+}
 
 // Inicializar gráficos
 function initializeCharts() {
