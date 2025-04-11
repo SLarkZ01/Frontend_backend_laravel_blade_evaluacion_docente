@@ -44,6 +44,9 @@
                     <div class="header-card">
                         <h1>Panel de Docente</h1>
                         <p>Bienvenido al sistema de evaluación docente</p>
+
+
+                        
                     </div>
 
                     <!-- Alerta de periodo activo -->
@@ -52,7 +55,7 @@
                         <div>
                             <strong>Periodo de evaluación activo</strong>
                             <p class="mb-0">El periodo de evaluación docente está activo hasta 2025-06-30. Te quedan 15
-                                días para completar la autoevaluación</p>
+                                días para completar la autoevaluación sadf</p>
                         </div>
                     </div>
 
@@ -62,7 +65,7 @@
                             <div class="card card-evaluacion">
                                 <div class="card-body">
                                     <h5 class="card-title">Evaluación Estudiantil</h5>
-                                    <h2 class="display-4 text-primary">4.4/5.0</h2>
+                                    <h2 class="display-4 text-primary"> {{ $evaluaciones->evaluacion_estudiantes }} /5.0</h2>
                                     <div class="progress">
                                         <div class="progress-bar" role="progressbar" style="width: 88%"
                                             aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
@@ -74,8 +77,8 @@
                         <div class="col-md-3 mb-3">
                             <div class="card card-evaluacion">
                                 <div class="card-body">
-                                    <h5 class="card-title">Evaluación Administrativa</h5>
-                                    <h2 class="display-4 text-primary">4.5/5.0</h2>
+                                    <h5 class="card-title">Evaluación fasd Administrativa</h5>
+                                    <h2 class="display-4 text-primary">{{ $evaluaciones->evaluacion_decano }}/1</h2>
                                     <div class="progress">
                                         <div class="progress-bar" role="progressbar" style="width: 92%"
                                             aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"></div>
@@ -89,7 +92,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Autoevaluación</h5>
                                     <div class="text-center">
-                                        <span class="pendiente-badge">Pendiente</span>
+                                        <span class="pendiente-badge">{{ $evaluaciones->autoevaluacion }}/5.0</span>
                                         <p class="card-text text-muted mt-3">No has completado tu autoevaluación</p>
                                     </div>
                                 </div>
@@ -98,8 +101,8 @@
                         <div class="col-md-3 mb-3">
                             <div class="card card-evaluacion">
                                 <div class="card-body">
-                                    <h5 class="card-title">Evaluación Global</h5>
-                                    <h2 class="display-4 text-primary">4.45/5.0</h2>
+                                    <h5 class="card-title">Promedio Evaluación</h5>
+                                    <h2 class="display-4 text-primary">{{ $evaluaciones->promedio_total }}/5.0</h2>
                                     <div class="progress">
                                         <div class="progress-bar" role="progressbar" style="width: 89%"
                                             aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
