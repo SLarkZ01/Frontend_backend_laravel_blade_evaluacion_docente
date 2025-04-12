@@ -136,7 +136,7 @@
                                                 <h6 class="mb-1">Gestión de Usuarios</h6>
                                                 <p class="mb-0 text-muted">Administrar usuarios y roles</p>
                                             </div>
-                                            <a href="{{ route('admin.roles_permisos') }}"
+                                            <a href="roles-permisos.html"
                                                 class="ms-auto btn btn-sm btn-outline-primary">Ir</a>
                                         </div>
                                     </div>
@@ -149,7 +149,7 @@
                                                 <h6 class="mb-1">Periodos de Evaluación</h6>
                                                 <p class="mb-0 text-muted">Configurar fechas y parámetros</p>
                                             </div>
-                                            <a href="{{route('admin.periodo_evaluacion')}}"
+                                            <a href="periodos-evaluacion.html"
                                                 class="ms-auto btn btn-sm btn-outline-primary">Ir</a>
                                         </div>
                                     </div>
@@ -162,7 +162,7 @@
                                                 <h6 class="mb-1">Reportes Generales</h6>
                                                 <p class="mb-0 text-muted">Ver estadísticas del sistema</p>
                                             </div>
-                                            <a href="{{ route('admin.reportes_admin') }}"
+                                            <a href="reportes-admin.html"
                                                 class="ms-auto btn btn-sm btn-outline-primary">Ir</a>
                                         </div>
                                     </div>
