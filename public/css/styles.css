@@ -1,75 +1,29 @@
 /* Estilos generales */
+:root {
+    --primary-color: #0a3b7d;
+    --secondary-color: #1a75ff;
+    --background-color: #f5f7fa;
+    --text-color: #343a40;
+    --sidebar-width: 250px;
+    --sidebar-width-tablet: 200px;
+    --sidebar-width-compact: 70px;
+    --transition-speed: 0.3s;
+    --header-height: 60px;
+    
+    /* Variables para tema oscuro */
+    --dark-primary: #0d2b57;
+    --dark-secondary: #1a4b8c;
+    --dark-background: #121212;
+    --dark-surface: #1e1e1e;
+    --dark-text: #e0e0e0;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f7fa;
-}
-
-/* Estilos para el sidebar */
-.sidebar {
-    background: linear-gradient(135deg, #0a4da3 0%, #0d6efd 100%);
-    min-height: 100vh;
-    color: white;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 16.666667%;
-    /* Equivalente a col-md-2 */
-    z-index: 100;
-    overflow-y: auto;
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.avatar-circle {
-    width: 80px;
-    height: 80px;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 20px auto;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar .nav-link {
-    color: rgba(255, 255, 255, 0.9);
-    padding: 0.9rem 1.2rem;
-    border-radius: 8px;
-    margin: 5px 10px;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-}
-
-.sidebar .nav-link:hover,
-.sidebar .nav-link.active {
-    background-color: rgba(255, 255, 255, 0.15);
-    color: white;
-    transform: translateX(5px);
-}
-
-.sidebar .nav-link::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 0;
-    background-color: rgba(255, 255, 255, 0.1);
-    transition: width 0.3s ease;
-}
-
-.sidebar .nav-link:hover::before {
-    width: 5px;
-}
-
-.sidebar .nav-link i {
-    margin-right: 12px;
-    width: 20px;
-    text-align: center;
-    font-size: 1.1rem;
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 /* Estilos para el contenido principal */
@@ -301,7 +255,83 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* Mejoras para dispositivos móviles */
+/* Mejoras para dispositivos móviles y tablets */
+@media (max-width: 1200px) {
+    :root {
+        --sidebar-width: var(--sidebar-width-tablet);
+    }
+    
+    .main-content {
+        margin-left: var(--sidebar-width-tablet);
+        width: calc(100% - var(--sidebar-width-tablet));
+    }
+    
+    .sidebar.compact {
+        width: var(--sidebar-width-compact);
+    }
+    
+    .main-content.sidebar-compact {
+        margin-left: var(--sidebar-width-compact);
+        width: calc(100% - var(--sidebar-width-compact));
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.show {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        transition: margin-left var(--transition-speed) ease-in-out;
+    }
+    
+    .card-deck {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+    
+    .sidebar-toggle {
+        display: block;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 1060;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 12px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    .sidebar-toggle:hover {
+        background-color: var(--secondary-color);
+    }
+}
+
+@media (max-width: 768px) {
+    .table-responsive {
+        font-size: 0.95rem;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .filtro-alertas {
+        padding: 15px;
+    }
+}
+
 @media (max-width: 576px) {
     .card-body {
         padding: 15px 10px;
@@ -314,5 +344,34 @@ h1 {
     .btn-accion {
         width: 30px;
         height: 30px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .sidebar .nav-link {
+        padding: 0.7rem 1rem;
+    }
+    
+    .avatar-circle {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .sidebar.show {
+        width: 85%;
+    }
+    
+    .sidebar-toggle {
+        top: 5px;
+        left: 5px;
+        padding: 6px 10px;
+    }
+    
+    .sidebar.compact .sidebar-toggle-btn {
+        right: -10px;
+        width: 25px;
+        height: 25px;
     }
 }
