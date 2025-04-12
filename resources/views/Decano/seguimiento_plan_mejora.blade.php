@@ -14,63 +14,6 @@
     <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="{{asset('css/styles.css')}}">
-    <style>
-        .header-seguimiento {
-            background-color: #198754;
-            color: white;
-            padding: 15px;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .table-seguimiento {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .badge-estado {
-            font-size: 0.85rem;
-            padding: 0.35em 0.65em;
-        }
-
-        .badge-activo {
-            background-color: #198754;
-        }
-
-        .badge-cerrado {
-            background-color: #6c757d;
-        }
-
-        .badge-pendiente {
-            background-color: #fd7e14;
-        }
-
-        .progress {
-            height: 10px;
-        }
-
-        .btn-circle {
-            width: 30px;
-            height: 30px;
-            padding: 6px 0px;
-            border-radius: 15px;
-            text-align: center;
-            font-size: 12px;
-            line-height: 1.42857;
-        }
-
-        .nota-seguimiento {
-            background-color: #f8f9fa;
-            border-left: 4px solid #198754;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        .nota-fecha {
-            font-size: 0.8rem;
-            color: #6c757d;
-        }
-    </style>
 </head>
 
 <body>

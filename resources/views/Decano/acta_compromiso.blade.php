@@ -16,61 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="{{asset('css/styles.css')}}">
-    <style>
-        .header-acta {
-            background-color: #0d6efd;
-            color: white;
-            padding: 15px;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .form-acta {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .avatar-preview {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background-color: #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-        }
-
-        .firma-box {
-            border: 1px dashed #ced4da;
-            border-radius: 5px;
-            padding: 15px;
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .select2-container--default .select2-selection--single {
-            height: 38px;
-            border: 1px solid #ced4da;
-            border-radius: 0.25rem;
-            padding: 0.375rem 0.75rem;
-        }
-
-        .select2-container--default .select2-selection--single .select2-selection__arrow {
-            height: 36px;
-        }
-
-        .calificacion-baja {
-            color: #dc3545;
-            font-weight: bold;
-        }
-
-        .nota-acta {
-            font-size: 0.9rem;
-            color: #6c757d;
-            font-style: italic;
-        }
-    </style>
+    
 </head>
 
 <body>
@@ -278,11 +224,9 @@
     <!-- html2pdf JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <!-- Script específico para acta de compromiso -->
-    {{-- <script src="{{asset('js/LogicaDecanoCoordinador/acta_script.js')}}"></script> --}}
+    <script src="{{asset('js/LogicaDecanoCoordinador/acta_script.js')}}"></script>
     <!-- Script para generación profesional de PDF -->
     <script src="{{asset('js/LogicaDecanoCoordinador/pdf_generator.js')}}"></script>
-    <!-- Script para navegación -->
-    <script src="{{asset('js/LogicaDecanoCoordinador/navigation.js}')}}"></script>
 
     <script>
         $(document).ready(function () {
