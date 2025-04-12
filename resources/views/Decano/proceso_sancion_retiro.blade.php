@@ -1,98 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Evaluación Docentes - Proceso de Sanción/Retiro</title>
-    <link rel="icon" href="images/Logo Uniautonoma.png">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome para iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Select2 para mejorar los selectores -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <!-- Summernote para editor de texto enriquecido -->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
-    <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{asset('css/styles.css')}}">
-    <style>
-        .header-sancion {
-            background-color: #dc3545;
-            color: white;
-            padding: 15px;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .form-sancion {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .avatar-preview {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background-color: #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-        }
-
-        .firma-box {
-            border: 1px dashed #ced4da;
-            border-radius: 5px;
-            padding: 15px;
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .select2-container--default .select2-selection--single {
-            height: 38px;
-            border: 1px solid #ced4da;
-            border-radius: 0.25rem;
-            padding: 0.375rem 0.75rem;
-        }
-
-        .select2-container--default .select2-selection--single .select2-selection__arrow {
-            height: 36px;
-        }
-
-        .calificacion-baja {
-            color: #dc3545;
-            font-weight: bold;
-        }
-
-        .nota-sancion {
-            font-size: 0.9rem;
-            color: #6c757d;
-            font-style: italic;
-        }
-        
-        .tipo-sancion-badge {
-            font-size: 0.9rem;
-            padding: 5px 10px;
-            border-radius: 15px;
-        }
-        
-        .sancion-leve {
-            background-color: #ffc107;
-            color: #212529;
-        }
-        
-        .sancion-grave {
-            background-color: #fd7e14;
-            color: white;
-        }
-        
-        .sancion-retiro {
-            background-color: #dc3545;
-            color: white;
-        }
-    </style>
-</head>
+@extends('layouts.app')
+@section('titulo','Proceso de Sanción o Retiro Docente')
+@section('contenido')
 
 <body>
     <div class="container-fluid p-0">
@@ -117,7 +25,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('decano.spm') }}">
+                        <a class="nav-link" href="{{ route('decano.spm') }}">
                             <i class="fas fa-tasks"></i> Seguimiento a plan de mejora
                         </a>
                     </li>
@@ -127,7 +35,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('decano.psr') }}">
+                        <a class="nav-link active" href="{{ route('decano.psr') }}">
                             <i class="fas fa-user-minus"></i> Proceso de Sanciones/Retiro
                         </a>
                     </li>
@@ -331,11 +239,11 @@
     <!-- html2pdf JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <!-- Script específico para proceso de sanción -->
-    <script src="{{asset('resources/js/LogicaDecanoCoordinador/sancion_script.js')}}"></script>
+    <script src="{{asset('js/LogicaDecanoCoordinador/sancion_script.js')}}"></script>
     <!-- Script para generación profesional de PDF -->
-    <script src="{{asset('resources/js/LogicaDecanoCoordinador/pdf_generator.js')}}"></script>
+    <script src="{{asset('js/LogicaDecanoCoordinador/pdf_generator.js')}}"></script>
     <!-- Script para generación profesional de PDF de sanción -->
-    <script src="{{asset('resources/js/LogicaDecanoCoordinador/sancion_pdf_generator.js')}}"></script>
+    <script src="{{asset('js/LogicaDecanoCoordinador/sancion_pdf_generator.js')}}"></script>
 
     <script>
         $(document).ready(function () {
@@ -422,4 +330,4 @@
     </script>
 </body>
 
-</html>
+@endsection

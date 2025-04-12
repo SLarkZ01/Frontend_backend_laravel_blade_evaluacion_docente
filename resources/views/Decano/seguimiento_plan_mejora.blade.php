@@ -1,77 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Evaluación Docentes - Seguimiento a Plan de Mejora</title>
-    <link rel="icon" href="images/Logo Uniautonoma.png">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome para iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- DataTables CSS -->
-    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-    <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{asset('css/styles.css')}}">
-    <style>
-        .header-seguimiento {
-            background-color: #198754;
-            color: white;
-            padding: 15px;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .table-seguimiento {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .badge-estado {
-            font-size: 0.85rem;
-            padding: 0.35em 0.65em;
-        }
-
-        .badge-activo {
-            background-color: #198754;
-        }
-
-        .badge-cerrado {
-            background-color: #6c757d;
-        }
-
-        .badge-pendiente {
-            background-color: #fd7e14;
-        }
-
-        .progress {
-            height: 10px;
-        }
-
-        .btn-circle {
-            width: 30px;
-            height: 30px;
-            padding: 6px 0px;
-            border-radius: 15px;
-            text-align: center;
-            font-size: 12px;
-            line-height: 1.42857;
-        }
-
-        .nota-seguimiento {
-            background-color: #f8f9fa;
-            border-left: 4px solid #198754;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        .nota-fecha {
-            font-size: 0.8rem;
-            color: #6c757d;
-        }
-    </style>
-</head>
+@extends('layouts.app')
+@section('titulo','Seguimiento a Planes de Mejora')
+@section('contenido')
 
 <body>
     <div class="container-fluid p-0">
@@ -334,4 +263,4 @@
     </script>
 </body>
 
-</html>
+@endsection

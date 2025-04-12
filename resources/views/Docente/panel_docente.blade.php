@@ -64,7 +64,7 @@
                             </div>
                             <div>
                                 <h6 class="card-title text-muted mb-1">Evaluación Estudiantil</h6>
-                                <h2 class="display-5 fw-bold mb-0">{{ $evaluaciones->evaluacion_estudiantes }}/5.0</h2>
+                               
                                 <p class="card-text text-muted small mb-0">Promedio de 45 evaluaciones</p>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                             </div>
                             <div>
                                 <h6 class="card-title text-muted mb-1">Evaluación Administrativa</h6>
-                                <h2 class="display-5 fw-bold mb-0">{{ $evaluaciones->evaluacion_decano }}/5.0</h2>
+                                
                                 <p class="card-text text-muted small mb-0">Calificación de coordinación</p>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                             </div>
                             <div>
                                 <h6 class="card-title text-muted mb-1">Autoevaluación</h6>
-                                <h2 class="display-5 fw-bold mb-0 text-warning">{{ $evaluaciones->autoevaluacion }}</h2>
+                               
                                 <p class="card-text text-muted small mb-0">No has completado tu autoevaluación</p>
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                             </div>
                             <div>
                                 <h6 class="card-title text-muted mb-1">Promedio Evaluación </h6>
-                                <h2 class="display-5 fw-bold mb-0">{{ $evaluaciones->promedio_total }}/5.0</h2>
+                               
                                 <p class="card-text text-muted small mb-0">Promedio general de evaluaciones</p>
                             </div>
                         </div>
