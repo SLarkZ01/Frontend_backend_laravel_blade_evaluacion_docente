@@ -27,9 +27,13 @@
 </head>
 
 <body>
-    <div class="container-fluid p-0">
-        @yield('contenido')
-    </div>
+    <main>
+        <x-sidebar>
+                <div class="container-fluid mt-4">
+                @yield('contenido')
+                </div>
+        </x-sidebar>
+    </main>
 
 </body>
 
