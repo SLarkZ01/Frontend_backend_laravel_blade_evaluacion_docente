@@ -29,12 +29,11 @@
 <body>
     <main>
         <x-sidebar>
-                <div class="container-fluid mt-4">
+            <div class="container-fluid mt-4">
                 @yield('contenido')
-                </div>
+            </div>
         </x-sidebar>
     </main>
-
 </body>
 
 </html>
