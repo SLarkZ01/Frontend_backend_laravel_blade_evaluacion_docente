@@ -83,12 +83,8 @@
                     <i class="lni lni-text-align-left"></i>
                 </button>
             </nav>
-            <main class="p-3">
-                <div class="container-fluid">
-                    <div class="mb-3 text-center">
-                        <h1>Bootstrap Sidebar Tutorial</h1>
-                    </div>
-                </div>
+            <main>
+                {{ $slot }}
             </main>
         </div>
     </div>
