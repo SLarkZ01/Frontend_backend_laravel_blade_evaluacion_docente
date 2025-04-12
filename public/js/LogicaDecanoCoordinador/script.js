@@ -1,60 +1,4 @@
-// Script para el Sistema de Evaluación Docentes
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Inicializar tooltips de Bootstrap
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
-
-    // Manejar clics en los elementos del menú
-    const navLinks = document.querySelectorAll('.sidebar .nav-link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function (e) {
-            e.preventDefault(); // Prevent default link behavior
-
-            // Remover clase active de todos los links
-            navLinks.forEach(l => l.classList.remove('active'));
-
-            // Añadir clase active al link actual
-            this.classList.add('active');
-
-            // Implementar navegación entre páginas
-            const linkText = this.textContent.trim();
-
-            if (linkText.includes('Generar Acta de compromiso')) {
-                window.location.href = 'acta-compromiso.html';
-            } else if (linkText.includes('Inicio')) {
-                window.location.href = 'index.html';
-            } else if (linkText.includes('Seguimiento a plan de mejora')) {
-                window.location.href = 'seguimiento-plan-mejora.html';
-            } else if (linkText.includes('Salir')) {
-                // Removing the duplicate confirmation dialog
-                // The navigation.js file already handles the logout functionality
-                return;
-            }
-        });
-    });
-
-    // Manejar clics en botones de evaluación
-    const evaluarBtns = document.querySelectorAll('.btn-primary.btn-sm');
-    evaluarBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
-            const docenteInfo = this.closest('.list-group-item').querySelector('h6').textContent;
-            alert(`Iniciando evaluación para: ${docenteInfo}`);
-            // Aquí iría el código para abrir el formulario de evaluación
-        });
-    });
-
-    // Manejar clics en botones "Ver todos"
-    const verTodosBtns = document.querySelectorAll('.btn-light.btn-sm');
-    verTodosBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
-            const cardTitle = this.closest('.card-body').querySelector('.card-title').textContent;
-            alert(`Mostrando lista completa de: ${cardTitle}`);
-            // Aquí iría el código para mostrar la lista completa
-        });
-    });
 
     // Función para actualizar las estadísticas (simulación)
     function actualizarEstadisticas() {
@@ -104,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //         buscarDocente(e.target.value);
     //     });
     // }
-});
+
 
 // Función para simular la generación de reportes
 function generarReporte(tipo) {

@@ -278,7 +278,7 @@
     <!-- html2pdf JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <!-- Script específico para acta de compromiso -->
-    <script src="{{asset('js/LogicaDecanoCoordinador/acta_script.js')}}"></script>
+    {{-- <script src="{{asset('js/LogicaDecanoCoordinador/acta_script.js')}}"></script> --}}
     <!-- Script para generación profesional de PDF -->
     <script src="{{asset('js/LogicaDecanoCoordinador/pdf_generator.js')}}"></script>
     <!-- Script para navegación -->

@@ -1,23 +1,107 @@
 /* Estilos generales */
+:root {
+    --primary-color: #0a3b7d;
+    --secondary-color: #1a75ff;
+    --background-color: #f5f7fa;
+    --text-color: #343a40;
+    --sidebar-width: 250px;
+    --sidebar-width-tablet: 200px;
+    --sidebar-width-compact: 70px;
+    --transition-speed: 0.3s;
+    --header-height: 60px;
+    
+    /* Variables para tema oscuro */
+    --dark-primary: #0d2b57;
+    --dark-secondary: #1a4b8c;
+    --dark-background: #121212;
+    --dark-surface: #1e1e1e;
+    --dark-text: #e0e0e0;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f7fa;
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 /* Estilos para el sidebar */
 .sidebar {
-    background: linear-gradient(135deg, #0a4da3 0%, #0d6efd 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 60%, #4d94ff 100%);
     min-height: 100vh;
     color: white;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.25), inset 0 0 30px rgba(0, 30, 100, 0.2);
     position: fixed;
     top: 0;
     left: 0;
-    width: 16.666667%;
-    /* Equivalente a col-md-2 */
-    z-index: 100;
+    width: var(--sidebar-width);
+    z-index: 1050;
     overflow-y: auto;
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all var(--transition-speed) ease-in-out;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+    position: relative;
+    overflow-x: hidden;
+    padding-bottom: 60px; /* Espacio para el botón de toggle */
+}
+
+/* Tema oscuro para el sidebar */
+.sidebar.dark-theme {
+    background: linear-gradient(135deg, var(--dark-primary) 0%, var(--dark-secondary) 60%, #2a4d8a 100%);
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.4), inset 0 0 30px rgba(0, 20, 60, 0.3);
+}
+
+/* Selector de tema */
+.theme-switch {
+    position: absolute;
+    bottom: 70px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.theme-switch:hover {
+    color: white;
+}
+
+.theme-switch i {
+    margin-right: 8px;
+    font-size: 1.1rem;
+}
+
+.sidebar.compact .theme-switch {
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.sidebar.compact .theme-switch span {
+    display: none;
+}
+
+.sidebar.compact:hover .theme-switch {
+    right: 20px;
+    transform: none;
+}
+
+.sidebar.compact:hover .theme-switch span {
+    display: inline;
+}
+
+.sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(77, 148, 255, 0.3), transparent 70%);
+    pointer-events: none;
 }
 
 .avatar-circle {
@@ -41,13 +125,21 @@ body {
     transition: all 0.3s;
     position: relative;
     overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
 }
 
 .sidebar .nav-link:hover,
 .sidebar .nav-link.active {
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.2);
     color: white;
     transform: translateX(5px);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .sidebar .nav-link::before {
@@ -57,7 +149,7 @@ body {
     top: 0;
     height: 100%;
     width: 0;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(77, 148, 255, 0.3);
     transition: width 0.3s ease;
 }
 
@@ -70,6 +162,119 @@ body {
     width: 20px;
     text-align: center;
     font-size: 1.1rem;
+    transition: margin var(--transition-speed) ease;
+}
+
+/* Estilos para el modo compacto del sidebar */
+.sidebar.compact .nav-link i {
+    margin-right: 0;
+    font-size: 1.3rem;
+}
+
+.sidebar.compact .nav-link span,
+.sidebar.compact .avatar-circle + p,
+.sidebar.compact .submenu-toggle {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.sidebar.compact .nav-link {
+    justify-content: center;
+    padding: 0.9rem;
+}
+
+.sidebar.compact:hover {
+    width: var(--sidebar-width);
+}
+
+.sidebar.compact:hover .nav-link span,
+.sidebar.compact:hover .avatar-circle + p,
+.sidebar.compact:hover .submenu-toggle {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0.1s;
+}
+
+.sidebar.compact:hover .nav-link {
+    justify-content: flex-start;
+    padding: 0.9rem 1.2rem;
+}
+
+.sidebar.compact:hover .nav-link i {
+    margin-right: 12px;
+}
+
+/* Estilos para submenues */
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-speed) ease;
+    padding-left: 2.5rem;
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+.submenu.show {
+    max-height: 500px;
+}
+
+.submenu .nav-link {
+    padding: 0.6rem 1rem;
+    margin: 3px 10px;
+    font-size: 0.9rem;
+    border-left: 2px solid rgba(255, 255, 255, 0.2);
+    margin-left: 20px;
+}
+
+.submenu .nav-link:hover {
+    border-left: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.nav-item.has-submenu > .nav-link {
+    position: relative;
+}
+
+.submenu-toggle {
+    margin-left: auto;
+    transition: transform var(--transition-speed) ease;
+}
+
+.submenu-toggle.rotate {
+    transform: rotate(180deg);
+}
+
+/* Botón para colapsar/expandir el sidebar */
+.sidebar-toggle-btn {
+    position: absolute;
+    bottom: 20px;
+    right: -15px;
+    width: 30px;
+    height: 30px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1060;
+    border: 2px solid white;
+    transition: all var(--transition-speed) ease;
+}
+
+.sidebar-toggle-btn:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+.sidebar-toggle-btn i {
+    transition: transform var(--transition-speed) ease;
+}
+
+.sidebar.compact .sidebar-toggle-btn i {
+    transform: rotate(180deg);
 }
 
 /* Estilos para el contenido principal */
@@ -301,7 +506,83 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* Mejoras para dispositivos móviles */
+/* Mejoras para dispositivos móviles y tablets */
+@media (max-width: 1200px) {
+    :root {
+        --sidebar-width: var(--sidebar-width-tablet);
+    }
+    
+    .main-content {
+        margin-left: var(--sidebar-width-tablet);
+        width: calc(100% - var(--sidebar-width-tablet));
+    }
+    
+    .sidebar.compact {
+        width: var(--sidebar-width-compact);
+    }
+    
+    .main-content.sidebar-compact {
+        margin-left: var(--sidebar-width-compact);
+        width: calc(100% - var(--sidebar-width-compact));
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.show {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        transition: margin-left var(--transition-speed) ease-in-out;
+    }
+    
+    .card-deck {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+    
+    .sidebar-toggle {
+        display: block;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 1060;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 12px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    .sidebar-toggle:hover {
+        background-color: var(--secondary-color);
+    }
+}
+
+@media (max-width: 768px) {
+    .table-responsive {
+        font-size: 0.95rem;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .filtro-alertas {
+        padding: 15px;
+    }
+}
+
 @media (max-width: 576px) {
     .card-body {
         padding: 15px 10px;
@@ -314,5 +595,34 @@ h1 {
     .btn-accion {
         width: 30px;
         height: 30px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .sidebar .nav-link {
+        padding: 0.7rem 1rem;
+    }
+    
+    .avatar-circle {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .sidebar.show {
+        width: 85%;
+    }
+    
+    .sidebar-toggle {
+        top: 5px;
+        left: 5px;
+        padding: 6px 10px;
+    }
+    
+    .sidebar.compact .sidebar-toggle-btn {
+        right: -10px;
+        width: 25px;
+        height: 25px;
     }
 }
