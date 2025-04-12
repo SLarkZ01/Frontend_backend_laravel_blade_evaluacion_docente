@@ -4,139 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Evaluación Docentes</title>
-    <link rel="icon" href="images/Logo Uniautonoma.png">
+    <title>{{-- Sistema de Evaluación Docentes - Panel Administrador --}}
+        @yield('titulo')
+    </title>
+    <link rel="icon" href="{{asset('images/LogoUniautonoma.png')}}">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Chart.js para gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    <style>
-        .dashboard-card {
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s;
-            height: 100%;
-        }
+    <link rel="stylesheet" href="{{asset('css/styles.css')}}">
 
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-icon {
-            font-size: 2.5rem;
-            color: #0d6efd;
-            opacity: 0.8;
-        }
-
-        .quick-access-card {
-            border-radius: 12px;
-            border-left: 4px solid #0d6efd;
-            transition: all 0.3s;
-        }
-
-        .quick-access-card:hover {
-            background-color: #f8f9fa;
-            transform: translateX(5px);
-        }
-
-        .quick-access-icon {
-            font-size: 1.8rem;
-            color: #0d6efd;
-            background-color: rgba(13, 110, 253, 0.1);
-            padding: 15px;
-            border-radius: 12px;
-        }
-
-        .alert-docente {
-            border-left: 4px solid #dc3545;
-        }
-
-        .alert-warning-custom {
-            border-left: 4px solid #ffc107;
-        }
-
-        .alert-success-custom {
-            border-left: 4px solid #198754;
-        }
-
-        .badge-departamento {
-            font-size: 0.75rem;
-            padding: 0.25em 0.6em;
-            border-radius: 10px;
-        }
-
-        .dept-ingenieria {
-            background-color: #0d6efd;
-            color: white;
-        }
-
-        .dept-ciencias {
-            background-color: #198754;
-            color: white;
-        }
-
-        .dept-humanidades {
-            background-color: #6f42c1;
-            color: white;
-        }
-
-        .chart-container {
-            position: relative;
-            height: 250px;
-            width: 100%;
-        }
-    </style>
 </head>
 
 <body>
+    <x-sidebar></x-sidebar>
     <div class="container-fluid p-0">
         <div class="row g-0">
-            <!-- Sidebar / Menú lateral -->
-            <div class="col-md-2 sidebar">
-                <div class="text-center py-4">
-                    <div class="avatar-circle mx-auto">
-                        <i class="fas fa-user fa-3x text-white"></i>
-                    </div>
-                    <p class="text-white mt-2">Perfil Decano/<br>Coordinador</p>
-                </div>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('user.index') }}">
-                            <i class="fas fa-home"></i> Inicio
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('decano.acta_compromiso') }}">
-                            <i class="fas fa-file-signature"></i> Generar Acta de compromiso
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('decano.spm') }}">
-                            <i class="fas fa-tasks"></i> Seguimiento a plan de mejora
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('decano.abd') }}">
-                            <i class="fas fa-exclamation-triangle"></i> Alertas de bajo desempeño
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('decano.psr') }}">
-                            <i class="fas fa-user-minus"></i> Proceso de Sanciones/Retiro
-                        </a>
-                    </li>
-                    <li class="nav-item mt-5">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-sign-out-alt"></i> Salir
-                        </a>
-                    </li>
-                </ul>
-            </div>
 
             <!-- Contenido principal -->
             <div class="col-md-10 main-content">
