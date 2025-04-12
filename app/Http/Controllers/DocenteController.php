@@ -11,9 +11,8 @@ class DocenteController extends Controller
     //
     public function p_docente()
     {
-        $evaluaciones = DB::select('CALL ObtenerEvaluacionesPorCorreo(?)', [Session::get('correo_usuario')]);
-        $evaluaciones = $evaluaciones[0] ?? null;
-        return view('Docente.panel_docente',compact('evaluaciones'));
+       
+        return view('Docente.panel_docente');
     }
 
     public function confi()
