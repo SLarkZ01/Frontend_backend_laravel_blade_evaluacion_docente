@@ -36,22 +36,23 @@
         </div>
 
         <!-- Tarjetas de estadísticas principales -->
-        <div class="row mb-4">
-            <div class="col-md-3 mb-3">
+        <div class="row mb-1">
+            <div class="col-md-3 mb-1">
                 <div class="card dashboard-card">
                     <div class="card-body d-flex align-items-center">
                         <div class="me-3">
                             <i class="fas fa-users card-icon"></i>
                         </div>
                         <div>
-                            <h6 class="card-title text-muted mb-1">Total Docentes</h6>
+                            <h6 class="card-title text-muted mb-1">Total de Docentes</h6>
                             <h2 class="display-5 fw-bold mb-0">45</h2>
                             <p class="card-text text-muted small mb-0">Docentes en el departamento</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 mb-3">
+
+            <div class="col-md-3 mb-1">
                 <div class="card dashboard-card">
                     <div class="card-body d-flex align-items-center">
                         <div class="me-3">
@@ -65,7 +66,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 mb-3">
+            <div class="col-md-3 mb-1">
                 <div class="card dashboard-card">
                     <div class="card-body d-flex align-items-center">
                         <div class="me-3">
@@ -79,7 +80,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 mb-3">
+            <div class="col-md-3 mb-1">
                 <div class="card dashboard-card">
                     <div class="card-body d-flex align-items-center">
                         <div class="me-3">
@@ -97,7 +98,7 @@
 
         <!-- Gráficos de rendimiento -->
         <div class="row mb-4">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-1">
                 <div class="card dashboard-card">
                     <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">Rendimiento por Departamento</h5>
@@ -120,7 +121,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-1">
                 <div class="card dashboard-card">
                     <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">Distribución de Calificaciones</h5>
@@ -146,9 +147,9 @@
         </div>
 
         <!-- Accesos rápidos y alertas -->
-        <div class="row mb-4">
+        <div class="row mb-1">
             <!-- Accesos rápidos -->
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-5">
                 <div class="card dashboard-card">
                     <div class="card-header bg-white border-0">
                         <h5 class="mb-0">Accesos Rápidos</h5>
@@ -271,9 +272,9 @@
         </div>
 
         <!-- Planes de mejora activos y docentes destacados -->
-        <div class="row mb-4">
+        <div class="row mb-1">
             <!-- Planes de mejora activos -->
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-2">
                 <div class="card dashboard-card">
                     <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">Planes de Mejora Activos</h5>
@@ -337,7 +338,7 @@
             </div>
 
             <!-- Docentes destacados -->
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-2">
                 <div class="card dashboard-card">
                     <div class="card-header bg-white border-0">
                         <h5 class="mb-0">Docentes Destacados</h5>
