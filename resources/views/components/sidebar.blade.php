@@ -6,6 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Select2 para mejorar los selectores -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Summernote para editor de texto enriquecido -->
@@ -14,34 +15,18 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- DataTables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Dashboard de el sistema Evalacion Docente</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <link rel="icon" href="{{ asset('images/LogoUniautonoma.png') }}" type="image/x-icon" />
 
-    <!-- Fonts and icons -->
-    <script src="{{ asset('js/sidebar/plugin/webfont/webfont.min.js') }}"></script>
-    <script>
-        WebFont.load({
-            google: {
-                "families": ["Lato:300,400,700,900"]
-            },
-            custom: {
-                "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands",
-                    "simple-line-icons"
-                ],
-                urls: ["{{ asset('css/sidebar/fonts.min.css') }}"]
-            },
-            active: function() {
-                sessionStorage.fonts = true;
-            }
-        });
-    </script>
-
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('css/sidebar/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sidebar/atlantis.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
 </head>
 
@@ -52,7 +37,8 @@
             <div class="logo-header" data-background-color="blue">
 
                 <a href="" class="logo">
-                        <img src="{{ asset('images/escudo.png') }}" alt="navbar brand" class="navbar-brand" height="42" style="max-width: 100%; object-fit: contain;">
+                    <img src="{{ asset('images/escudo.png') }}" alt="navbar brand" class="navbar-brand" height="42"
+                        style="max-width: 100%; object-fit: contain;">
                 </a>
                 <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                     data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -660,42 +646,62 @@
                 </footer>
             </div>
         </div>
-        <!--   Core JS Files   -->
-        <script src="{{ asset('js/sidebar/core/jquery.3.2.1.min.js') }}"></script>
-        <script src="{{ asset('js/sidebar/core/popper.min.js') }}"></script>
-        <script src="{{ asset('js/sidebar/core/bootstrap.min.js') }}"></script>
+            <!-- Fonts and icons -->
+    <script src="{{ asset('js/sidebar/plugin/webfont/webfont.min.js') }}"></script>
+    <!--   Core JS Files   -->
+    <script src="{{ asset('js/sidebar/core/jquery.3.2.1.min.js') }}"></script>
+    <script src="{{ asset('js/sidebar/core/popper.min.js') }}"></script>
+    <script src="{{ asset('js/sidebar/core/bootstrap.min.js') }}"></script>
 
-        <!-- jQuery UI -->
-        <script src="{{ asset('js/sidebar/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
-        <script src="{{ asset('js/sidebar/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js') }}"></script>
+    <!-- jQuery UI -->
+    <script src="{{ asset('js/sidebar/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('js/sidebar/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js') }}"></script>
 
-        <!-- jQuery Scrollbar -->
-        <script src="{{ asset('js/sidebar/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
+    <!-- jQuery Scrollbar -->
+    <script src="{{ asset('js/sidebar/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
 
-        <!-- Chart JS -->
-        <script src="{{ asset('js/sidebar/plugin/chart.js/chart.min.js') }}"></script>
+    <!-- Chart JS -->
+    <script src="{{ asset('js/sidebar/plugin/chart.js/chart.min.js') }}"></script>
 
-        <!-- jQuery Sparkline -->
-        <script src="{{ asset('js/sidebar/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
+    <!-- jQuery Sparkline -->
+    <script src="{{ asset('js/sidebar/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
 
-        <!-- Chart Circle -->
-        <script src="{{ asset('js/sidebar/plugin/chart-circle/circles.min.js') }}"></script>
+    <!-- Chart Circle -->
+    <script src="{{ asset('js/sidebar/plugin/chart-circle/circles.min.js') }}"></script>
 
-        <!-- Datatables -->
-        <script src="{{ asset('js/sidebar/plugin/datatables/datatables.min.js') }}"></script>
+    <!-- Datatables -->
+    <script src="{{ asset('js/sidebar/plugin/datatables/datatables.min.js') }}"></script>
 
-        <!-- Bootstrap Notify -->
-        <script src="{{ asset('js/sidebar/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+    <!-- Bootstrap Notify -->
+    <script src="{{ asset('js/sidebar/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 
-        <!-- jQuery Vector Maps -->
-        <script src="{{ asset('js/sidebar/plugin/jqvmap/jquery.vmap.min.js') }}"></script>
-        <script src="{{ asset('js/sidebar/plugin/jqvmap/maps/jquery.vmap.world.js') }}"></script>
+    <!-- jQuery Vector Maps -->
+    <script src="{{ asset('js/sidebar/plugin/jqvmap/jquery.vmap.min.js') }}"></script>
+    <script src="{{ asset('js/sidebar/plugin/jqvmap/maps/jquery.vmap.world.js') }}"></script>
 
-        <!-- Sweet Alert -->
-        <script src="{{ asset('js/sidebar/plugin/sweetalert/sweetalert.min.js') }}"></script>
+    <!-- Sweet Alert -->
+    <script src="{{ asset('js/sidebar/plugin/sweetalert/sweetalert.min.js') }}"></script>
 
-        <!-- Atlantis JS -->
-        <script src="{{ asset('js/sidebar/atlantis.min.js') }}"></script>
+    <!-- Atlantis JS -->
+    <script src="{{ asset('js/sidebar/atlantis.min.js') }}"></script>
+    
+    <script>
+        WebFont.load({
+            google: {
+                "families": ["Lato:300,400,700,900"]
+            },
+            custom: {
+                "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands",
+                    "simple-line-icons"
+                ],
+                urls: ["{{ asset('css/sidebar/fonts.css') }}"]
+            },
+            active: function() {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+
 </body>
 
 </html>

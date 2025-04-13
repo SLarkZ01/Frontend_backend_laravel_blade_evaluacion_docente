@@ -36,7 +36,7 @@
         </div>
 
         <!-- Tarjetas de estadísticas principales -->
-        <div class="row mb-1">
+        <div class="row mb-4">
             <div class="col-md-3 mb-1">
                 <div class="card dashboard-card">
                     <div class="card-body d-flex align-items-center">
@@ -412,84 +412,4 @@
     {{-- <script src="{{ asset('js/LogicaDecanoCoordinador/script.js') }}"></script> --}}
     <!-- Script para dashboard interactivo -->
     <script src="{{ asset('js/LogicaDecanoCoordinador/dashboard_interactivo.js') }}"></script>
-
-    <!-- Scripts para los gráficos -->
-    <script>
-        // Gráfico de rendimiento por departamento
-        const ctxDepartamentos = document.getElementById('departamentosChart').getContext('2d');
-        const departamentosChart = new Chart(ctxDepartamentos, {
-            type: 'bar',
-            data: {
-                labels: ['Ingeniería', 'Ciencias', 'Humanidades', 'Artes', 'Economía'],
-                datasets: [{
-                    label: 'Promedio de Calificación',
-                    data: [4.2, 4.0, 4.5, 4.3, 3.9],
-                    backgroundColor: [
-                        'rgba(13, 110, 253, 0.7)',
-                        'rgba(25, 135, 84, 0.7)',
-                        'rgba(111, 66, 193, 0.7)',
-                        'rgba(220, 53, 69, 0.7)',
-                        'rgba(255, 193, 7, 0.7)'
-                    ],
-                    borderColor: [
-                        'rgba(13, 110, 253, 1)',
-                        'rgba(25, 135, 84, 1)',
-                        'rgba(111, 66, 193, 1)',
-                        'rgba(220, 53, 69, 1)',
-                        'rgba(255, 193, 7, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: false,
-                        min: 3.0,
-                        max: 5.0
-                    }
-                }
-            }
-        });
-
-        // Gráfico de distribución de calificaciones
-        const ctxCalificaciones = document.getElementById('calificacionesChart').getContext('2d');
-        const calificacionesChart = new Chart(ctxCalificaciones, {
-            type: 'doughnut',
-            data: {
-                labels: ['Excelente (4.5-5.0)', 'Bueno (4.0-4.4)', 'Aceptable (3.5-3.9)', 'Regular (3.0-3.4)',
-                    'Deficiente (<3.0)'
-                ],
-                datasets: [{
-                    data: [15, 18, 7, 3, 2],
-                    backgroundColor: [
-                        'rgba(25, 135, 84, 0.7)',
-                        'rgba(13, 110, 253, 0.7)',
-                        'rgba(255, 193, 7, 0.7)',
-                        'rgba(255, 128, 0, 0.7)',
-                        'rgba(220, 53, 69, 0.7)'
-                    ],
-                    borderColor: [
-                        'rgba(25, 135, 84, 1)',
-                        'rgba(13, 110, 253, 1)',
-                        'rgba(255, 193, 7, 1)',
-                        'rgba(255, 128, 0, 1)',
-                        'rgba(220, 53, 69, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'right',
-                    }
-                }
-            }
-        });
-    </script>
 @endsection
