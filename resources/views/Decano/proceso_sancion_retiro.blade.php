@@ -1,71 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
+@extends('layouts.principal')
+@section('titulo', 'Panel del Decano/proceso de Sanción o Retiro Docente')
+@section('contenido')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Evaluación Docentes - Proceso de Sanción/Retiro</title>
-    <link rel="icon" href="images/Logo Uniautonoma.png">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome para iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Select2 para mejorar los selectores -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <!-- Summernote para editor de texto enriquecido -->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
-    <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{asset('css/styles.css')}}">
-</head>
-
-<body>
     <div class="container-fluid p-0">
         <div class="row g-0">
             <!-- Sidebar / Menú lateral -->
-            <div class="col-md-2 sidebar">
-                <div class="text-center py-4">
-                    <div class="avatar-circle mx-auto">
-                        <i class="fas fa-user fa-3x text-white"></i>
-                    </div>
-                    <p class="text-white mt-2">Perfil Decano/<br>Coordinador</p>
-                </div>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.index') }}">
-                            <i class="fas fa-home"></i> Inicio
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('decano.acta_compromiso') }}">
-                            <i class="fas fa-file-signature"></i> Generar Acta de compromiso
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('decano.spm') }}">
-                            <i class="fas fa-tasks"></i> Seguimiento a plan de mejora
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('decano.abd') }}">
-                            <i class="fas fa-exclamation-triangle"></i> Alertas de bajo desempeño
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('decano.psr') }}">
-                            <i class="fas fa-user-minus"></i> Proceso de Sanciones/Retiro
-                        </a>
-                    </li>
-                    <li class="nav-item mt-5">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-sign-out-alt"></i> Salir
-                        </a>
-                    </li>
-                </ul>
-            </div>
+
 
             <!-- Contenido principal -->
-            <div class="col-md-10 main-content">
-                <div class="container py-4">
                     <div class="header-sancion mb-4">
                         <h1 class="mb-0">Proceso de Sanción o Retiro Docente</h1>
                     </div>
@@ -237,8 +179,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -344,6 +284,4 @@
             }
         }
     </script>
-</body>
-
-</html>
+@endsection

@@ -1,43 +1,8 @@
-@extends('layouts.docente_layout')
-@section('title', 'Panel Docente')
+@extends('layouts.principal')   
+@section('titulo', 'Panel del Docente')
 @section('contenido')
 
-<div class="row g-0">
-    <!-- Sidebar / Menú lateral -->
-    <div class="col-md-2 sidebar">
-        <div class="text-center py-4">
-            <div class="avatar-circle mx-auto">
-                <i class="fas fa-user fa-3x text-white"></i>
-            </div>
-            <p class="text-white mt-2">Docente</p>
-        </div>
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" href="{{ route('docente.p_docente') }}">
-                    <i class="fas fa-home"></i> Inicio
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('docente.result') }}">
-                    <i class="fas fa-chart-line"></i> Resultados
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('docente.confi') }}">
-                    <i class="fas fa-cog"></i> Configuración
-                </a>
-            </li>
-            <li class="nav-item mt-5">
-                <a class="nav-link" href="{{ route('user.login') }}">
-                    <i class="fas fa-sign-out-alt"></i> Salir
-                </a>
-            </li>
-        </ul>
-    </div>
 
-    <!-- Contenido principal -->
-    <div class="col-md-10 main-content">
-        <div class="container py-4">
             <!-- Encabezado mejorado -->
             <div class="header-card animated-card">
                 <h1>Panel de Docente</h1>
@@ -64,8 +29,7 @@
                             </div>
                             <div>
                                 <h6 class="card-title text-muted mb-1">Evaluación Estudiantil</h6>
-                                <h2 class="display-5 fw-bold mb-0">3.8</h2>
-                                <p class="card-text text-muted small mb-0 fs-8">Promedio de 45 evaluaciones</p>
+                                <p class="card-text text-muted small mb-0">Promedio de 45 evaluaciones</p>
                             </div>
                         </div>
                     </div>
@@ -78,8 +42,8 @@
                             </div>
                             <div>
                                 <h6 class="card-title text-muted mb-1">Evaluación Administrativa</h6>
-                                <h2 class="display-5 fw-bold mb-0">4.5</h2>
-                                <p class="card-text text-muted small mb-0 fs-8">Calificación de coordinación</p>
+                                
+                                <p class="card-text text-muted small mb-0">Calificación de coordinación</p>
                             </div>
                         </div>
                     </div>
@@ -92,8 +56,8 @@
                             </div>
                             <div>
                                 <h6 class="card-title text-muted mb-1">Autoevaluación</h6>
-                                <h2 class="display-8 fw-bold mb-0 text-warning">Pendiente</h2>
-                                <p class="card-text text-muted small mb-0 fs-8">No has completado tu autoevaluación</p>
+                               
+                                <p class="card-text text-muted small mb-0">No has completado tu autoevaluación</p>
                             </div>
                         </div>
                     </div>
@@ -106,8 +70,8 @@
                             </div>
                             <div>
                                 <h6 class="card-title text-muted mb-1">Promedio Evaluación </h6>
-                                <h2 class="display-5 fw-bold mb-0">4.1</h2>
-                                <p class="card-text text-muted small mb-0 fs-8">Promedio general de evaluaciones</p>
+                               
+                                <p class="card-text text-muted small mb-0">Promedio general de evaluaciones</p>
                             </div>
                         </div>
                     </div>
@@ -252,6 +216,4 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
 @endsection

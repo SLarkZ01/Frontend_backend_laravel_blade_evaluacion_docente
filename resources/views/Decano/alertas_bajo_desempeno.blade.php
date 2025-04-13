@@ -1,23 +1,7 @@
-<!DOCTYPE html>
-<html lang="es">
+@extends('layouts.principal')
+@section('titulo', 'Panel del Decano/Alerta de Bajo Desempeño')
+@section('contenido')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Evaluación Docentes - Alertas de Bajo Desempeño</title>
-    <link rel="icon" href="images/Logo Uniautonoma.png">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome para iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Select2 para mejorar los selectores -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{asset('css/styles.css')}}">
-    
-</head>
-
-<body>
     <div class="container-fluid p-0">
         <div class="row g-0">
             <!-- Sidebar / Menú lateral -->
@@ -149,6 +133,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Script específico para alertas -->
     <script src="{{asset('js/LogicaDecanoCoordinador/alertas_script.js')}}"></script>
-</body>
-
-</html>
+@endsection

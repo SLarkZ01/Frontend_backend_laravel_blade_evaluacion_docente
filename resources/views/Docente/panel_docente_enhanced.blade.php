@@ -1,45 +1,12 @@
-@extends('layouts.docente_layout')
-@section('title', 'Panel Docente')
+@extends('layouts.principal')   
+@section('titulo', 'Panel del Docente')
 @section('contenido')
 
 <body>
     <div class="container-fluid p-0">
         <div class="row g-0">
-            <!-- Sidebar / Menú lateral -->
-            <div class="col-md-2 sidebar">
-                <div class="text-center py-4">
-                    <div class="avatar-circle mx-auto">
-                        <i class="fas fa-user fa-3x text-white"></i>
-                    </div>
-                    <p class="text-white mt-2">Docente</p>
-                </div>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">
-                            <i class="fas fa-home"></i> Inicio
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="resultados.html">
-                            <i class="fas fa-chart-line"></i> Resultados
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="configuracion.html">
-                            <i class="fas fa-cog"></i> Configuración
-                        </a>
-                    </li>
-                    <li class="nav-item mt-5">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-sign-out-alt"></i> Salir
-                        </a>
-                    </li>
-                </ul>
-            </div>
 
             <!-- Contenido principal -->
-            <div class="col-md-10 main-content">
-                <div class="container py-4">
                     <!-- Encabezado mejorado -->
                     <div class="header-card">
                         <h1>Panel de Docente</h1>
@@ -65,7 +32,7 @@
                             <div class="card card-evaluacion">
                                 <div class="card-body">
                                     <h5 class="card-title">Evaluación Estudiantil</h5>
-                                    <h2 class="display-4 text-primary"> {{ $evaluaciones->evaluacion_estudiantes }} /5.0</h2>
+                                    <h2 class="display-4 text-primary"> /5.0</h2>
                                     <div class="progress">
                                         <div class="progress-bar" role="progressbar" style="width: 88%"
                                             aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
@@ -78,7 +45,7 @@
                             <div class="card card-evaluacion">
                                 <div class="card-body">
                                     <h5 class="card-title">Evaluación fasd Administrativa</h5>
-                                    <h2 class="display-4 text-primary">{{ $evaluaciones->evaluacion_decano }}/1</h2>
+                                    <h2 class="display-4 text-primary">/1</h2>
                                     <div class="progress">
                                         <div class="progress-bar" role="progressbar" style="width: 92%"
                                             aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"></div>
@@ -92,7 +59,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Autoevaluación</h5>
                                     <div class="text-center">
-                                        <span class="pendiente-badge">{{ $evaluaciones->autoevaluacion }}/5.0</span>
+                                        <span class="pendiente-badge">/5.0</span>
                                         <p class="card-text text-muted mt-3">No has completado tu autoevaluación</p>
                                     </div>
                                 </div>
@@ -102,7 +69,7 @@
                             <div class="card card-evaluacion">
                                 <div class="card-body">
                                     <h5 class="card-title">Promedio Evaluación</h5>
-                                    <h2 class="display-4 text-primary">{{ $evaluaciones->promedio_total }}/5.0</h2>
+                                    <h2 class="display-4 text-primary">/5.0</h2>
                                     <div class="progress">
                                         <div class="progress-bar" role="progressbar" style="width: 89%"
                                             aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
@@ -214,8 +181,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    </div>
 
     <!-- Bootstrap JS y scripts personalizados -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -296,5 +261,4 @@
             // Fin de la inicialización de gráficos
         });
     </script>
-</body>
 @endsection

@@ -1,47 +1,10 @@
-@extends('layouts.app')
-@section('titulo', 'Panel de Administrador')
+@extends('layouts.principal')   
+@section('titulo', 'Panel del Administrador')
 @section('contenido')
     <div class="row g-0">
         <!-- Sidebar / Menú lateral -->
-        <div class="col-md-2 sidebar">
-            <div class="text-center py-4">
-                <div class="avatar-circle mx-auto">
-                    <i class="fas fa-user-shield fa-3x text-white"></i>
-                </div>
-                <p class="text-white mt-2">Administrador</p>
-            </div>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('Admin.Dashboard') }}">
-                        <i class="fas fa-tachometer-alt"></i> Dashboard
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.roles_permisos') }}">
-                        <i class="fas fa-users-cog"></i> Gestión de Roles y Permisos
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.periodo_evaluacion') }}">
-                        <i class="fas fa-calendar-alt"></i> Configuración de Periodos
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.reportes_admin') }}">
-                        <i class="fas fa-chart-bar"></i> Reportes y Estadísticas
-                    </a>
-                </li>
-                <li class="nav-item mt-5">
-                    <a class="nav-link" href="{{ route('user.login') }}">
-                        <i class="fas fa-sign-out-alt"></i> Salir
-                    </a>
-                </li>
-            </ul>
-        </div>
+        
 
-        <!-- Contenido principal -->
-        <div class="col-md-10 main-content">
-            <div class="container py-4">
                 <!-- Encabezado y bienvenida -->
                 <div class="header-card animated-card">
                     <h1>Panel de Administrador</h1>
@@ -283,6 +246,5 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+
 @endsection
