@@ -51,8 +51,8 @@
             <!-- Logo Header -->
             <div class="logo-header" data-background-color="blue">
 
-                <a href="index.html" class="logo">
-                    <img src="{{ asset('images/escudo.png') }}" alt="navbar brand" class="navbar-brand img-fluid w-25">
+                <a href="" class="logo">
+                        <img src="{{ asset('images/escudo.png') }}" alt="navbar brand" class="navbar-brand" height="42" style="max-width: 100%; object-fit: contain;">
                 </a>
                 <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                     data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -630,35 +630,35 @@
                 <div class="page-inner mt--10">
                     {{ $slot }}
                 </div>
-            <footer class="footer">
-                <div class="container-fluid">
-                    <nav class="pull-left">
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="https://www.uniautonoma.edu.co">
-                                    Pepemarco carreando
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    Ayuda
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                    href="https://github.com/SLarkZ01/Frontend_backend_laravel_blade_evaluacion_docente">
-                                    Repositorio
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div class="copyright ml-auto">
-                        © Derchos reservados por los integrantes del proyecto 👨‍💻 la cabra <a
-                            href="https://www.uniautonoma.edu.co">Uniautonoma</a>
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <nav class="pull-left">
+                            <ul class="nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="https://www.uniautonoma.edu.co">
+                                        Pepemarco carreando
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="">
+                                        Ayuda
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                        href="https://github.com/SLarkZ01/Frontend_backend_laravel_blade_evaluacion_docente">
+                                        Repositorio
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="copyright ml-auto">
+                            © Derchos reservados por los integrantes del proyecto 👨‍💻 la cabra <a
+                                href="https://www.uniautonoma.edu.co">Uniautonoma</a>
+                        </div>
                     </div>
-                </div>
-            </footer>
-			</div>
+                </footer>
+            </div>
         </div>
         <!--   Core JS Files   -->
         <script src="{{ asset('js/sidebar/core/jquery.3.2.1.min.js') }}"></script>
