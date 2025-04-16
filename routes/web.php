@@ -8,6 +8,7 @@ use App\Http\Controllers\DecanoCordinadorController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +32,8 @@ Route::get("/docente/resultados", [DocenteController::class, 'result'])->name('d
 Route::post('/login', [loginController::class, 'validation'])->name('login.process');
 
 
+//lista los docentes
+Route::get('/decano/total_docentes', [DecanoCordinadorController::class, 'total_docentes']);
 
 Route::get("/decano", [HomeController::class, 'index'])->name('user.index');
 
@@ -43,7 +46,7 @@ Route::get('/', [loginController::class, 'Login'])->name('user.login');
 Route::get('/Admin', [AdminController::class, 'Dashboard'])->name('Admin.Dashboard');
 // rutas para el periodo de evaluacion
 Route::get('/Admin/periodo_evaluacion', [AdminController::class, 'periodo_evaluacion'])
-->name('admin.periodo_evaluacion'); 
+->name('admin.periodo_evaluacion');
 // rutas para los reportes
 Route::get('/Admin/reportes', [AdminController::class, 'reportes'])->name('admin.reportes_admin');
 // rutas para los roles y permisos

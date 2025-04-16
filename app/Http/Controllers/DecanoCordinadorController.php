@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 class DecanoCordinadorController extends Controller
+
 {
     //
-    
+    public function total_docentes()
+    {
+        $docentes = DB::select('CALL total_docentes()');
+        return view('decano.total_docentes', compact('docentes'));
+    }
     public function acta_compromiso()
     {
         return view('decano.acta_compromiso');

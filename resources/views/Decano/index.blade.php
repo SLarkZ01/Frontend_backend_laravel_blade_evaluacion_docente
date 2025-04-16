@@ -44,7 +44,7 @@
                             <i class="fas fa-users card-icon"></i>
                         </div>
                         <div>
-                            <h6 class="card-title text-muted mb-1">Total de Docentes</h6>
+                            <h6 class="card-title text-muted mb-1">Total de Docentes:{{$docentes}}</h6>
                             <h2 class="display-5 fw-bold mb-0">45</h2>
                             <p class="card-text text-muted small mb-0">Docentes en el departamento</p>
                         </div>
