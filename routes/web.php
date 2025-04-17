@@ -62,12 +62,3 @@ Route::get('/decano/modalesSeguimiento', [DecanoCordinadorController::class, 'se
 Route::get('/decano/procesoSancionRetiro', [DecanoCordinadorController::class, 'psr'])->name('decano.psr');
 // seguimiento plan de mejora
 Route::get('/decano/seguimientoPlanMejora', [DecanoCordinadorController::class, 'spm'])->name('decano.spm');
-
-// Rutas para el panel de Decano/Coordinador
-Route::prefix('decano')->name('decano.')->group(function () {
-    Route::get('/acta-compromiso', [DecanoCordinadorController::class, 'acta_compromiso'])->name('acta_compromiso');
-    Route::get('/alertas-bajo-desempeno', [DecanoCordinadorController::class, 'abd'])->name('alertas_bajo_desempeno');
-    Route::get('/seguimiento', [DecanoCordinadorController::class, 'seguimiento'])->name('modales_seguimiento');
-    Route::get('/proceso-sancion', [DecanoCordinadorController::class, 'psr'])->name('proceso_sancion_retiro');
-    Route::get('/seguimiento-plan-mejora', [DecanoCordinadorController::class, 'spm'])->name('seguimiento_plan_mejora');
-});
