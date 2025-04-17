@@ -14,7 +14,7 @@ function validarFirmaDecano() {
 function crearEncabezadoPDF() {
     return `
         <div style="text-align: center; margin-bottom: 10px; padding-top: 0;">
-            <img src="images/Logo Uniautonoma.png" alt="Logo CUAC" style="height: 110px; margin top: 15px;">
+            <img src="${window.location.origin}/images/LogoUniautonoma.png" alt="Logo CUAC" style="height: 110px; margin top: 15px;">
             <h2 style="margin: 5px 0; margin-top: 15px; color: #003366;">Corporación Universitaria Autónoma del Cauca</h2>
             <h3 style="margin: 3px 0; color: #666;">Acta de Compromiso Docente</h3>
             <hr style="border-top: 2px solid #003366; margin: 5px 0;">

@@ -156,42 +156,36 @@
                     </div>
                     <div class="card-body p-0">
                         <div class="list-group list-group-flush">
-                            <a href="acta-compromiso.html"
-                                class="list-group-item list-group-item-action quick-access-card p-3">
+                            <a href="{{ route('decano.acta_compromiso') }}" class="list-group-item list-group-item-action quick-access-card p-3">
                                 <div class="d-flex align-items-center">
                                     <div class="me-3">
                                         <i class="fas fa-file-signature quick-access-icon"></i>
                                     </div>
                                     <div>
                                         <h6 class="mb-1">Generar Acta de Compromiso</h6>
-                                        <p class="mb-0 text-muted small">Crear actas para docentes con bajo
-                                            desempeño</p>
-                                    </div>
+                                        <p class="mb-0 text-muted small">Crear actas para docentes con bajo desempeño</p>
+                                    </div>  
                                 </div>
                             </a>
-                            <a href="seguimiento-plan-mejora.html"
-                                class="list-group-item list-group-item-action quick-access-card p-3">
+                            <a href="{{ route('decano.spm') }}" class="list-group-item list-group-item-action quick-access-card p-3">
                                 <div class="d-flex align-items-center">
                                     <div class="me-3">
                                         <i class="fas fa-tasks quick-access-icon"></i>
                                     </div>
                                     <div>
                                         <h6 class="mb-1">Seguimiento a Plan de Mejora</h6>
-                                        <p class="mb-0 text-muted small">Monitorear planes de mejora
-                                            activos</p>
+                                        <p class="mb-0 text-muted small">Monitorear planes de mejora activos</p>
                                     </div>
                                 </div>
                             </a>
-                            <a href="alertas-bajo-desempeno.html"
-                                class="list-group-item list-group-item-action quick-access-card p-3">
+                            <a href="{{ route('decano.abd') }}" class="list-group-item list-group-item-action quick-access-card p-3">
                                 <div class="d-flex align-items-center">
                                     <div class="me-3">
                                         <i class="fas fa-exclamation-triangle quick-access-icon"></i>
                                     </div>
                                     <div>
                                         <h6 class="mb-1">Alertas de Bajo Desempeño</h6>
-                                        <p class="mb-0 text-muted small">Ver docentes con calificaciones
-                                            críticas</p>
+                                        <p class="mb-0 text-muted small">Ver docentes con calificaciones críticas</p>
                                     </div>
                                 </div>
                             </a>
@@ -205,8 +199,7 @@
                 <div class="card dashboard-card">
                     <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">Alertas y Notificaciones</h5>
-                        <a href="alertas-bajo-desempeno.html" class="btn btn-sm btn-outline-primary">Ver
-                            todas</a>
+                        <a href="{{ route('decano.abd') }}" class="btn btn-sm btn-outline-primary">Ver todas</a>
                     </div>
                     <div class="card-body p-0">
                         <div class="list-group list-group-flush">
@@ -220,8 +213,7 @@
                                     </div>
                                     <div>
                                         <span class="badge dept-ingenieria">Ingeniería</span>
-                                        <a href="acta-compromiso.html" class="btn btn-sm btn-outline-danger ms-2">Generar
-                                            Acta</a>
+                                        <a href="{{ route('decano.acta_compromiso') }}" class="btn btn-sm btn-outline-danger ms-2">Generar Acta</a>
                                     </div>
                                 </div>
                             </div>
@@ -235,8 +227,7 @@
                                     </div>
                                     <div>
                                         <span class="badge dept-ciencias">Ciencias</span>
-                                        <a href="acta-compromiso.html" class="btn btn-sm btn-outline-danger ms-2">Generar
-                                            Acta</a>
+                                        <a href="{{ route('decano.acta_compromiso') }}" class="btn btn-sm btn-outline-danger ms-2">Generar Acta</a>
                                     </div>
                                 </div>
                             </div>
@@ -248,7 +239,7 @@
                                             está pendiente de seguimiento desde hace 7 días</p>
                                     </div>
                                     <div>
-                                        <a href="seguimiento-plan-mejora.html" class="btn btn-sm btn-warning">Revisar</a>
+                                        <a href="{{ route('decano.spm') }}" class="btn btn-sm btn-warning">Revisar</a>
                                     </div>
                                 </div>
                             </div>
@@ -260,8 +251,7 @@
                                             de mejora con éxito</p>
                                     </div>
                                     <div>
-                                        <a href="seguimiento-plan-mejora.html" class="btn btn-sm btn-success">Ver
-                                            detalles</a>
+                                        <a href="{{ route('decano.spm') }}" class="btn btn-sm btn-success">Ver detalles</a>
                                     </div>
                                 </div>
                             </div>
@@ -278,8 +268,7 @@
                 <div class="card dashboard-card">
                     <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">Planes de Mejora Activos</h5>
-                        <a href="seguimiento-plan-mejora.html" class="btn btn-sm btn-outline-primary">Ver
-                            todos</a>
+                        <a href="{{ route('decano.spm') }}" class="btn btn-sm btn-outline-primary">Ver todos</a>
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
@@ -407,9 +396,11 @@
                 </div>
             </div>
         </div>
+
+
     <!-- Bootstrap JS y scripts personalizados -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    {{-- <script src="{{ asset('js/LogicaDecanoCoordinador/script.js') }}"></script> --}}
     <!-- Script para dashboard interactivo -->
     <script src="{{ asset('js/LogicaDecanoCoordinador/dashboard_interactivo.js') }}"></script>
+
 @endsection

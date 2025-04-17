@@ -1,147 +1,45 @@
 @extends('layouts.principal')
-@section('titulo', 'Panel del Decano/Acta de Compromiso')
+@section('titulo', 'Acta de Compromiso')
 @section('contenido')
-    <div class="container-fluid p-0">
-        <div class="row g-0">
 
+    <div class="header-acta mb-4">
+        <h1 class="mb-0">Generar Acta de Compromiso para docentes con desempeño < 4</h1>
+    </div>
 
-            <!-- Contenido principal -->
-            <div class="header-acta mb-4">
-                <h1 class="mb-0">Generar Acta de Compromiso para docentes con desempeño < 4</h1>
-            </div>
-
-            <!-- Sistema de búsqueda mejorado -->
-            <div class="row mb-4">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title"><i class="fas fa-search me-2"></i>Buscar Docente</h5>
-                            <div class="mb-3">
-                                <select class="form-select select2-docentes" id="docenteSelect">
-                                    <option value="">Seleccione un docente</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title"><i class="fas fa-filter me-2"></i>Filtros</h5>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <select class="form-select" id="departamentoSelect">
-                                        <option value="">Todos los departamentos</option>
-                                        <option value="1">Ciencias Exactas</option>
-                                        <option value="2">Ingeniería</option>
-                                        <option value="3">Humanidades</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <select class="form-select" id="calificacionSelect">
-                                        <option value="">Todas las calificaciones</option>
-                                        <option value="1">Menor a 3.0</option>
-                                        <option value="2">Entre 3.0 y 3.5</option>
-                                        <option value="3">Entre 3.5 y 4.0</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+    <!-- Sistema de búsqueda mejorado -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-search me-2"></i>Buscar Docente</h5>
+                    <div class="mb-3">
+                        <select class="form-select select2-docentes" id="docenteSelect">
+                            <option value="">Seleccione un docente</option>
+                        </select>
                     </div>
                 </div>
             </div>
-
-            <!-- Formulario de Acta de Compromiso -->
-            <div class="form-acta p-0 mb-4">
-                <div class="card-body p-4">
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-filter me-2"></i>Filtros</h5>
                     <div class="row">
-                        <div class="col-md-3 text-center">
-                            <div class="avatar-preview mb-3">
-                                <i class="fas fa-user fa-5x text-secondary"></i>
-                            </div>
+                        <div class="col-md-6 mb-3">
+                            <select class="form-select" id="departamentoSelect">
+                                <option value="">Todos los departamentos</option>
+                                <option value="1">Ciencias Exactas</option>
+                                <option value="2">Ingeniería</option>
+                                <option value="3">Humanidades</option>
+                            </select>
                         </div>
-                        <div class="col-md-9">
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">Numero de Acta:</label>
-                                    <input type="text" class="form-control" value="" readonly>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Fecha de Generación:</label>
-                                    <input type="text" class="form-control" value="" readonly>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">Nombre:</label>
-                                    <input type="text" class="form-control" value="" readonly>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Apellido:</label>
-                                    <input type="text" class="form-control" value="" readonly>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">Identificación:</label>
-                                    <input type="text" class="form-control" value="" readonly>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Asignatura:</label>
-                                    <input type="text" class="form-control" value="" readonly>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">Calificacion Final del Docente:</label>
-                                    <input type="text" class="form-control calificacion-baja" value="" readonly>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="row mb-4">
-                        <div class="col-12">
-                            <h5>Resumen de Retroalimentación:</h5>
-                            <div id="summernote">Aquí el decano hará sus comentarios hacia el respectivo
-                                docente...</div>
-                        </div>
-                    </div>
-
-                    <div class="row mb-4">
-                        <div class="col-md-6 offset-md-3">
-                            <h5 class="text-center mb-3">Firma de Decano/ Coordinador</h5>
-                            <div class="firma-box">
-                                <div id="firma-preview" class="mb-3 d-none">
-                                    <img id="firma-imagen" src="#" alt="Vista previa de la firma" class="img-fluid"
-                                        style="max-height: 100px;">
-                                </div>
-                                <div id="firma-placeholder" class="text-center text-muted mb-3">
-                                    <i class="fas fa-signature fa-3x"></i>
-                                    <p class="mt-2">Seleccione una imagen de firma</p>
-                                </div>
-                                <input type="file" id="firma-input" class="form-control" accept=".png,.jpg,.jpeg"
-                                    style="display: none;">
-                                <button type="button" id="seleccionar-firma" class="btn btn-outline-primary mb-2">
-                                    <i class="fas fa-upload me-2"></i>Cargar Firma
-                                </button>
-                                <button type="button" id="eliminar-firma" class="btn btn-outline-danger d-none">
-                                    <i class="fas fa-trash me-2"></i>Eliminar Firma
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-4">
-                        <div class="col-12 text-center">
-                            <button class="btn btn-primary me-2" onclick="generarPDF()">
-                                <i class="fas fa-file-pdf me-2"></i>Generar PDF
-                            </button>
-                            <button class="btn btn-success" onclick="enviarReporte()">
-                                <i class="fas fa-paper-plane me-2"></i>Enviar reporte al Docente
-                            </button>
+                        <div class="col-md-6 mb-3">
+                            <select class="form-select" id="calificacionSelect">
+                                <option value="">Todas las calificaciones</option>
+                                <option value="1">Menor a 3.0</option>
+                                <option value="2">Entre 3.0 y 3.5</option>
+                                <option value="3">Entre 3.5 y 4.0</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -149,20 +47,110 @@
         </div>
     </div>
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Bootstrap Bundle JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Select2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <!-- Summernote JS -->
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+    <!-- Formulario de Acta de Compromiso -->
+    <div class="form-acta p-0 mb-4">
+        <div class="card-body p-4">
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    <div class="avatar-preview mb-3">
+                        <i class="fas fa-user fa-5x text-secondary"></i>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Numero de Acta:</label>
+                            <input type="text" class="form-control" value="" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Fecha de Generación:</label>
+                            <input type="text" class="form-control" value="" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" value="" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Apellido:</label>
+                            <input type="text" class="form-control" value="" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Identificación:</label>
+                            <input type="text" class="form-control" value="" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Asignatura:</label>
+                            <input type="text" class="form-control" value="" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Calificacion Final del Docente:</label>
+                            <input type="text" class="form-control calificacion-baja" value="" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h5>Resumen de Retroalimentación:</h5>
+                    <div id="summernote">Aquí el decano hará sus comentarios hacia el respectivo
+                        docente...</div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6 offset-md-3">
+                    <h5 class="text-center mb-3">Firma de Decano/ Coordinador</h5>
+                    <div class="firma-box">
+                        <div id="firma-preview" class="mb-3 d-none">
+                            <img id="firma-imagen" src="#" alt="Vista previa de la firma" class="img-fluid"
+                                style="max-height: 100px;">
+                        </div>
+                        <div id="firma-placeholder" class="text-center text-muted mb-3">
+                            <i class="fas fa-signature fa-3x"></i>
+                            <p class="mt-2">Seleccione una imagen de firma</p>
+                        </div>
+                        <input type="file" id="firma-input" class="form-control" accept=".png,.jpg,.jpeg"
+                            style="display: none;">
+                        <button type="button" id="seleccionar-firma" class="btn btn-outline-primary mb-2">
+                            <i class="fas fa-upload me-2"></i>Cargar Firma
+                        </button>
+                        <button type="button" id="eliminar-firma" class="btn btn-outline-danger d-none">
+                            <i class="fas fa-trash me-2"></i>Eliminar Firma
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <button class="btn btn-primary me-2" onclick="generarPDF()">
+                        <i class="fas fa-file-pdf me-2"></i>Generar PDF
+                    </button>
+                    <button class="btn btn-success" onclick="enviarReporte()">
+                        <i class="fas fa-paper-plane me-2"></i>Enviar reporte al Docente
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
     <!-- html2pdf JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <!-- Script específico para acta de compromiso -->
+    
+    <!-- Scripts específicos del acta -->
     <script src="{{ asset('js/LogicaDecanoCoordinador/acta_script.js') }}"></script>
-    <!-- Script para generación profesional de PDF -->
-    <script src="{{ asset('js/LogicaDecanoCoordinador/pdf_generator.js') }}"></script>
+    <script src="{{ asset('js/LogicaDecanoCoordinador/pdf_generator.js') }}?v={{ time() }}"></script>
 
     <script>
         $(document).ready(function() {

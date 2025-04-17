@@ -351,7 +351,7 @@
                         <li class="nav-item active">
                             <a href="{{ route('user.index') }}">
                                 <i class="fas fa-home"></i>
-                                <p>Dashboard</p>
+                                <p>Inicio</p>
                             </a>
                         </li>
                         <li class="nav-section">
@@ -367,19 +367,19 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('decano.alertas_bajo_desempeno') }}">
+                            <a href="{{ route('decano.abd') }}">
                                 <i class="fas fa-exclamation-triangle"></i>
                                 <p>Alertas Bajo Desempeño</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('decano.seguimiento_plan_mejora') }}">
+                            <a href="{{ route('decano.spm') }}">
                                 <i class="fas fa-chart-line"></i>
                                 <p>Seguimiento Plan de Mejora</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('decano.proceso_sancion_retiro') }}">
+                            <a href="{{ route('decano.psr') }}">
                                 <i class="fas fa-user-times"></i>
                                 <p>Proceso de Sanción</p>
                             </a>
@@ -437,68 +437,70 @@
                             </ul>
                         </nav>
                         <div class="copyright ml-auto">
-                            © Derchos reservados por los integrantes del proyecto 👨‍💻 la cabra <a
+                            © Derchos reservados por los integrantes del proyecto 👨‍💻. la <a
                                 href="https://www.uniautonoma.edu.co">Uniautonoma</a>
                         </div>
                     </div>
                 </footer>
             </div>
         </div>
-            <!-- Fonts and icons -->
-    <script src="{{ asset('js/sidebar/plugin/webfont/webfont.min.js') }}"></script>
-    <!--   Core JS Files   -->
-    <script src="{{ asset('js/sidebar/core/jquery.3.2.1.min.js') }}"></script>
-    <script src="{{ asset('js/sidebar/core/popper.min.js') }}"></script>
-    <script src="{{ asset('js/sidebar/core/bootstrap.min.js') }}"></script>
 
-    <!-- jQuery UI -->
-    <script src="{{ asset('js/sidebar/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('js/sidebar/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js') }}"></script>
+        <!-- Fonts and icons -->
+        <script src="{{ asset('js/sidebar/plugin/webfont/webfont.min.js') }}"></script>
+        <!-- Core JS Files -->
+        <script src="{{ asset('js/sidebar/core/jquery.3.2.1.min.js') }}"></script>
+        <script src="{{ asset('js/sidebar/core/popper.min.js') }}"></script>
+        <script src="{{ asset('js/sidebar/core/bootstrap.min.js') }}"></script>
 
-    <!-- jQuery Scrollbar -->
-    <script src="{{ asset('js/sidebar/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
+        <!-- jQuery UI -->
+        <script src="{{ asset('js/sidebar/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
+        <script src="{{ asset('js/sidebar/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js') }}"></script>
 
-    <!-- Chart JS -->
-    <script src="{{ asset('js/sidebar/plugin/chart.js/chart.min.js') }}"></script>
+        <!-- jQuery Scrollbar -->
+        <script src="{{ asset('js/sidebar/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
 
-    <!-- jQuery Sparkline -->
-    <script src="{{ asset('js/sidebar/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
+        <!-- Chart JS -->
+        <script src="{{ asset('js/sidebar/plugin/chart.js/chart.min.js') }}"></script>
 
-    <!-- Chart Circle -->
-    <script src="{{ asset('js/sidebar/plugin/chart-circle/circles.min.js') }}"></script>
+        <!-- jQuery Sparkline -->
+        <script src="{{ asset('js/sidebar/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
 
-    <!-- Datatables -->
-    <script src="{{ asset('js/sidebar/plugin/datatables/datatables.min.js') }}"></script>
+        <!-- Chart Circle -->
+        <script src="{{ asset('js/sidebar/plugin/chart-circle/circles.min.js') }}"></script>
 
-    <!-- Bootstrap Notify -->
-    <script src="{{ asset('js/sidebar/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+        <!-- Datatables -->
+        <script src="{{ asset('js/sidebar/plugin/datatables/datatables.min.js') }}"></script>
 
-    <!-- jQuery Vector Maps -->
-    <script src="{{ asset('js/sidebar/plugin/jqvmap/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('js/sidebar/plugin/jqvmap/maps/jquery.vmap.world.js') }}"></script>
+        <!-- Bootstrap Notify -->
+        <script src="{{ asset('js/sidebar/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 
-    <!-- Sweet Alert -->
-    <script src="{{ asset('js/sidebar/plugin/sweetalert/sweetalert.min.js') }}"></script>
+        <!-- jQuery Vector Maps -->
+        <script src="{{ asset('js/sidebar/plugin/jqvmap/jquery.vmap.min.js') }}"></script>
+        <script src="{{ asset('js/sidebar/plugin/jqvmap/maps/jquery.vmap.world.js') }}"></script>
 
-    <!-- Atlantis JS -->
-    <script src="{{ asset('js/sidebar/atlantis.min.js') }}"></script>
-    
-    <script>
-        WebFont.load({
-            google: {
-                "families": ["Lato:300,400,700,900"]
-            },
-            custom: {
-                "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands",
-                    "simple-line-icons"
-                ],
-                urls: ["{{ asset('css/sidebar/fonts.css') }}"]
-            },
-            active: function() {
-                sessionStorage.fonts = true;
-            }
-        });
-    </script>
+        <!-- Sweet Alert -->
+        <script src="{{ asset('js/sidebar/plugin/sweetalert/sweetalert.min.js') }}"></script>
+
+        <!-- Atlantis Core JS -->
+        <script src="{{ asset('js/sidebar/atlantis.min.js') }}"></script>
+        <script src="{{ asset('js/sidebar/atlantis2.js') }}"></script>
+
+        <script>
+            WebFont.load({
+                google: {
+                    "families": ["Lato:300,400,700,900"]
+                },
+                custom: {
+                    "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands",
+                        "simple-line-icons"
+                    ],
+                    urls: ["{{ asset('css/sidebar/fonts.css') }}"]
+                },
+                active: function() {
+                    sessionStorage.fonts = true;
+                }
+            });
+        </script>
 
 </body>
 
