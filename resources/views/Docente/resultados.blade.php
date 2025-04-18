@@ -1,45 +1,54 @@
-@extends('layouts.docente_layout')
-@section('title', 'Panel Docente')
-@section('contenido')
+@extends('layouts.principal')
+@section('titulo', 'Panel de Administrador')
+@section('menu-sidebar')
 
-<body>
+    <li class="nav-item active">
+        <a href="{{ route('docente.p_docente') }}">
+            <i class="fas fa-home"></i>
+            <p>Inicio</p>
+        </a>
+    </li>
+    <li class="nav-section">
+        <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+        </span>
+        <h4 class="text-section">Gestión Docente</h4>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('docente.result') }}">
+            <i class="fas fa-file-signature"></i>
+            <p>Resultados</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('docente.confi') }}">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>Configuracion</p>
+        </a>
+    </li>
+    <li class="nav-section">
+        <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+        </span>
+        <h4 class="text-section">Configuración</h4>
+    </li>
+    <li class="nav-item">
+        <a href="#profile">
+            <i class="fas fa-user"></i>
+            <p>Mi Perfil</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('user.login') }}">
+            <i class="fas fa-sign-out-alt"></i>
+            <p>Cerrar Sesión</p>
+        </a>
+    </li>
+@endsection
+@section('contenido')
     <div class="container-fluid p-0">
         <div class="row g-0">
-            <!-- Sidebar / Menú lateral -->
-            <div class="col-md-2 sidebar">
-                <div class="text-center py-4">
-                    <div class="avatar-circle mx-auto">
-                        <i class="fas fa-user fa-3x text-white"></i>
-                    </div>
-                    <p class="text-white mt-2">Docente</p>
-                </div>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('docente.p_docente') }}">
-                            <i class="fas fa-home"></i> Inicio
-                        </a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link active" href="{{ route('docente.result') }}">
-                            <i class="fas fa-chart-line"></i> Resultados
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('docente.confi') }}">
-                            <i class="fas fa-cog"></i> Configuración
-                        </a>
-                    </li>
-                    <li class="nav-item mt-5">
-                        <a class="nav-link" href="{{ route('user.login') }}">
-                            <i class="fas fa-sign-out-alt"></i> Salir
-                        </a>
-                    </li>
-                </ul>
-            </div>
 
-            <!-- Contenido principal -->
-            <div class="col-md-10 main-content">
-                <div class="container py-4">
                     <!-- Encabezado mejorado -->
                     <div class="header-card animated-card">
                         <h1>Resultados de Evaluación</h1>
@@ -194,8 +203,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+
 
     <!-- Bootstrap JS y scripts personalizados -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
