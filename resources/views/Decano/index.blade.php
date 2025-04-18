@@ -1,5 +1,62 @@
 @extends('layouts.principal')
 @section('titulo', 'Panel del Decano/Coordinador')
+@section('menu-sidebar')
+
+    <li class="nav-item active">
+        <a href="{{ route('user.index') }}">
+            <i class="fas fa-home"></i>
+            <p>Inicio</p>
+        </a>
+    </li>
+    <li class="nav-section">
+        <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+        </span>
+        <h4 class="text-section">Gestión Docente</h4>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('decano.acta_compromiso') }}">
+            <i class="fas fa-file-signature"></i>
+            <p>Actas de Compromiso</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('decano.abd') }}">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>Alertas Bajo Desempeño</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('decano.spm') }}">
+            <i class="fas fa-chart-line"></i>
+            <p>Seguimiento Plan de Mejora</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('decano.psr') }}">
+            <i class="fas fa-user-times"></i>
+            <p>Proceso de Sanción</p>
+        </a>
+    </li>
+    <li class="nav-section">
+        <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+        </span>
+        <h4 class="text-section">Configuración</h4>
+    </li>
+    <li class="nav-item">
+        <a href="#profile">
+            <i class="fas fa-user"></i>
+            <p>Mi Perfil</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('user.login') }}">
+            <i class="fas fa-sign-out-alt"></i>
+            <p>Cerrar Sesión</p>
+        </a>
+    </li>
+@endsection
 @section('contenido')
     <!-- Encabezado y bienvenida -->
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -409,5 +466,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Script para dashboard interactivo -->
     <script src="{{ asset('js/LogicaDecanoCoordinador/dashboard_interactivo.js') }}"></script>
-
 @endsection

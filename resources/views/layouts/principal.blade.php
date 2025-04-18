@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -17,22 +18,27 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
     <!-- DataTables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <!-- CSS de Atlantis -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 
 <body>
+    
     <main>
         <x-sidebar>
+            {{-- Slot para el menú personalizado --}}
+            <x-slot name="menu">
+                @yield('menu-sidebar')
+            </x-slot>
+        
+            {{-- Contenido principal de cada vista --}}
             @yield('contenido')
         </x-sidebar>
+        
     </main>
     
-    <!-- Scripts core -->
-    <script src="{{ asset('js/sidebar/core/jquery.3.2.1.min.js') }}"></script>
-    <script src="{{ asset('js/sidebar/core/popper.min.js') }}"></script>
-    <script src="{{ asset('js/sidebar/core/bootstrap.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <!-- Scripts de plugins -->
     <script src="{{ asset('js/sidebar/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
@@ -42,12 +48,7 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 
-    <!-- Scripts principales del sidebar -->
-    <script src="{{ asset('js/sidebar/atlantis.js') }}"></script>
-    <script src="{{ asset('js/sidebar/atlantis2.js') }}"></script>
-    <script src="{{ asset('js/sidebar/demo.js') }}"></script>
-    <script src="{{ asset('js/sidebar/setting-demo.js') }}"></script>
-    <script src="{{ asset('js/sidebar/setting-demo2.js') }}"></script>
+
 
     <!-- Scripts de lógica de docentes -->
     <script src="{{ asset('js/LogicaDocente/configuracion.js') }}"></script>
