@@ -1,5 +1,50 @@
-@extends('layouts.docente_layout')
-@section('title', 'Panel Docente')
+@extends('layouts.principal')
+@section('titulo', 'Panel de Administrador')
+@section('menu-sidebar')
+
+    <li class="nav-item active">
+        <a href="{{ route('docente.p_docente') }}">
+            <i class="fas fa-home"></i>
+            <p>Inicio</p>
+        </a>
+    </li>
+    <li class="nav-section">
+        <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+        </span>
+        <h4 class="text-section">Gestión Docente</h4>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('docente.result') }}">
+            <i class="fas fa-file-signature"></i>
+            <p>Resultados</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('docente.confi') }}">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>Configuracion</p>
+        </a>
+    </li>
+    <li class="nav-section">
+        <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+        </span>
+        <h4 class="text-section">Configuración</h4>
+    </li>
+    <li class="nav-item">
+        <a href="#profile">
+            <i class="fas fa-user"></i>
+            <p>Mi Perfil</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('user.login') }}">
+            <i class="fas fa-sign-out-alt"></i>
+            <p>Cerrar Sesión</p>
+        </a>
+    </li>
+@endsection
 @section('contenido')
 
 <div class="row g-0">
@@ -244,6 +289,5 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+
 @endsection

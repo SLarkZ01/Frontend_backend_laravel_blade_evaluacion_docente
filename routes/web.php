@@ -52,7 +52,7 @@ Route::get('/Admin/roles_permisos', [AdminController::class, 'roles_permisos'])
 
 
 // rutas de decano coordinador//
-// acta de compromiso
+// acta de compromisoS
 Route::get('/decano/actaCompromiso', [DecanoCordinadorController::class, 'acta_compromiso'])->name('decano.acta_compromiso');
 // alertas bajo desempeño
 Route::get('/decano/alertasBajoDesempeno', [DecanoCordinadorController::class, 'abd'])->name('decano.abd');
@@ -62,3 +62,21 @@ Route::get('/decano/modalesSeguimiento', [DecanoCordinadorController::class, 'se
 Route::get('/decano/procesoSancionRetiro', [DecanoCordinadorController::class, 'psr'])->name('decano.psr');
 // seguimiento plan de mejora
 Route::get('/decano/seguimientoPlanMejora', [DecanoCordinadorController::class, 'spm'])->name('decano.spm');
+//total de docentes
+Route::get('/decanato/total_docente', [DecanoCordinadorController::class, 'total_Docentes'])->name('decanato.total_docentes');
+
+
+//docentes no evaluados
+Route::get('/decano/totalNoEvaluados', [DecanoCordinadorController::class, 'totalNoEvaluados'])->name('decano.totalNoEvaluados');
+//esrtudiantes no evaluados
+Route::get('/decano/totalEstudiantesNoEvaluaron', [DecanoCordinadorController::class, 'totalEstudiantesNoEvaluaron'])->name('decano.totalEstudiantesNoEvaluaron');
+//promedio por facultad
+Route::get('/decano/promedio_global', [DecanoCordinadorController::class, 'promedio_global'])->name('decano.promedio_global');
+ //promedio por facultad graficado
+Route::get('/decano/promedio-facultad-ultimo-periodo', [DecanoCordinadorController::class, 'obtenerPromedioPorFacultad']);
+Route::get('/decano/promedio-facultad', [DecanoCordinadorController::class, 'mostrarGraficoFacultades'])->name('decano.mostrarGraficoFacultades');
+
+
+Route::get('/decano/docentesDestacados', [DecanoCordinadorController::class, 'obtenerDocentesDestacados'])->name('decano.docentesdestacados');
+
+Route::get('/decano/buscar-docente', [DecanoCordinadorController::class, 'buscarDocente'])->name('decano.buscarDocente');
