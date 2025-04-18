@@ -3,7 +3,7 @@
 $host = "localhost";         // Normalmente "localhost" en entornos locales
 $usuario = "root";           // Usuario de MySQL
 $contrasena = "";            // Contraseña del usuario (puede ser vacío)
-$base_datos = "evaluacion_docentes";   // Reemplaza "nombre_bd" con el nombre de tu base de datos
+$base_datos = "evaluacion_docentes_def";   // Reemplaza "nombre_bd" con el nombre de tu base de datos
 
 // Crear la conexión
 $conexion = new mysqli($host, $usuario, $contrasena, $base_datos);

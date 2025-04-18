@@ -49,42 +49,7 @@
 
 <div class="row g-0">
     <!-- Sidebar / Menú lateral -->
-    
 
-    <div class="col-md-2 sidebar">
-        <div class="text-center py-4">
-            <div class="avatar-circle mx-auto">
-                <i class="fas fa-user fa-3x text-white"></i>
-            </div>
-            <p class="text-white mt-2">Docente</p>
-        </div>
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" href="{{ route('docente.p_docente') }}">
-                    <i class="fas fa-home"></i> Inicio
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('docente.result') }}">
-                    <i class="fas fa-chart-line"></i> Resultados
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('docente.confi') }}">
-                    <i class="fas fa-cog"></i> Configuración
-                </a>
-            </li>
-            <li class="nav-item mt-5">
-                <a class="nav-link" href="{{ route('user.login') }}">
-                    <i class="fas fa-sign-out-alt"></i> Salir
-                </a>
-            </li>
-        </ul>
-    </div>
-
-    <!-- Contenido principal -->
-    <div class="col-md-10 main-content">
-        <div class="container py-4">
             <!-- Encabezado mejorado -->
             <div class="header-card animated-card">
                 <h1>Panel de Docente</h1>
@@ -111,7 +76,7 @@
                             </div>
                             <div>
                                 <h6 class="card-title text-muted mb-1">Evaluación Estudiantil</h6>
-                                <h2 class="display-5 fw-bold mb-0">{{$evaluaciones->evaluacion_estudiantes}}</h2>
+                                <h2 class="display-5 fw-bold mb-0">3.8</h2>
                                 <p class="card-text text-muted small mb-0 fs-8">Promedio de 45 evaluaciones</p>
                             </div>
                         </div>
@@ -124,8 +89,8 @@
                                 <i class="fas fa-clipboard-check card-icon"></i>
                             </div>
                             <div>
-                                <h6 class="card-title text-muted mb-1">Evaluación Decano</h6>
-                                <h2 class="display-5 fw-bold mb-0">{{$evaluaciones->evaluacion_decano}}</h2>
+                                <h6 class="card-title text-muted mb-1">Evaluación Administrativa</h6>
+                                <h2 class="display-5 fw-bold mb-0">4.5</h2>
                                 <p class="card-text text-muted small mb-0 fs-8">Calificación de coordinación</p>
                             </div>
                         </div>
@@ -139,7 +104,7 @@
                             </div>
                             <div>
                                 <h6 class="card-title text-muted mb-1">Autoevaluación</h6>
-                                <h2 class="display-8 fw-bold mb-0 text-warning">{{$evaluaciones->autoevaluacion}}</h2>
+                                <h2 class="display-8 fw-bold mb-0 text-warning">Pendiente</h2>
                                 <p class="card-text text-muted small mb-0 fs-8">No has completado tu autoevaluación</p>
                             </div>
                         </div>
@@ -152,8 +117,8 @@
                                 <i class="fas fa-chart-line card-icon"></i>
                             </div>
                             <div>
-                                <h6 class="card-title text-muted mb-1">Promedio total </h6>
-                                <h2 class="display-5 fw-bold mb-0">{{$evaluaciones->promedio_total}}</h2>
+                                <h6 class="card-title text-muted mb-1">Promedio Evaluación </h6>
+                                <h2 class="display-5 fw-bold mb-0">4.1</h2>
                                 <p class="card-text text-muted small mb-0 fs-8">Promedio general de evaluaciones</p>
                             </div>
                         </div>
@@ -172,15 +137,21 @@
                             <div class="filter-container">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <label for="yearFilter" class="form-label">Evaluaciones:</label>
+                                        <label for="yearFilter" class="form-label">Año:</label>
                                         <select class="form-select" id="yearFilter">
-                                            <option value="2022">Evaluación estudiantes</option>
-                                            <option value="2023">Evaluación decano</option>
-                                            <option value="2024">Autoevaluación</option>
-                                            <option value="2024">Promedio total</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2025" selected>2025</option>
                                         </select>
                                     </div>
-                                    
+                                    <div class="col-md-3">
+                                        <label for="semesterFilter" class="form-label">Semestre:</label>
+                                        <select class="form-select" id="semesterFilter">
+                                            <option value="1" selected>Semestre 1</option>
+                                            <option value="2">Semestre 2</option>
+                                        </select>
+                                    </div>
                                     <div class="col-md-4 d-flex align-items-end">
                                         <button id="updateChartBtn" class="btn btn-primary">Actualizar</button>
                                     </div>
@@ -191,10 +162,14 @@
                                             class="fas fa-chart-bar me-1"></i> Barras</button>
                                     <button class="chart-type-btn" data-type="line"><i
                                             class="fas fa-chart-line me-1"></i> Líneas</button>
+                                    <button class="chart-type-btn" data-type="radar"><i
+                                            class="fas fa-spider me-1"></i> Radar</button>
+                                    <button class="chart-type-btn" data-type="pie"><i
+                                            class="fas fa-chart-pie me-1"></i> Circular</button>
                                 </div>
                             </div>
 
-                            <div class="chart-container" data-evaluaciones='@json($evaluaciones)'>
+                            <div class="chart-container">
                                 <canvas id="mainChart"></canvas>
                             </div>
                         </div>
