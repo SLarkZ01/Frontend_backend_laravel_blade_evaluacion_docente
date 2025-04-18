@@ -71,16 +71,15 @@
                     <h5 class="card-title"><i class="fas fa-search me-2"></i>Buscar Docente</h5>
                     <div class="mb-3">
                         <select class="form-select select2-docentes" id="docenteSelect">
-                            
-                            @if($docentesbusqueda)
-                          @foreach($docentesbusqueda as $docente)
-                          <option value="">{{ $docente->nombre }}</option>
-                         <div class="card mb-2">
-                         
-                        @endforeach
-                         @else
-                        <p>No hay docentes disponibles.</p>
-                         @endif
+
+                            @if ($docentesbusqueda)
+                                @foreach ($docentesbusqueda as $docente)
+                                    <option value="">{{ $docente->nombre }}</option>
+                                    <div class="card mb-2">
+                                @endforeach
+                            @else
+                                <p>No hay docentes disponibles.</p>
+                            @endif
                         </select>
                     </div>
                 </div>
@@ -213,7 +212,7 @@
 
     <!-- html2pdf JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    
+
     <!-- Scripts específicos del acta -->
     <script src="{{ asset('js/LogicaDecanoCoordinador/acta_script.js') }}"></script>
     <script src="{{ asset('js/LogicaDecanoCoordinador/pdf_generator.js') }}?v={{ time() }}"></script>
