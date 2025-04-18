@@ -23,6 +23,7 @@ class HomeController extends Controller
          $docentes = DB::select('CALL ObtenerDocentesDestacados()');
          $docentesUnicos = collect($docentes)->unique('docente');
          $docentesbusqueda = DB::select('CALL BuscarDocente()');
+         $docentesbusqueda = DB::select('CALL BuscarDocente()');
         
          
 
@@ -53,6 +54,7 @@ class HomeController extends Controller
         $promedio_global_p = 0;
     }
     // Pasa la variable a la vista
+    return view('Decano.index', compact('total_docentes','totalNoEvaluados','totalEstudiantesNoEvaluaron','promedio_global_p','promedios', 'labels', 'notas','docentes','docentesUnicos','docentesbusqueda'));
     return view('Decano.index', compact('total_docentes','totalNoEvaluados','totalEstudiantesNoEvaluaron','promedio_global_p','promedios', 'labels', 'notas','docentes','docentesUnicos','docentesbusqueda'));
     }
 }

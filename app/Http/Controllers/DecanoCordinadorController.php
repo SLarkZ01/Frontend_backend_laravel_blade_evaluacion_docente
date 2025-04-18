@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DecanoCordinadorController extends Controller
-
 {
     //
     //total_docentes
