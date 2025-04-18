@@ -92,22 +92,6 @@
         </div>
     </div>
 
-        <!-- Tarjetas de estadísticas principales -->
-        <div class="row mb-4">
-            <div class="col-md-3 mb-1">
-                <div class="card dashboard-card">
-                    <div class="card-body d-flex align-items-center">
-                        <div class="me-3">
-                            <i class="fas fa-users card-icon"></i>
-                        </div>
-                        <div>
-                            <h6 class="card-title text-muted mb-1">Total de Docentes:{{$docentes}}</h6>
-                            <h2 class="display-5 fw-bold mb-0">45</h2>
-                            <p class="card-text text-muted small mb-0">Docentes en el departamento</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
     <!-- Tarjetas de estadísticas principales -->
     <div class="row mb-4">
         <div class="col-md-3 mb-1">
@@ -125,49 +109,6 @@
             </div>
         </div>
 
-            <div class="col-md-3 mb-1">
-                <div class="card dashboard-card">
-                    <div class="card-body d-flex align-items-center">
-                        <div class="me-3">
-                            <i class="fas fa-clipboard-check card-icon"></i>
-                        </div>
-                        <div>
-                            <h6 class="card-title text-muted mb-1">Evaluaciones Completas</h6>
-                            <h2 class="display-5 fw-bold mb-0">32</h2>
-                            <p class="card-text text-muted small mb-0">71% completado</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-1">
-                <div class="card dashboard-card">
-                    <div class="card-body d-flex align-items-center">
-                        <div class="me-3">
-                            <i class="fas fa-hourglass-half card-icon text-warning"></i>
-                        </div>
-                        <div>
-                            <h6 class="card-title text-muted mb-1">Evaluaciones Pendientes</h6>
-                            <h2 class="display-5 fw-bold mb-0">13</h2>
-                            <p class="card-text text-muted small mb-0">29% pendiente</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-1">
-                <div class="card dashboard-card">
-                    <div class="card-body d-flex align-items-center">
-                        <div class="me-3">
-                            <i class="fas fa-chart-line card-icon text-success"></i>
-                        </div>
-                        <div>
-                            <h6 class="card-title text-muted mb-1">Promedio Departamental</h6>
-                            <h2 class="display-5 fw-bold mb-0">4.2</h2>
-                            <p class="card-text text-muted small mb-0">De 5.0 puntos posibles</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="col-md-3 mb-1">
             <div class="card dashboard-card">
                 <div class="card-body d-flex align-items-center">
@@ -212,55 +153,6 @@
         </div>
     </div>
 
-        <!-- Gráficos de rendimiento -->
-        <div class="row mb-4">
-            <div class="col-md-6 mb-1">
-                <div class="card dashboard-card">
-                    <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Rendimiento por Departamento</h5>
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
-                                id="dropdownPeriodo" data-bs-toggle="dropdown" aria-expanded="false">
-                                Último periodo
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownPeriodo">
-                                <li><a class="dropdown-item" href="#">Último periodo</a></li>
-                                <li><a class="dropdown-item" href="#">Últimos 3 periodos</a></li>
-                                <li><a class="dropdown-item" href="#">Último año</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <canvas id="departamentosChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 mb-1">
-                <div class="card dashboard-card">
-                    <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Distribución de Calificaciones</h5>
-                        <div class="dropdown">
-                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
-                                id="dropdownCalificaciones" data-bs-toggle="dropdown" aria-expanded="false">
-                                Periodo actual
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownCalificaciones">
-                                <li><a class="dropdown-item" href="#">Periodo actual</a></li>
-                                <li><a class="dropdown-item" href="#">Periodo anterior</a></li>
-                                <li><a class="dropdown-item" href="#">Comparativa</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <canvas id="calificacionesChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     <!-- Gráficos de rendimiento -->
 
     <div class="row mb-4">
@@ -499,61 +391,6 @@
             </div>
         </div>
 
-            <!-- Docentes destacados -->
-            <div class="col-md-6 mb-2">
-                <div class="card dashboard-card">
-                    <div class="card-header bg-white border-0">
-                        <h5 class="mb-0">Docentes Destacados</h5>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="list-group list-group-flush">
-                            <div class="list-group-item p-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="me-3">
-                                        <div class="avatar-circle"
-                                            style="width: 50px; height: 50px; background-color: #0d6efd;">
-                                            <i class="fas fa-user fa-lg text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-1">Laura Sánchez</h6>
-                                        <p class="mb-0 text-muted small">Calificación: <span
-                                                class="text-success fw-bold">4.9/5.0</span></p>
-                                        <div class="d-flex align-items-center">
-                                            <span class="badge dept-humanidades me-2">Humanidades</span>
-                                            <small class="text-muted">Literatura Contemporánea</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-group-item p-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="me-3">
-                                        <div class="avatar-circle"
-                                            style="width: 50px; height: 50px; background-color: #198754;">
-                                            <i class="fas fa-user fa-lg text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-1">Roberto Álvarez</h6>
-                                        <p class="mb-0 text-muted small">Calificación: <span
-                                                class="text-success fw-bold">4.8/5.0</span></p>
-                                        <div class="d-flex align-items-center">
-                                            <span class="badge dept-ingenieria me-2">Ingeniería</span>
-                                            <small class="text-muted">Programación Avanzada</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-    
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Docentes destacados -->
         <div class="col-md-6 mb-2">
             <div class="card dashboard-card">
