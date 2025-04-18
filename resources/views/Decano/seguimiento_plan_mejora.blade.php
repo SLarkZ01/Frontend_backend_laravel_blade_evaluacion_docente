@@ -274,5 +274,7 @@
                 $('body').css('padding-right', '');
             });
         });
+        <script src="{{ asset('js/LogicaDecanoCoordinador/seguimiento_script.js') }}"></script>
+        <script src="{{ asset('js/LogicaDecanoCoordinador/seguimiento_pdf_generator.js') }}"></script>
     </script>
 @endsection

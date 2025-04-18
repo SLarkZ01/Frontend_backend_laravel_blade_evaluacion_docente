@@ -137,5 +137,6 @@
                     </div>
                 </div>
             </div>
+            <script src="{{ asset('js/LogicaDecanoCoordinador/alertas_script.js') }}"></script>
 @endsection
 
