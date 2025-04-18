@@ -18,6 +18,8 @@ let chartData = {
         }
     ]
 };
+const rawData = document.getElementById('chartDataContainer').dataset.evaluaciones;
+const datosEvaluaciones = JSON.parse(rawData);
 
 // Configuración del panel docente
 
