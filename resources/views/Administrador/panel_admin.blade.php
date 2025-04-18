@@ -1,47 +1,58 @@
-@extends('layouts.app')
+@extends('layouts.principal')
 @section('titulo', 'Panel de Administrador')
-@section('contenido')
-    <div class="row g-0">
-        <!-- Sidebar / Menú lateral -->
-        <div class="col-md-2 sidebar">
-            <div class="text-center py-4">
-                <div class="avatar-circle mx-auto">
-                    <i class="fas fa-user-shield fa-3x text-white"></i>
-                </div>
-                <p class="text-white mt-2">Administrador</p>
-            </div>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('Admin.Dashboard') }}">
-                        <i class="fas fa-tachometer-alt"></i> Dashboard
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.roles_permisos') }}">
-                        <i class="fas fa-users-cog"></i> Gestión de Roles y Permisos
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.periodo_evaluacion') }}">
-                        <i class="fas fa-calendar-alt"></i> Configuración de Periodos
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.reportes_admin') }}">
-                        <i class="fas fa-chart-bar"></i> Reportes y Estadísticas
-                    </a>
-                </li>
-                <li class="nav-item mt-5">
-                    <a class="nav-link" href="{{ route('user.login') }}">
-                        <i class="fas fa-sign-out-alt"></i> Salir
-                    </a>
-                </li>
-            </ul>
-        </div>
+@section('menu-sidebar')
 
-        <!-- Contenido principal -->
-        <div class="col-md-10 main-content">
-            <div class="container py-4">
+    <li class="nav-item active">
+        <a href="{{ route('Admin.Dashboard') }}">
+            <i class="fas fa-home"></i>
+            <p>Inicio</p>
+        </a>
+    </li>
+    <li class="nav-section">
+        <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+        </span>
+        <h4 class="text-section">Gestión Docente</h4>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('admin.roles_permisos') }}">
+            <i class="fas fa-file-signature"></i>
+            <p>Gestion de Roles y Permisos</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('admin.periodo_evaluacion') }}">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>Configuracion de Periodo</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('admin.reportes_admin') }}">
+            <i class="fas fa-chart-line"></i>
+            <p>Reportes y Estadisticas</p>
+        </a>
+    </li>
+    <li class="nav-section">
+        <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+        </span>
+        <h4 class="text-section">Configuración</h4>
+    </li>
+    <li class="nav-item">
+        <a href="#profile">
+            <i class="fas fa-user"></i>
+            <p>Mi Perfil</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('user.login') }}">
+            <i class="fas fa-sign-out-alt"></i>
+            <p>Cerrar Sesión</p>
+        </a>
+    </li>
+@endsection
+@section('contenido')
+
                 <!-- Encabezado y bienvenida -->
                 <div class="header-card animated-card">
                     <h1>Panel de Administrador</h1>
@@ -283,6 +294,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+
+<script src="{{ asset('js/LogicaAdministrador/Admin_graficos.js') }}"></script>
 @endsection

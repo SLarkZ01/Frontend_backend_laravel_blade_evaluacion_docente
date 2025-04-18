@@ -1,71 +1,59 @@
-@extends('layouts.app')
+@extends('layouts.principal')
 @section('titulo', 'Panel de Administrador')
+@section('menu-sidebar')
+
+    <li class="nav-item active">
+        <a href="{{ route('Admin.Dashboard') }}">
+            <i class="fas fa-home"></i>
+            <p>Inicio</p>
+        </a>
+    </li>
+    <li class="nav-section">
+        <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+        </span>
+        <h4 class="text-section">Gestión Docente</h4>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('admin.roles_permisos') }}">
+            <i class="fas fa-file-signature"></i>
+            <p>Gestion de Roles y Permisos</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('admin.periodo_evaluacion') }}">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>Configuracion de Periodo</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('admin.reportes_admin') }}">
+            <i class="fas fa-chart-line"></i>
+            <p>Reportes y Estadisticas</p>
+        </a>
+    </li>
+    <li class="nav-section">
+        <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+        </span>
+        <h4 class="text-section">Configuración</h4>
+    </li>
+    <li class="nav-item">
+        <a href="#profile">
+            <i class="fas fa-user"></i>
+            <p>Mi Perfil</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('user.login') }}">
+            <i class="fas fa-sign-out-alt"></i>
+            <p>Cerrar Sesión</p>
+        </a>
+    </li>
+@endsection
 @section('contenido')
 
-<!DOCTYPE html>
-<html lang="es">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reportes y Estadísticas - Sistema de Evaluación Docentes</title>
-    <link rel="icon" href="{{asset('public/images/LogoUniautonoma.png')}}">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome para iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Chart.js para gráficos -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- DataTables -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
-    <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{asset('css/styles.css')}}">
-    
-</head>
-
-<body>
-    <div class="container-fluid p-0">
-        <div class="row g-0">
-            <!-- Sidebar / Menú lateral -->
-            <div class="col-md-2 sidebar">
-                <div class="text-center py-4">
-                    <div class="avatar-circle mx-auto">
-                        <i class="fas fa-user-shield fa-3x text-white"></i>
-                    </div>
-                    <p class="text-white mt-2">Administrador</p>
-                </div>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link"  href="{{route('Admin.Dashboard')}}">
-                            <i class="fas fa-tachometer-alt"></i> Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin.roles_permisos')}}">
-                            <i class="fas fa-users-cog"></i> Gestión de Roles y Permisos
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin.periodo_evaluacion')}}">
-                            <i class="fas fa-calendar-alt"></i> Configuración de Periodos
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{route('admin.reportes_admin')}}">
-                            <i class="fas fa-chart-bar"></i> Reportes y Estadísticas
-                        </a>
-                    </li>
-                    <li class="nav-item mt-5">
-                        <a class="nav-link" href="{{route('user.login')}}">
-                            <i class="fas fa-sign-out-alt"></i> Salir
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Contenido principal -->
-            <div class="col-md-10 main-content">
-                <div class="container py-4">
                     <!-- Encabezado y bienvenida -->
                     <div class="header-card animated-card">
                         <h1>Reportes y Estadísticas</h1>
@@ -578,8 +566,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -863,7 +850,4 @@
             }
         }
     </script>
-</body>
-
-</html>
 @endsection
