@@ -71,7 +71,16 @@
                     <h5 class="card-title"><i class="fas fa-search me-2"></i>Buscar Docente</h5>
                     <div class="mb-3">
                         <select class="form-select select2-docentes" id="docenteSelect">
-                            <option value="">Seleccione un docente</option>
+                            
+                            @if($docentesbusqueda)
+                          @foreach($docentesbusqueda as $docente)
+                          <option value="">{{ $docente->nombre }}</option>
+                         <div class="card mb-2">
+                         
+                        @endforeach
+                         @else
+                        <p>No hay docentes disponibles.</p>
+                         @endif
                         </select>
                     </div>
                 </div>

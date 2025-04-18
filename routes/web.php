@@ -8,7 +8,6 @@ use App\Http\Controllers\DecanoCordinadorController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,8 +31,6 @@ Route::get("/docente/resultados", [DocenteController::class, 'result'])->name('d
 Route::post('/login', [loginController::class, 'validation'])->name('login.process');
 
 
-//lista los docentes
-Route::get('/decano/total_docentes', [DecanoCordinadorController::class, 'total_docentes']);
 
 Route::get("/decano", [HomeController::class, 'index'])->name('user.index');
 
@@ -46,7 +43,7 @@ Route::get('/', [loginController::class, 'Login'])->name('user.login');
 Route::get('/Admin', [AdminController::class, 'Dashboard'])->name('Admin.Dashboard');
 // rutas para el periodo de evaluacion
 Route::get('/Admin/periodo_evaluacion', [AdminController::class, 'periodo_evaluacion'])
-->name('admin.periodo_evaluacion');
+->name('admin.periodo_evaluacion'); 
 // rutas para los reportes
 Route::get('/Admin/reportes', [AdminController::class, 'reportes'])->name('admin.reportes_admin');
 // rutas para los roles y permisos
@@ -65,3 +62,21 @@ Route::get('/decano/modalesSeguimiento', [DecanoCordinadorController::class, 'se
 Route::get('/decano/procesoSancionRetiro', [DecanoCordinadorController::class, 'psr'])->name('decano.psr');
 // seguimiento plan de mejora
 Route::get('/decano/seguimientoPlanMejora', [DecanoCordinadorController::class, 'spm'])->name('decano.spm');
+//total de docentes
+Route::get('/decanato/total_docente', [DecanoCordinadorController::class, 'total_Docentes'])->name('decanato.total_docentes');
+
+
+//docentes no evaluados
+Route::get('/decano/totalNoEvaluados', [DecanoCordinadorController::class, 'totalNoEvaluados'])->name('decano.totalNoEvaluados');
+//esrtudiantes no evaluados
+Route::get('/decano/totalEstudiantesNoEvaluaron', [DecanoCordinadorController::class, 'totalEstudiantesNoEvaluaron'])->name('decano.totalEstudiantesNoEvaluaron');
+//promedio por facultad
+Route::get('/decano/promedio_global', [DecanoCordinadorController::class, 'promedio_global'])->name('decano.promedio_global');
+ //promedio por facultad graficado
+Route::get('/decano/promedio-facultad-ultimo-periodo', [DecanoCordinadorController::class, 'obtenerPromedioPorFacultad']);
+Route::get('/decano/promedio-facultad', [DecanoCordinadorController::class, 'mostrarGraficoFacultades'])->name('decano.mostrarGraficoFacultades');
+
+
+Route::get('/decano/docentesDestacados', [DecanoCordinadorController::class, 'obtenerDocentesDestacados'])->name('decano.docentesdestacados');
+
+Route::get('/decano/buscar-docente', [DecanoCordinadorController::class, 'buscarDocente'])->name('decano.buscarDocente');
