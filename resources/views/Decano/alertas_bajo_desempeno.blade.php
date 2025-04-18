@@ -13,74 +13,8 @@
     <!-- Select2 para mejorar los selectores -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{asset('resources/css/styles.css')}}">
-    <style>
-        .header-alertas {
-            background-color: #dc3545;
-            color: white;
-            padding: 15px;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .alerta-card {
-            border-left: 4px solid #dc3545;
-            transition: transform 0.3s;
-        }
-
-        .alerta-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .calificacion-critica {
-            color: #dc3545;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .badge-departamento {
-            font-size: 0.8rem;
-            padding: 5px 10px;
-            border-radius: 15px;
-        }
-
-        .dept-ingenieria {
-            background-color: #0d6efd;
-            color: white;
-        }
-
-        .dept-ciencias {
-            background-color: #198754;
-            color: white;
-        }
-
-        .dept-humanidades {
-            background-color: #6f42c1;
-            color: white;
-        }
-
-        .btn-sancion {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            transition: all 0.3s;
-        }
-
-        .btn-sancion:hover {
-            background-color: #bb2d3b;
-            transform: scale(1.05);
-        }
-
-        .alerta-icon {
-            font-size: 2rem;
-            color: #dc3545;
-        }
-
-        .sin-alertas {
-            text-align: center;
-            padding: 50px 0;
-            color: #6c757d;
-        }
-    </style>
+    <link rel="stylesheet" href="{{asset('css/styles.css')}}">
+    
 </head>
 
 <body>
@@ -214,9 +148,7 @@
     <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Script específico para alertas -->
-    <script src="{{asset('resources/js/LogicaDecanoCoordinador/alertas_script.js')}}"></script>
-    <!-- Script para navegación -->
-    <script src="{{asset('resources/js/LogicaDecanoCoordinador/navigation.js')}}"></script>
+    <script src="{{asset('js/LogicaDecanoCoordinador/alertas_script.js')}}"></script>
 </body>
 
 </html>

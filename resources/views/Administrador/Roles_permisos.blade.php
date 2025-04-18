@@ -1,3 +1,7 @@
+@extends('layouts.app')
+@section('titulo', 'Panel de Administrador')
+@section('contenido')
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -13,98 +17,8 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{asset('resources/css/styles.css')}}">
-    <style>
-        .header-card {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-left: 5px solid #0d6efd;
-        }
-
-        .header-card h1 {
-            margin-bottom: 5px;
-            color: #0d6efd;
-        }
-
-        .table-admin {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .table-admin thead {
-            background-color: #0d6efd;
-            color: white;
-        }
-
-        .btn-action {
-            padding: 0.25rem 0.5rem;
-            font-size: 0.875rem;
-            border-radius: 0.2rem;
-            margin-right: 5px;
-        }
-
-        .role-badge {
-            padding: 0.35em 0.65em;
-            font-size: 0.75em;
-            font-weight: 500;
-            border-radius: 0.25rem;
-        }
-
-        .role-admin {
-            background-color: #6f42c1;
-            color: white;
-        }
-
-        .role-decano {
-            background-color: #198754;
-            color: white;
-        }
-
-        .role-docente {
-            background-color: #0d6efd;
-            color: white;
-        }
-
-        /* Animaciones para elementos */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animated-card {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-
-        .tab-content {
-            padding: 20px;
-            background-color: white;
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        .nav-tabs .nav-link {
-            border: none;
-            color: #6c757d;
-            font-weight: 500;
-            padding: 10px 20px;
-        }
-
-        .nav-tabs .nav-link.active {
-            color: #0d6efd;
-            border-bottom: 3px solid #0d6efd;
-            background-color: transparent;
-        }
-    </style>
+    <link rel="stylesheet" href="{{asset('css/styles.css')}}">
+        
 </head>
 
 <body>
@@ -606,7 +520,7 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     <!-- Script personalizado -->
-    <script src="admin-script.js"></script>
+    <script src="js/LogicaAdministrador/Admin-script.js"></script>
 
     <script>
         // Script específico para la página de roles y permisos
@@ -649,3 +563,4 @@
 </body>
 
 </html>
+@endsection

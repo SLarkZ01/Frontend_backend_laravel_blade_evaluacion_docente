@@ -379,7 +379,26 @@
                                       @else
                                     <p>No hay docentes destacados disponibles.</p> <!-- Mensaje si no hay docentes -->
                                      @endif
-                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item p-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-3">
+                                        <div class="avatar-circle"
+                                            style="width: 50px; height: 50px; background-color: #6f42c1;">
+                                            <i class="fas fa-user fa-lg text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1">Patricia Mendoza</h6>
+                                        <p class="mb-0 text-muted small">Calificación: <span
+                                                class="text-success fw-bold">4.7/5.0</span></p>
+                                        <div class="d-flex align-items-center">
+                                            <span class="badge dept-ciencias me-2">Ciencias</span>
+                                            <small class="text-muted">Biología Molecular</small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -1,177 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Evaluación Docentes - Panel Docente</title>
-    <link rel="icon" href="../images/Logo Uniautonoma.png">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome para iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Chart.js para gráficos -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{ asset('resources/css/styles.css') }}">
-    <style>
-        /* Estilos específicos para el panel docente mejorado */
-        .dashboard-card {
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s;
-            height: 100%;
-        }
-
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-icon {
-            font-size: 2.5rem;
-            color: #0d6efd;
-            opacity: 0.8;
-        }
-
-        .card-evaluacion {
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-            height: 100%;
-            border: none;
-            overflow: hidden;
-        }
-
-        .card-evaluacion:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-evaluacion .card-body {
-            padding: 1.5rem;
-        }
-
-        .progress {
-            height: 10px;
-            margin-top: 8px;
-            border-radius: 10px;
-            background-color: rgba(13, 110, 253, 0.1);
-        }
-
-        .progress-bar {
-            border-radius: 10px;
-            background-color: #0d6efd;
-        }
-
-        .pendiente-badge {
-            font-size: 1.5rem;
-            color: #0d6efd;
-            font-weight: bold;
-        }
-
-        .curso-card {
-            border-left: 4px solid #0d6efd;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            transition: transform 0.2s;
-        }
-
-        .curso-card:hover {
-            transform: translateX(5px);
-            background-color: #f0f7ff !important;
-        }
-
-        .resumen-criterio {
-            margin-bottom: 18px;
-        }
-
-        .chart-container {
-            position: relative;
-            margin: auto;
-            height: 250px;
-            width: 100%;
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 15px;
-        }
-
-        .stats-highlight {
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: #0d6efd;
-        }
-
-        .filter-container {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-
-        .chart-type-selector {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .chart-type-btn {
-            border: 1px solid #dee2e6;
-            background-color: white;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .chart-type-btn.active {
-            background-color: #0d6efd;
-            color: white;
-            border-color: #0d6efd;
-        }
-
-        .header-card {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-left: 5px solid #0d6efd;
-        }
-
-        .header-card h1 {
-            margin-bottom: 5px;
-            color: #0d6efd;
-        }
-
-        .alert {
-            border-radius: 10px;
-            border: none;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        .alert-success {
-            background-color: #d1e7dd;
-            border-left: 4px solid #0f5132;
-        }
-
-        /* Animaciones para elementos */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animated-card {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-    </style>
-</head>
+@extends('layouts.docente_layout')
+@section('title', 'Panel Docente')
+@section('contenido')
 
 <body>
     <div class="container-fluid p-0">
@@ -215,6 +44,9 @@
                     <div class="header-card">
                         <h1>Panel de Docente</h1>
                         <p>Bienvenido al sistema de evaluación docente</p>
+
+
+                        
                     </div>
 
                     <!-- Alerta de periodo activo -->
@@ -223,7 +55,7 @@
                         <div>
                             <strong>Periodo de evaluación activo</strong>
                             <p class="mb-0">El periodo de evaluación docente está activo hasta 2025-06-30. Te quedan 15
-                                días para completar la autoevaluación</p>
+                                días para completar la autoevaluación sadf</p>
                         </div>
                     </div>
 
@@ -233,7 +65,7 @@
                             <div class="card card-evaluacion">
                                 <div class="card-body">
                                     <h5 class="card-title">Evaluación Estudiantil</h5>
-                                    <h2 class="display-4 text-primary">4.4/5.0</h2>
+                                    <h2 class="display-4 text-primary"> {{ $evaluaciones->evaluacion_estudiantes }} /5.0</h2>
                                     <div class="progress">
                                         <div class="progress-bar" role="progressbar" style="width: 88%"
                                             aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
@@ -245,8 +77,8 @@
                         <div class="col-md-3 mb-3">
                             <div class="card card-evaluacion">
                                 <div class="card-body">
-                                    <h5 class="card-title">Evaluación Administrativa</h5>
-                                    <h2 class="display-4 text-primary">4.5/5.0</h2>
+                                    <h5 class="card-title">Evaluación fasd Administrativa</h5>
+                                    <h2 class="display-4 text-primary">{{ $evaluaciones->evaluacion_decano }}/1</h2>
                                     <div class="progress">
                                         <div class="progress-bar" role="progressbar" style="width: 92%"
                                             aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"></div>
@@ -260,7 +92,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Autoevaluación</h5>
                                     <div class="text-center">
-                                        <span class="pendiente-badge">Pendiente</span>
+                                        <span class="pendiente-badge">{{ $evaluaciones->autoevaluacion }}/5.0</span>
                                         <p class="card-text text-muted mt-3">No has completado tu autoevaluación</p>
                                     </div>
                                 </div>
@@ -269,8 +101,8 @@
                         <div class="col-md-3 mb-3">
                             <div class="card card-evaluacion">
                                 <div class="card-body">
-                                    <h5 class="card-title">Evaluación Global</h5>
-                                    <h2 class="display-4 text-primary">4.45/5.0</h2>
+                                    <h5 class="card-title">Promedio Evaluación</h5>
+                                    <h2 class="display-4 text-primary">{{ $evaluaciones->promedio_total }}/5.0</h2>
                                     <div class="progress">
                                         <div class="progress-bar" role="progressbar" style="width: 89%"
                                             aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
@@ -387,8 +219,7 @@
 
     <!-- Bootstrap JS y scripts personalizados -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('resources/js/LogicaDocente/auth.js')}}"></script>
-    <script src="{{ asset('resources/js/LogicaDocente/script.js')}}"></script>
+    <script src="{{ asset('js/LogicaDocente/script.js')}}"></script>
     <script>
         // Inicializar el gráfico principal
         document.addEventListener('DOMContentLoaded', function () {
@@ -466,5 +297,4 @@
         });
     </script>
 </body>
-
-</html>
+@endsection

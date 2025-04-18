@@ -1,143 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Evaluación Docentes - Resultados</title>
-    <link rel="icon" href="../images/Logo Uniautonoma.png">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome para iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Chart.js para gráficos -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- html2pdf.js para generar PDFs -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{ asset('resources/css/styles.css') }}">
-    <style>
-        /* Estilos específicos para la página de resultados */
-        .dashboard-card {
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s;
-            height: 100%;
-        }
-        
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .card-icon {
-            font-size: 2.5rem;
-            color: #0d6efd;
-            opacity: 0.8;
-        }
-
-        .card-evaluacion {
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-            height: 100%;
-        }
-
-        .card-evaluacion:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .progress {
-            height: 10px;
-            margin-top: 5px;
-        }
-
-        .chart-container {
-            position: relative;
-            margin: auto;
-            height: 300px;
-            width: 100%;
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 15px;
-        }
-
-        .comentario {
-            border-left: 4px solid #0d6efd;
-            padding: 10px 15px;
-            margin-bottom: 15px;
-            background-color: #f8f9fa;
-            border-radius: 0 5px 5px 0;
-        }
-
-        .comentario .rating {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #0d6efd;
-        }
-
-        .comentario .text {
-            margin-top: 5px;
-            font-style: italic;
-        }
-
-        .star-rating {
-            color: #ffc107;
-        }
-
-        .dropdown-toggle::after {
-            display: none;
-        }
-
-        .table-container {
-            overflow-x: auto;
-            margin-top: 20px;
-        }
-
-        .table-evaluaciones th {
-            background-color: #0d6efd;
-            color: white;
-            font-weight: 500;
-        }
-
-        .table-evaluaciones td,
-        .table-evaluaciones th {
-            text-align: center;
-            vertical-align: middle;
-        }
-        
-        .header-card {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-left: 5px solid #0d6efd;
-        }
-
-        .header-card h1 {
-            margin-bottom: 5px;
-            color: #0d6efd;
-        }
-        
-        /* Animaciones para elementos */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animated-card {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-    </style>
-</head>
+@extends('layouts.docente_layout')
+@section('title', 'Panel Docente')
+@section('contenido')
 
 <body>
     <div class="container-fluid p-0">
@@ -152,12 +15,12 @@
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('docente.p_docente') }}">
+                        <a class="nav-link" href="{{ route('docente.p_docente') }}">
                             <i class="fas fa-home"></i> Inicio
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('docente.result') }}">
+                    <li class="nav-item active">
+                        <a class="nav-link active" href="{{ route('docente.result') }}">
                             <i class="fas fa-chart-line"></i> Resultados
                         </a>
                     </li>
@@ -336,6 +199,6 @@
 
     <!-- Bootstrap JS y scripts personalizados -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('resources/js/LogicaDocente/auth.js')}}"></script>
-    <script src="{{ asset('resources/js/LogicaDocente/script.js')}}"></script>
-    <script src="{{ asset('resources/js/LogicaDocente/acta-docente.js')}}"></script>
+    <script src="{{ asset('js/LogicaDocente/script.js')}}"></script>
+
+    @endsection

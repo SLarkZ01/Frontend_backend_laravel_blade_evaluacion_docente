@@ -1,3 +1,7 @@
+@extends('layouts.app')
+@section('titulo', 'Panel de Administrador')
+@section('contenido')
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -13,100 +17,7 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{asset('resources/css/styles.css')}}">
-    <style>
-        .header-card {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-left: 5px solid #0d6efd;
-        }
-
-        .header-card h1 {
-            margin-bottom: 5px;
-            color: #0d6efd;
-        }
-
-        .table-admin {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .table-admin thead {
-            background-color: #0d6efd;
-            color: white;
-        }
-
-        .btn-action {
-            padding: 0.25rem 0.5rem;
-            font-size: 0.875rem;
-            border-radius: 0.2rem;
-            margin-right: 5px;
-        }
-
-        .config-section {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .config-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .config-icon {
-            font-size: 2rem;
-            color: #0d6efd;
-            margin-bottom: 15px;
-        }
-
-        /* Animaciones para elementos */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animated-card {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-
-        .period-active {
-            background-color: rgba(25, 135, 84, 0.1);
-            border-left: 4px solid #198754;
-        }
-
-        .period-inactive {
-            background-color: rgba(108, 117, 125, 0.1);
-            border-left: 4px solid #6c757d;
-        }
-
-        .period-upcoming {
-            background-color: rgba(13, 110, 253, 0.1);
-            border-left: 4px solid #0d6efd;
-        }
-
-        .period-card {
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .period-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+    <link rel="stylesheet" href="{{asset('css/styles.css')}}">
 </head>
 
 <body>
@@ -457,7 +368,7 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     <!-- Script personalizado -->
-    <script src="admin-script.js"></script>
+    <script src="js/LogicaAdministrador/Admin-script.js"></script>
 
     <script>
         // Script específico para la página de periodos de evaluación
@@ -500,3 +411,4 @@
     </script>
 </body>
 </html>
+@endsection

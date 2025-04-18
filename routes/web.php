@@ -5,7 +5,9 @@ use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\DecanoCordinadorController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,12 +28,14 @@ Route::get("/docente/PDmejorado", [DocenteController::class, 'pde'])->name('doce
 //resultados
 Route::get("/docente/resultados", [DocenteController::class, 'result'])->name('docente.result');
 
+//Login 
+Route::post('/login', [loginController::class, 'validation'])->name('login.process');
 
 
+//lista los docentes
+Route::get('/decano/total_docentes', [DecanoCordinadorController::class, 'total_docentes']);
 
-
-
-Route::get("/user", [HomeController::class, 'index'])->name('user.index');
+Route::get("/decano", [HomeController::class, 'index'])->name('user.index');
 
 Route::get('/', [loginController::class, 'Login'])->name('user.login');
 
@@ -42,7 +46,7 @@ Route::get('/', [loginController::class, 'Login'])->name('user.login');
 Route::get('/Admin', [AdminController::class, 'Dashboard'])->name('Admin.Dashboard');
 // rutas para el periodo de evaluacion
 Route::get('/Admin/periodo_evaluacion', [AdminController::class, 'periodo_evaluacion'])
-->name('admin.periodo_evaluacion'); 
+->name('admin.periodo_evaluacion');
 // rutas para los reportes
 Route::get('/Admin/reportes', [AdminController::class, 'reportes'])->name('admin.reportes_admin');
 // rutas para los roles y permisos
@@ -50,7 +54,7 @@ Route::get('/Admin/roles_permisos', [AdminController::class, 'roles_permisos'])
 ->name('admin.roles_permisos');
 
 
-// rutas de decano docente //
+// rutas de decano coordinador//
 // acta de compromiso
 Route::get('/decano/actaCompromiso', [DecanoCordinadorController::class, 'acta_compromiso'])->name('decano.acta_compromiso');
 // alertas bajo desempeño
