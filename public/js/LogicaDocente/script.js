@@ -1,4 +1,5 @@
 // Datos para el gráfico
+
 let chartData = {
     labels: ['AÑO 2022', 'AÑO 2023', 'AÑO 2024', 'AÑO 2025'],
     datasets: [
@@ -20,7 +21,8 @@ let chartData = {
 };
 
 // Configuración del panel docente
-
+//const rawData = document.getElementById('chartDataContainer').dataset.evaluaciones;
+//const datosEvaluaciones = JSON.parse(rawData);
 // Función para generar un número aleatorio entre min y max con decimales
 function getRandomDecimal(min, max, decimals = 1) {
     const value = Math.random() * (max - min) + min;
