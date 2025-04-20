@@ -19,7 +19,7 @@ class DocenteController extends Controller
     
         // Llamar al procedimiento almacenado
         $evaluaciones = DB::select('CALL ObtenerEvaluacionesPorCorreo(?)', [$correo]);
-        $evaluaciones = $evaluaciones[0] ?? null;
+       // $evaluaciones = $evaluaciones[0] ?? null;
         
         return view('Docente.panel_docente', compact('evaluaciones'));
     }

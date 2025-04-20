@@ -1,6 +1,97 @@
-// Datos para el gráfico
+const evaluaciones = window.miAppData.evaluaciones;
 
-let chartData = {
+const labels = evaluaciones.map(e => e.fecha_fin);
+let chartInstance = null;
+
+// Colores para cada tipo
+const colores = {
+    autoevaluacion: '#2c7be5',
+    evaluacion_decano: '#e6873c',
+    evaluacion_estudiantes: '#00b894',
+    promedio_total: '#6c757d'
+};
+
+// Nombres amigables
+const nombres = {
+    autoevaluacion: 'Autoevaluación',
+    evaluacion_decano: 'Evaluación Decano',
+    evaluacion_estudiantes: 'Evaluación Estudiantes',
+    promedio_total: 'Promedio Total'
+};
+
+// Crear datasets según selección
+function generarDatasets(tiposSeleccionados, tipoGrafico) {
+    return tiposSeleccionados.map(tipo => ({
+        label: nombres[tipo],
+        data: evaluaciones.map(e => e[tipo]),
+        borderColor: colores[tipo],
+        backgroundColor: colores[tipo],
+        borderWidth: 2,
+        fill: tipoGrafico === 'line' ? false : true,
+        tension: 0.2
+    }));
+}
+
+// Renderizar gráfico
+function renderChart(tipoGrafico, tiposSeleccionados) {
+    const ctx = document.getElementById('miGrafico').getContext('2d');
+
+    if (chartInstance) chartInstance.destroy();
+
+    chartInstance = new Chart(ctx, {
+        type: tipoGrafico,
+        data: {
+            labels: labels,
+            datasets: generarDatasets(tiposSeleccionados, tipoGrafico)
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Fecha de Fin del Periodo'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Valor'
+                    },
+                    min: 0,
+                    max: 5
+                }
+            }
+        }
+    });
+}
+
+// Obtener los valores seleccionados del select múltiple
+function getSelectedEvaluations() {
+    const selected = Array.from(document.getElementById('evaluationType').selectedOptions);
+    return selected.map(option => option.value);
+}
+
+// Eventos
+document.getElementById('chartType').addEventListener('change', () => {
+    renderChart(
+        document.getElementById('chartType').value,
+        getSelectedEvaluations()
+    );
+});
+
+document.getElementById('evaluationType').addEventListener('change', () => {
+    renderChart(
+        document.getElementById('chartType').value,
+        getSelectedEvaluations()
+    );
+});
+
+// Cargar por defecto
+renderChart('line', getSelectedEvaluations());
+
+
+let chartData2 = {
     labels: ['AÑO 2022', 'AÑO 2023', 'AÑO 2024', 'AÑO 2025'],
     datasets: [
         {
@@ -31,21 +122,19 @@ function getRandomDecimal(min, max, decimals = 1) {
 
 // Función para generar datos aleatorios para el gráfico
 function generarDatosAleatorios() {
+    const datos = window.miAppData.evaluaciones;
+    datos.Matematicas
     // Generar datos aleatorios para el gráfico
     chartData.datasets[0].data = [
-        getRandomDecimal(2.0, 5.0),
-        getRandomDecimal(2.0, 5.0),
-        getRandomDecimal(2.0, 5.0),
-        getRandomDecimal(2.0, 5.0)
+        2.80  ,
+        3.40
     ];
     
     chartData.datasets[1].data = [
-        getRandomDecimal(2.0, 5.0),
-        getRandomDecimal(2.0, 5.0),
-        getRandomDecimal(2.0, 5.0),
-        getRandomDecimal(2.0, 5.0)
+        2.80  ,
+        3.40
     ];
-    
+   
     // Actualizar el gráfico
     if (window.evaluacionChart) {
         window.evaluacionChart.data = chartData;
@@ -145,11 +234,14 @@ function updateChart() {
     const yearIndex = chartData.labels.findIndex(label => label.includes(yearSelected)) || 0;
     const datasetIndex = semesterSelected === '1' ? 0 : 1;
     
+
+    const datos = window.miAppData.evaluaciones;
+    datos.Matematicas
     // Criterios de evaluación
-    const criterios = ['Métodos de enseñanza', 'Conocimiento de contenido', 'Comunicación', 'Puntualidad', 'Material didáctico'];
+    const criterios = ['2023-06-10', '2023-12-10'];
     
     // Generar datos aleatorios para cada criterio
-    const datosAleatorios = criterios.map(() => getRandomDecimal(3.0, 5.0));
+    //const datosAleatorios = criterios.map(() => getRandomDecimal(3.0, 5.0));
     
     // Colores para los diferentes tipos de gráficos
     const backgroundColors = [
@@ -648,7 +740,7 @@ function generarComentariosAleatorios() {
     comentariosContainer.innerHTML = '';
     
     // Generar entre 5 y 10 comentarios aleatorios
-    const numComentarios = Math.floor(Math.random() * 6) + 5;
+     const numComentarios = Math.floor(Math.random() * 6) + 5;
     
     // Lista de posibles comentarios positivos
     const comentariosPositivos = [
