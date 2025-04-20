@@ -52,7 +52,7 @@ Route::get('/Admin/roles_permisos', [AdminController::class, 'roles_permisos'])
 
 
 // rutas de decano coordinador//
-// acta de compromiso
+// acta de compromisoS
 Route::get('/decano/actaCompromiso', [DecanoCordinadorController::class, 'acta_compromiso'])->name('decano.acta_compromiso');
 // alertas bajo desempeño
 Route::get('/decano/alertasBajoDesempeno', [DecanoCordinadorController::class, 'abd'])->name('decano.abd');
@@ -80,3 +80,8 @@ Route::get('/decano/promedio-facultad', [DecanoCordinadorController::class, 'mos
 Route::get('/decano/docentesDestacados', [DecanoCordinadorController::class, 'obtenerDocentesDestacados'])->name('decano.docentesdestacados');
 
 Route::get('/decano/buscar-docente', [DecanoCordinadorController::class, 'buscarDocente'])->name('decano.buscarDocente');
+
+Route::get('/decano/grafica-promedios', [DecanoCordinadorController::class, 'mostrarGrafica']);
+Route::get('/decano/alertas', [DecanoCordinadorController::class, 'index']);
+
+

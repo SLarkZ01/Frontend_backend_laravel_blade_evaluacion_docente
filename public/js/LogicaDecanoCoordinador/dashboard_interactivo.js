@@ -12,73 +12,70 @@ document.addEventListener('DOMContentLoaded', function () {
     // Actualizar contador de días restantes
     updateRemainingDays();
 });
+console.log(window.miAppData.promedios);
 
 // Función para inicializar gráficos interactivos
-function initializeCharts() {
-    // Actualizar gráfico de rendimiento por departamento con interactividad
-    if (document.getElementById('departamentosChart')) {
-        const ctxDepartamentos = document.getElementById('departamentosChart').getContext('2d');
-        const departamentosChart = new Chart(ctxDepartamentos, {
-            type: 'bar',
-            data: {
-                labels: ['Ingeniería', 'Ciencias', 'Humanidades', 'Artes', 'Economía'],
-                datasets: [{
-                    label: 'Promedio de Calificación',
-                    data: [4.2, 4.0, 4.5, 4.3, 3.9],
-                    backgroundColor: [
-                        'rgba(13, 110, 253, 0.7)',
-                        'rgba(25, 135, 84, 0.7)',
-                        'rgba(111, 66, 193, 0.7)',
-                        'rgba(220, 53, 69, 0.7)',
-                        'rgba(255, 193, 7, 0.7)'
-                    ],
-                    borderColor: [
-                        'rgba(13, 110, 253, 1)',
-                        'rgba(25, 135, 84, 1)',
-                        'rgba(111, 66, 193, 1)',
-                        'rgba(220, 53, 69, 1)',
-                        'rgba(255, 193, 7, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: false,
-                        min: 3.0,
-                        max: 5.0
-                    }
-                },
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            afterLabel: function (context) {
-                                const departamentos = ['Ingeniería', 'Ciencias', 'Humanidades', 'Artes', 'Economía'];
-                                const docentes = [15, 10, 8, 7, 5];
-                                return `Total docentes: ${docentes[context.dataIndex]}`;
-                            }
-                        }
-                    },
-                    legend: {
+const promedios = @json($promedios);
+const labels = promedios.map(p => p.facultad);
+const data = promedios.map(p => p.promedio);  // Usamos el promedio como dato
+
+// Variable para el gráfico
+let chartInstance;
+
+// Función para renderizar el gráfico
+function renderChart(type) {
+    const ctx = document.getElementById('miGrafico').getContext('2d');
+
+    // Destruir gráfico anterior si existe
+    if (chartInstance) {
+        chartInstance.destroy();
+    }
+
+    chartInstance = new Chart(ctx, {
+        type: type,
+        data: {
+            labels: labels,  // Facultades como etiquetas
+            datasets: [{
+                label: 'Promedio por Facultad',
+                data: data,  // Promedios de cada facultad
+                backgroundColor: 'rgba(13, 110, 253, 0.5)',
+                borderColor: 'rgb(39, 113, 223)',
+                borderWidth: 2,
+                fill: type === 'line' ? false : true,
+                tension: 0.2
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    title: {
                         display: true,
-                        position: 'top'
+                        text: 'Facultad'
                     }
                 },
-                onClick: function (e, elements) {
-                    if (elements.length > 0) {
-                        const index = elements[0].index;
-                        const departamento = this.data.labels[index];
-                        showDepartmentDetails(departamento);
-                    }
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Promedio Total'
+                    },
+                    min: 0,
+                    max: 5
                 }
             }
-        });
+        }
+    });
+}
+
+// Evento para cambiar tipo de gráfico
+document.getElementById('chartType').addEventListener('change', function () {
+    renderChart(this.value);
+});
+
+// Renderizar gráfico inicial
+renderChart('bar');  // Inicializamos con un gráfico de barras
 
         // Añadir botones para cambiar visualización
-        const chartContainer = document.querySelector('#departamentosChart').closest('.chart-container');
         const buttonContainer = document.createElement('div');
         buttonContainer.className = 'chart-buttons mt-2 text-center';
         buttonContainer.innerHTML = `
@@ -101,74 +98,72 @@ function initializeCharts() {
                 this.classList.add('active');
             });
         });
-    }
-
-    // Actualizar gráfico de distribución de calificaciones con interactividad
-    if (document.getElementById('calificacionesChart')) {
-        const ctxCalificaciones = document.getElementById('calificacionesChart').getContext('2d');
-        const calificacionesChart = new Chart(ctxCalificaciones, {
-            type: 'doughnut',
-            data: {
-                labels: ['Excelente (4.5-5.0)', 'Bueno (4.0-4.4)', 'Aceptable (3.5-3.9)', 'Regular (3.0-3.4)', 'Deficiente (<3.0)'],
-                datasets: [{
-                    data: [15, 18, 7, 3, 2],
-                    backgroundColor: [
-                        'rgba(25, 135, 84, 0.7)',
-                        'rgba(13, 110, 253, 0.7)',
-                        'rgba(255, 193, 7, 0.7)',
-                        'rgba(255, 128, 0, 0.7)',
-                        'rgba(220, 53, 69, 0.7)'
-                    ],
-                    borderColor: [
-                        'rgba(25, 135, 84, 1)',
-                        'rgba(13, 110, 253, 1)',
-                        'rgba(255, 193, 7, 1)',
-                        'rgba(255, 128, 0, 1)',
-                        'rgba(220, 53, 69, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'right',
-                        onClick: function (e, legendItem, legend) {
-                            // Implementación personalizada del clic en leyenda
-                            const index = legendItem.index;
-                            const ci = this.chart;
-
-                            // Mostrar/ocultar segmento
-                            const meta = ci.getDatasetMeta(0);
-                            const alreadyHidden = meta.data[index].hidden || false;
-                            meta.data[index].hidden = !alreadyHidden;
-
-                            // Actualizar gráfico
-                            ci.update();
-
-                            // Mostrar detalles de la categoría
-                            if (!alreadyHidden) {
-                                showCategoryDetails(legendItem.text);
+    
+        if (document.getElementById('calificacionesChart')) {
+            const ctxCalificaciones = document.getElementById('calificacionesChart').getContext('2d');
+        
+            // Aquí cargas desde Laravel tus promedios (vienen del controlador)
+            const datos = @json($promedios);
+        
+            // Extraes nombres de facultades y sus promedios
+            const labels = datos.map(item => item.facultad);
+            const valores = datos.map(item => parseFloat(item.promedio));
+        
+            const calificacionesChart = new Chart(ctxCalificaciones, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: valores,
+                        backgroundColor: [
+                            'rgba(25, 135, 84, 0.7)',   // Verde
+                            'rgba(13, 110, 253, 0.7)',  // Azul
+                            'rgba(255, 193, 7, 0.7)',   // Amarillo
+                            'rgba(255, 128, 0, 0.7)',   // Naranja
+                            'rgba(220, 53, 69, 0.7)'    // Rojo (por si tienes más facultades)
+                        ],
+                        borderColor: [
+                            'rgba(25, 135, 84, 1)',
+                            'rgba(13, 110, 253, 1)',
+                            'rgba(255, 193, 7, 1)',
+                            'rgba(255, 128, 0, 1)',
+                            'rgba(220, 53, 69, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            onClick: function (e, legendItem, legend) {
+                                const index = legendItem.index;
+                                const ci = this.chart;
+                                const meta = ci.getDatasetMeta(0);
+                                const alreadyHidden = meta.data[index].hidden || false;
+                                meta.data[index].hidden = !alreadyHidden;
+                                ci.update();
+                                if (!alreadyHidden) {
+                                    showCategoryDetails(legendItem.text);
+                                }
                             }
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function (context) {
-                                const label = context.label || '';
-                                const value = context.raw || 0;
-                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                const percentage = Math.round((value / total) * 100);
-                                return `${label}: ${value} docentes (${percentage}%)`;
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    return `${label}: promedio ${value.toFixed(2)}`;
+                                }
                             }
                         }
                     }
                 }
-            }
-        });
-
+            });
+        }
+        
         // Añadir botones para cambiar visualización
         const chartContainer = document.querySelector('#calificacionesChart').closest('.chart-container');
         const buttonContainer = document.createElement('div');
@@ -193,11 +188,10 @@ function initializeCharts() {
                 this.classList.add('active');
             });
         });
-    }
-
+    
     // Crear nuevo gráfico de tendencia histórica
     createHistoricalTrendChart();
-}
+
 
 // Función para crear gráfico de tendencia histórica
 function createHistoricalTrendChart() {
