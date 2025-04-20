@@ -71,7 +71,23 @@ public function docentesDestacados()
     // Pasar los docentes únicos a la vista
     return view('decano.docentesDestacados', compact('docentesUnicos'));
 }
+public function mostrarGrafica()
+    {
+        // Ejecuta el procedimiento almacenado
+        $promedios = DB::select('CALL ObtenerPromedioNotasPorFacultad()');
 
+        // Extrae las etiquetas (facultades) y los datos (promedios)
+        return view('decano.mostrarGrafica',['evaluaciones' => $promedios]);
+    }
+
+    public function mostrarAlertas()
+    {
+        $alertas = DB::select('CALL ObtenerAlertasCalificacionesCriticas()');
+    
+        return view('tu_vista', compact('alertas'));
+    }
+    
+    
 //ocentes destacados
     public function acta_compromiso()
     {
