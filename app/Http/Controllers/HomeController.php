@@ -27,7 +27,6 @@ class HomeController extends Controller
         $docentesbusqueda = DB::select('CALL BuscarDocente()');
 
 
-
         // Verifica si hay datos antes de enviarlo
         if (!empty($resultado3)) {
             $totalEstudiantesNoEvaluaron = $resultado3[0]->total_estudiantes_no_evaluaron;  // Ajusta según el nombre de la columna
