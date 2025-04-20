@@ -9,10 +9,14 @@ class HomeController extends Controller
 {
     //
 
+
     public function index()
+    { // Llamar al procedimiento almacenado
     { // Llamar al procedimiento almacenado
         $resultado = DB::select('CALL total_docentes()');
 
+        // Ejecutamos el procedimiento almacenado para obtener el total de docentes no evaluados
+        $resultadoTotalNoEvaluados = DB::select('CALL totalNoEvaluados()');
         // Ejecutamos el procedimiento almacenado para obtener el total de docentes no evaluados
         $resultadoTotalNoEvaluados = DB::select('CALL totalNoEvaluados()');
 
@@ -44,6 +48,18 @@ class HomeController extends Controller
         } else {
             $totalNoEvaluados = 0;
         }
+        // Verifica si hay datos antes de enviarlo
+        if (!empty($resultado3)) {
+            $totalEstudiantesNoEvaluaron = $resultado3[0]->total_estudiantes_no_evaluaron;  // Ajusta según el nombre de la columna
+        } else {
+            $totalEstudiantesNoEvaluaron = 0;
+        }
+        // Verifica si hay datos antes de enviarlo
+        if (!empty($resultadoTotalNoEvaluados)) {
+            $totalNoEvaluados = $resultadoTotalNoEvaluados[0]->total_no_evaluados;  // Ajusta según el nombre de la columna
+        } else {
+            $totalNoEvaluados = 0;
+        }
 
         // Verifica si hay datos antes de enviarlo
         if (!empty($resultado)) {
@@ -63,6 +79,9 @@ class HomeController extends Controller
     }
     //total docentes no evaluados
 
+    //total docentes no evaluados
 
 
+
+}
 }
