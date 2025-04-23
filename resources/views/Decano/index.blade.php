@@ -61,7 +61,7 @@
     <!-- Encabezado y bienvenida -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 class="mb-1">Dashboard del Panel Decano/Coordinador</h1>
+            <h1 class="mb-1">Panel Decano</h1>
             <p class="text-muted">Bienvenido al sistema de Evaluación Docente</p>
         </div>
         <div class="d-flex align-items-center">
@@ -152,59 +152,185 @@
             </div>
         </div>
     </div>
+    <script>
+        window.miAppData = {
+            evaluaciones: @json($promedios)
+        };
+    </script>
 
-    <!-- Gráficos de rendimiento -->
-
+    <!-- Fila para las gráficas una al lado de la otra -->
     <div class="row mb-4">
         <div class="col-md-6 mb-1">
-            <div class="card dashboard-card">
-                <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Rendimiento por Facultad</h5>
-                    <div class="dropdown">
-                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownPeriodo"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Último periodo
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownPeriodo">
-                            <li><a class="dropdown-item" href="#">Último periodo</a></li>
-                            <li><a class="dropdown-item" href="#">Últimos 3 periodos</a></li>
-                            <li><a class="dropdown-item" href="#">Último año</a></li>
-                        </ul>
-                    </div>
+            <div class="card dashboard-card h-100">
+                <div class="card-header bg-white border-0">
+                    <h2>Promedio por facultad</h2>
                 </div>
                 <div class="card-body">
-                    <div class="chart-container">
-                        <canvas id="departamentosChart"></canvas>
+                    <div class="card p-3">
+                        <div style="height: 350px;">
+                            <canvas id="miGrafico"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
         <div class="col-md-6 mb-1">
-            <div class="card dashboard-card">
-                <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Distribución de Calificaciones</h5>
-                    <div class="dropdown">
-                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
-                            id="dropdownCalificaciones" data-bs-toggle="dropdown" aria-expanded="false">
-                            Periodo actual
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownCalificaciones">
-                            <li><a class="dropdown-item" href="{{ url('/promedio-facultad') }}">Periodo actual</a></li>
-                            <li><a class="dropdown-item" href="#">Periodo anterior</a></li>
-                            <li><a class="dropdown-item" href="#">Comparativa</a></li>
-                        </ul>
-                    </div>
+            <div class="card dashboard-card h-100">
+                <div class="card-header bg-white border-0">
+                    <h2>Análisis de notas</h2>
                 </div>
                 <div class="card-body">
-                    <div class="chart-container">
-                        <canvas id="calificacionesChart"></canvas>
+                    <div class="card p-3">
+                        <div style="height: 350px;">
+                            <canvas id="calificacionesChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Recibir los datos de Laravel directamente en JavaScript
+        const promedios = @json($promedios);
+        const labels = promedios.map(p => p.facultad);
+        const data = promedios.map(p => p.promedio); // promedios
+
+        let chartInstance;
+
+        function renderChart(type) {
+            const ctx = document.getElementById('miGrafico').getContext('2d');
+
+            // Destruir el gráfico anterior si ya existe
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            // Crear nuevo gráfico
+            chartInstance = new Chart(ctx, {
+                type: type, // 'bar' o 'line'
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Promedio por Facultad',
+                        data: data,
+                        backgroundColor: [
+                            'rgba(25, 155, 215, 0.7)',
+                            'rgba(13, 110, 253, 0.7)',
+                            'rgba(51, 88, 224, 0.7)',
+                            'rgba(25, 59, 225, 0.7)',
+                            'rgba(12, 34, 235, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgb(40, 60, 236)',
+                            'rgba(13, 110, 253, 1)',
+                            'rgb(45, 35, 238)',
+                            'rgb(28, 74, 211)',
+                            'rgb(48, 128, 232)'
+                        ],
+                        borderWidth: 2,
+                        fill: type === 'line' ? false : true,
+                        tension: 0.2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Facultad'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Promedio Total'
+                            },
+                            min: 0,
+                            max: 5
+                        }
+                    }
+                }
+            });
+        }
+
+        // Mostrar por defecto gráfico de barras
+        document.addEventListener("DOMContentLoaded", function() {
+            renderChart('bar');
+
+            if (document.getElementById('calificacionesChart')) {
+                const ctx = document.getElementById('calificacionesChart').getContext('2d');
+
+                // Datos enviados desde Laravel
+                const datos = promedios;
+
+                const labels = datos.map(item => item.facultad);
+                const valores = datos.map(item => parseFloat(item.promedio));
+
+                const calificacionesChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: valores,
+                            backgroundColor: [
+                                'rgba(25, 135, 84, 0.7)',
+                                'rgba(13, 110, 253, 0.7)',
+                                'rgba(255, 193, 7, 0.7)',
+                                'rgba(255, 128, 0, 0.7)',
+                                'rgba(220, 53, 69, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(25, 135, 84, 1)',
+                                'rgba(13, 110, 253, 1)',
+                                'rgba(255, 193, 7, 1)',
+                                'rgba(255, 128, 0, 1)',
+                                'rgba(220, 53, 69, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                onClick: function(e, legendItem, legend) {
+                                    const index = legendItem.index;
+                                    const ci = this.chart;
+                                    const meta = ci.getDatasetMeta(0);
+                                    const alreadyHidden = meta.data[index].hidden || false;
+                                    meta.data[index].hidden = !alreadyHidden;
+                                    ci.update();
+
+                                    if (!alreadyHidden) {
+                                        showCategoryDetails(legendItem.text);
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const label = context.label || '';
+                                        const value = context.raw || 0;
+                                        return `${label}: Promedio ${value.toFixed(2)}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Puedes personalizar esta función para mostrar más detalles si lo deseas
+            function showCategoryDetails(text) {
+                alert("Facultad: " + text);
+            }
+        });
+    </script>
 
     <!-- Accesos rápidos y alertas -->
     <div class="row mb-1">
@@ -269,188 +395,66 @@
                         <div class="list-group-item p-3 alert-docente">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h6 class="mb-1">Carlos Rodríguez - Calificación crítica</h6>
-                                    <p class="mb-0 text-muted small">Calificación: <span
-                                            class="text-danger fw-bold">2.4/5.0</span> en Cálculo
-                                        Diferencial</p>
-                                </div>
-                                <div>
-                                    <span class="badge dept-ingenieria">Ingeniería</span>
-                                    <a href="{{ route('decano.acta_compromiso') }}"
-                                        class="btn btn-sm btn-outline-danger ms-2">Generar Acta</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-group-item p-3 alert-docente">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <h6 class="mb-1">María Gómez - Calificación crítica</h6>
-                                    <p class="mb-0 text-muted small">Calificación: <span
-                                            class="text-danger fw-bold">2.7/5.0</span> en Física
-                                        Mecánica</p>
-                                </div>
-                                <div>
-                                    <span class="badge dept-ciencias">Ciencias</span>
-                                    <a href="{{ route('decano.acta_compromiso') }}"
-                                        class="btn btn-sm btn-outline-danger ms-2">Generar Acta</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-group-item p-3 alert-warning-custom">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <h6 class="mb-1">Plan de mejora pendiente</h6>
-                                    <p class="mb-0 text-muted small">El plan de mejora de Juan Pérez
-                                        está pendiente de seguimiento desde hace 7 días</p>
-                                </div>
-                                <div>
-                                    <a href="{{ route('decano.spm') }}" class="btn btn-sm btn-warning">Revisar</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-group-item p-3 alert-success-custom">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <h6 class="mb-1">Plan de mejora completado</h6>
-                                    <p class="mb-0 text-muted small">Ana Martínez ha completado su plan
-                                        de mejora con éxito</p>
-                                </div>
-                                <div>
-                                    <a href="{{ route('decano.spm') }}" class="btn btn-sm btn-success">Ver detalles</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Planes de mejora activos y docentes destacados -->
-    <div class="row mb-1">
-        <!-- Planes de mejora activos -->
-        <div class="col-md-6 mb-2">
-            <div class="card dashboard-card">
-                <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Planes de Mejora Activos</h5>
-                    <a href="{{ route('decano.spm') }}" class="btn btn-sm btn-outline-primary">Ver todos</a>
-                </div>
-                <div class="card-body">
-                    <div class="mb-3">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <div>
-                                <h6 class="mb-0">Juan Pérez - Física Cuántica</h6>
-                                <small class="text-muted">Inicio: 15/05/2025 - Fin: 15/08/2025</small>
-                            </div>
-                            <span class="badge badge-estado badge-activo">Activo</span>
-                        </div>
-                        <div class="progress" style="height: 8px;">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 65%"
-                                aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-1">
-                            <small class="text-muted">Progreso</small>
-                            <small class="text-muted">65%</small>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <div>
-                                <h6 class="mb-0">María Gómez - Física Mecánica</h6>
-                                <small class="text-muted">Inicio: 01/06/2025 - Fin: 01/09/2025</small>
-                            </div>
-                            <span class="badge badge-estado badge-activo">Activo</span>
-                        </div>
-                        <div class="progress" style="height: 8px;">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 30%"
-                                aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-1">
-                            <small class="text-muted">Progreso</small>
-                            <small class="text-muted">30%</small>
-                        </div>
-                    </div>
-                    <div class="mb-0">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <div>
-                                <h6 class="mb-0">Carlos Rodríguez - Cálculo Diferencial</h6>
-                                <small class="text-muted">Inicio: 10/06/2025 - Fin: 10/09/2025</small>
-                            </div>
-                            <span class="badge badge-estado badge-pendiente">Pendiente</span>
-                        </div>
-                        <div class="progress" style="height: 8px;">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 10%"
-                                aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-1">
-                            <small class="text-muted">Progreso</small>
-                            <small class="text-muted">10%</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Docentes destacados -->
-        <div class="col-md-6 mb-2">
-            <div class="card dashboard-card">
-                <div class="card-header bg-white border-0">
-                    <h5 class="mb-0">Docentes Destacados</h5>
-                </div>
-                <div class="card-body p-0">
-                    <div class="list-group list-group-flush">
-                        <div class="list-group-item p-3">
-                            <div class="d-flex align-items-center">
-                                <div class="me-3">
-                                    <div class="avatar-circle"
-                                        style="width: 50px; height: 50px; background-color: #0d6efd;">
-                                        <i class="fas fa-user fa-lg text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    @if ($docentesUnicos && $docentesUnicos->isNotEmpty())
-                                        <!-- Verificamos si hay docentes -->
-                                        @foreach ($docentesUnicos as $docente)
-                                            <!-- Iteramos a través de los docentes -->
-                                            <div class="list-group-item p-3">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="me-3">
-                                                        <div class="avatar-circle"
-                                                            style="width: 50px; height: 50px; background-color: #0d6efd;">
-                                                            <i class="fas fa-user fa-lg text-white"></i>
-                                                        </div>
+                                    @if ($alertas && count($alertas) > 0)
+                                        @foreach ($alertas as $alerta)
+                                            <div class="list-group-item p-3 alert-docente">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h6 class="mb-1">{{ $alerta->docente }} - Calificación crítica
+                                                        </h6>
+                                                        <p class="mb-0 text-muted small">
+                                                            Calificación:
+                                                            <span
+                                                                class="text-danger fw-bold">{{ $alerta->calificacion }}/5.0</span>
+                                                            en {{ $alerta->curso }}
+                                                        </p>
                                                     </div>
                                                     <div>
-                                                        <!-- Mostramos el nombre del docente, el curso y la calificación -->
-                                                        <h4>{{ $docente->docente }}</h4>
-                                                        <p><strong>Curso:</strong> {{ $docente->curso }}</p>
-                                                        <p><strong>Calificación:</strong> {{ $docente->calificacion }}/5.0
-                                                        </p>
+                                                        @php
+                                                            // Genera la clase de facultad automáticamente
+                                                            $claseFacultad = 'dept-' . Str::slug($alerta->facultad);
+                                                        @endphp
+
+                                                        <span
+                                                            class="badge {{ $claseFacultad }}">{{ $alerta->facultad }}</span>
+
+                                                        <a href="{{ route('decano.acta_compromiso') }}"
+                                                            class="btn btn-sm btn-outline-danger ms-2">
+                                                            Generar Acta
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
                                         @endforeach
                                     @else
-                                        <p>No hay docentes destacados disponibles.</p> <!-- Mensaje si no hay docentes -->
+                                        <div class="alert alert-success">✅ No se han encontrado docentes con calificación
+                                            crítica.</div>
                                     @endif
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="list-group-item p-3">
-                        <div class="d-flex align-items-center">
-                            <div class="me-3">
-                                <div class="avatar-circle" style="width: 50px; height: 50px; background-color: #6f42c1;">
-                                    <i class="fas fa-user fa-lg text-white"></i>
+                            <div class="list-group-item p-3 alert-warning-custom">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">Plan de mejora pendiente</h6>
+                                        <p class="mb-0 text-muted small">El plan de mejora de Juan Pérez
+                                            está pendiente de seguimiento desde hace 7 días</p>
+                                    </div>
+                                    <div>
+                                        <a href="{{ route('decano.spm') }}" class="btn btn-sm btn-warning">Revisar</a>
+                                    </div>
                                 </div>
                             </div>
-                            <div>
-                                <h6 class="mb-1">Patricia Mendoza</h6>
-                                <p class="mb-0 text-muted small">Calificación: <span
-                                        class="text-success fw-bold">4.7/5.0</span></p>
-                                <div class="d-flex align-items-center">
-                                    <span class="badge dept-ciencias me-2">Ciencias</span>
-                                    <small class="text-muted">Biología Molecular</small>
+                            <div class="list-group-item p-3 alert-success-custom">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">Plan de mejora completado</h6>
+                                        <p class="mb-0 text-muted small">Ana Martínez ha completado su plan
+                                            de mejora con éxito</p>
+                                    </div>
+                                    <div>
+                                        <a href="{{ route('decano.spm') }}" class="btn btn-sm btn-success">Ver
+                                            detalles</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -458,7 +462,126 @@
                 </div>
             </div>
         </div>
-    </div>
+
+        <!-- Planes de mejora activos y docentes destacados -->
+        <div class="row mb-1">
+            <!-- Planes de mejora activos -->
+            <div class="col-md-6 mb-2">
+                <div class="card dashboard-card">
+                    <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Planes de Mejora Activos</h5>
+                        <a href="{{ route('decano.spm') }}" class="btn btn-sm btn-outline-primary">Ver todos</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <h6 class="mb-0">Juan Pérez - Física Cuántica</h6>
+                                    <small class="text-muted">Inicio: 15/05/2025 - Fin: 15/08/2025</small>
+                                </div>
+                                <span class="badge badge-estado badge-activo">Activo</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 65%"
+                                    aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-1">
+                                <small class="text-muted">Progreso</small>
+                                <small class="text-muted">65%</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <h6 class="mb-0">María Gómez - Física Mecánica</h6>
+                                    <small class="text-muted">Inicio: 01/06/2025 - Fin: 01/09/2025</small>
+                                </div>
+                                <span class="badge badge-estado badge-activo">Activo</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 30%"
+                                    aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-1">
+                                <small class="text-muted">Progreso</small>
+                                <small class="text-muted">30%</small>
+                            </div>
+                        </div>
+                        <div class="mb-0">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <h6 class="mb-0">Carlos Rodríguez - Cálculo Diferencial</h6>
+                                    <small class="text-muted">Inicio: 10/06/2025 - Fin: 10/09/2025</small>
+                                </div>
+                                <span class="badge badge-estado badge-pendiente">Pendiente</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 10%"
+                                    aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-1">
+                                <small class="text-muted">Progreso</small>
+                                <small class="text-muted">10%</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Docentes destacados -->
+            <div class="col-md-6 mb-2">
+                <div class="card dashboard-card">
+                    <div class="card-header bg-white border-0">
+                        <h5 class="mb-0">Docentes Destacados</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item p-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="me-3">
+                                    </div>
+                                    <div>
+                                        @if ($docentesUnicos && $docentesUnicos->isNotEmpty())
+                                            <!-- Verificamos si hay docentes -->
+                                            @foreach ($docentesUnicos as $docente)
+                                                <!-- Iteramos a través de los docentes -->
+                                                <div class="list-group-item p-3">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="me-3">
+                                                            <div class="avatar-circle"
+                                                                style="width: 50px; height: 50px; background-color: #0d6efd;">
+                                                                <i class="fas fa-user fa-lg text-white"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <!-- Mostramos el nombre del docente, el curso y la calificación -->
+                                                            <h4>{{ $docente->docente }}</h4>
+                                                            <p><strong>Curso:</strong> {{ $docente->curso }}</p>
+                                                            <p><strong>Calificación:</strong>
+                                                                {{ $docente->calificacion }}/5.0
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @else
+                                            <p>No hay docentes destacados disponibles.</p>
+                                            <!-- Mensaje si no hay docentes -->
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
