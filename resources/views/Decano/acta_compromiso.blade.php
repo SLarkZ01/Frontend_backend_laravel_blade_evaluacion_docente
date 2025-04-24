@@ -112,6 +112,53 @@
         </div>
     </div>
 
+    <!-- Lista de Actas de Compromiso -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title"><i class="fas fa-list me-2"></i>Actas de Compromiso Existentes</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Número de Acta</th>
+                                    <th>Docente</th>
+                                    <th>Fecha</th>
+                                    <th>Calificación</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(isset($actas) && count($actas) > 0)
+                                    @foreach($actas as $acta)
+                                    <tr>
+                                        <td>{{ $acta->numero_acta ?? 'N/A' }}</td>
+                                        <td>{{ $acta->nombre_docente ?? 'N/A' }}</td>
+                                        <td>{{ $acta->fecha_generacion ?? 'N/A' }}</td>
+                                        <td><span class="badge bg-danger">{{ $acta->calificacion ?? 'N/A' }}</span></td>
+                                        <td>
+                                            <a href="{{ route('decano.editar_acta', ['id' => $acta->id_acta]) }}" class="btn btn-sm btn-primary">
+                                                <i class="fas fa-edit"></i> Editar
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="5" class="text-center">No hay actas de compromiso registradas</td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Formulario de Acta de Compromiso -->
     <div class="form-acta p-0 mb-4">
         <div class="card-body p-4">

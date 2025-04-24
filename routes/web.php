@@ -7,7 +7,7 @@ use App\Http\Controllers\loginController;
 use App\Http\Controllers\DecanoCordinadorController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ActaCompromisoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -70,6 +70,10 @@ Route::get('/decanato/total_docente', [DecanoCordinadorController::class, 'total
 Route::get('/decano/totalNoEvaluados', [DecanoCordinadorController::class, 'totalNoEvaluados'])->name('decano.totalNoEvaluados');
 //esrtudiantes no evaluados
 Route::get('/decano/totalEstudiantesNoEvaluaron', [DecanoCordinadorController::class, 'totalEstudiantesNoEvaluaron'])->name('decano.totalEstudiantesNoEvaluaron');
+// editar acta de compromiso
+Route::get('/decano/editar-acta/{id}', [DecanoCordinadorController::class, 'editarActa'])->name('decano.editar_acta');
+// actualizar acta de compromiso
+Route::put('/decano/actualizar-acta/{id}', [DecanoCordinadorController::class, 'actualizarActa'])->name('decano.actualizar_acta');
 //promedio por facultad
 Route::get('/decano/promedio_global', [DecanoCordinadorController::class, 'promedio_global'])->name('decano.promedio_global');
  //promedio por facultad graficado
@@ -83,5 +87,10 @@ Route::get('/decano/buscar-docente', [DecanoCordinadorController::class, 'buscar
 
 Route::get('/decano/grafica-promedios', [DecanoCordinadorController::class, 'mostrarGrafica']);
 Route::get('/decano/alertas', [DecanoCordinadorController::class, 'index']);
-
+Route::get('/actas', [ActaCompromisoController::class, 'vistaIndex'])->name('actas.index');
+Route::get('/actas/create', [ActaCompromisoController::class, 'create'])->name('actas.create');
+Route::post('/actas', [ActaCompromisoController::class, 'storeVista'])->name('actas.store');
+Route::get('/actas/{id}/edit', [ActaCompromisoController::class, 'edit'])->name('actas.edit');
+Route::put('/actas/{id}', [ActaCompromisoController::class, 'updateVista'])->name('actas.update');
+Route::delete('/actas/{id}', [ActaCompromisoController::class, 'destroyVista'])->name('actas.destroy');
 
