@@ -14,7 +14,7 @@ class DocenteController extends Controller
         $correo = Session::get('correo_usuario');
 
         if (!$correo) {
-            return redirect()->route('login')->withErrors(['error' => 'No hay sesión activa. Inicia sesión.']);
+            return redirect()->route('user.login')->withErrors(['error' => 'No hay sesión activa. Inicia sesión.']);
         }
     
         // Llamar al procedimiento almacenado
