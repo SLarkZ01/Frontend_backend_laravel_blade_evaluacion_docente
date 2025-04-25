@@ -35,7 +35,7 @@ class loginController extends Controller
             // Redirigir según el rol del usuario
             switch ($usuario->id_rol) {
                 case 1:
-                    return redirect()->route('decano.acta_compromiso');
+                    return redirect()->route('user.index');
                 case 2:
                     return redirect()->route('docente.p_docente');
                 case 3:

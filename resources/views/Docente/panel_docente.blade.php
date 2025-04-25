@@ -76,7 +76,7 @@
                             </div>
                             <div>
                                 <h6 class="card-title text-muted mb-1">Evaluación Estudiantil</h6>
-                                <h2 class="display-5 fw-bold mb-0">3.8</h2>
+                                <h2 class="display-5 fw-bold mb-0">{{$evaluaciones[count($evaluaciones) - 1]->evaluacion_estudiantes}}</h2>
                                 <p class="card-text text-muted small mb-0 fs-8">Promedio de 45 evaluaciones</p>
                             </div>
                         </div>
@@ -89,8 +89,8 @@
                                 <i class="fas fa-clipboard-check card-icon"></i>
                             </div>
                             <div>
-                                <h6 class="card-title text-muted mb-1">Evaluación Administrativa</h6>
-                                <h2 class="display-5 fw-bold mb-0">4.5</h2>
+                                <h6 class="card-title text-muted mb-1">Evaluación Decano</h6>
+                                <h2 class="display-5 fw-bold mb-0">{{$evaluaciones[count($evaluaciones) - 1]->evaluacion_decano}}</h2>
                                 <p class="card-text text-muted small mb-0 fs-8">Calificación de coordinación</p>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                             </div>
                             <div>
                                 <h6 class="card-title text-muted mb-1">Autoevaluación</h6>
-                                <h2 class="display-8 fw-bold mb-0 text-warning">Pendiente</h2>
+                                <h2 class="display-8 fw-bold mb-0 text-warning">{{$evaluaciones[count($evaluaciones) - 1]->autoevaluacion}}</h2>
                                 <p class="card-text text-muted small mb-0 fs-8">No has completado tu autoevaluación</p>
                             </div>
                         </div>
@@ -117,17 +117,57 @@
                                 <i class="fas fa-chart-line card-icon"></i>
                             </div>
                             <div>
-                                <h6 class="card-title text-muted mb-1">Promedio Evaluación </h6>
-                                <h2 class="display-5 fw-bold mb-0">4.1</h2>
+                                <h6 class="card-title text-muted mb-1">Promedio total </h6>
+                                <h2 class="display-5 fw-bold mb-0">{{$evaluaciones[count($evaluaciones) - 1]->promedio_total}} </h2>
                                 <p class="card-text text-muted small mb-0 fs-8">Promedio general de evaluaciones</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
+              <!-- GRAFICO NUEVO-->
+            <script>
+                window.miAppData = {
+                    evaluaciones: @json($evaluaciones)
+                };
+            </script>
+            
+            <div class="container mt-4">
+                <h3 class="mb-3">Gráfico de Evaluaciones</h3>
+            
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label for="chartType" class="form-label">Tipo de gráfico:</label>
+                        <select id="chartType" class="form-select">
+                            <option value="line" selected>Gráfico de líneas</option>
+                            <option value="bar">Gráfico de barras</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="evaluationType" class="form-label">Tipo de evaluación:</label>
+                        <select id="evaluationType" class="form-select" multiple>
+                            <option value="autoevaluacion" selected>Autoevaluación</option>
+                            <option value="evaluacion_decano" selected>Evaluación Decano</option>
+                            <option value="evaluacion_estudiantes" selected>Evaluación Estudiantes</option>
+                            <option value="promedio_total" selected>Promedio Total</option>
+                        </select>
+                        <small class="text-muted">Puedes seleccionar varias (Ctrl o Shift)</small>
+                    </div>
+                </div>
+            
+                <canvas id="miGrafico" width="400" height="200"></canvas>
+            
+                <script>
+                    window.miAppData = {
+                        evaluaciones: @json($evaluaciones)
+                    };
+                </script>
+            
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script src="/js/configuracion/script.js"></script>
+            </div>
             <!-- Filtros y gráfico principal -->
-            <div class="row mt-4 animated-card" style="animation-delay: 0.2s;">
+           {{--  <div class="row mt-4 animated-card" style="animation-delay: 0.2s;">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
@@ -137,21 +177,15 @@
                             <div class="filter-container">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <label for="yearFilter" class="form-label">Año:</label>
+                                        <label for="yearFilter" class="form-label">Evaluaciones:</label>
                                         <select class="form-select" id="yearFilter">
-                                            <option value="2022">2022</option>
-                                            <option value="2023">2023</option>
-                                            <option value="2024">2024</option>
-                                            <option value="2025" selected>2025</option>
+                                            <option value="2022">Evaluación estudiantes</option>
+                                            <option value="2023">Evaluación decano</option>
+                                            <option value="2024">Autoevaluación</option>
+                                            <option value="2024">Promedio total</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-3">
-                                        <label for="semesterFilter" class="form-label">Semestre:</label>
-                                        <select class="form-select" id="semesterFilter">
-                                            <option value="1" selected>Semestre 1</option>
-                                            <option value="2">Semestre 2</option>
-                                        </select>
-                                    </div>
+                                    
                                     <div class="col-md-4 d-flex align-items-end">
                                         <button id="updateChartBtn" class="btn btn-primary">Actualizar</button>
                                     </div>
@@ -162,20 +196,16 @@
                                             class="fas fa-chart-bar me-1"></i> Barras</button>
                                     <button class="chart-type-btn" data-type="line"><i
                                             class="fas fa-chart-line me-1"></i> Líneas</button>
-                                    <button class="chart-type-btn" data-type="radar"><i
-                                            class="fas fa-spider me-1"></i> Radar</button>
-                                    <button class="chart-type-btn" data-type="pie"><i
-                                            class="fas fa-chart-pie me-1"></i> Circular</button>
                                 </div>
                             </div>
 
-                            <div class="chart-container">
+                            <div class="chart-container" >
                                 <canvas id="mainChart"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Mis Cursos y Resumen de Evaluaciones -->
             <div class="row mt-4">

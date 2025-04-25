@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class DecanoCordinadorController extends Controller
 {
@@ -91,14 +93,149 @@ public function mostrarGrafica()
 //docentes destacados
     public function acta_compromiso()
     {
-        // Obtener la lista de docentes para la búsqueda
         $docentesbusqueda = DB::select('CALL BuscarDocente()');
-        
-        // Obtener las actas de compromiso existentes usando el procedimiento almacenado
-        $actas = DB::select('CALL GetActasCompromiso()');
-            
+        $actas = \App\Models\ActaCompromiso::all();
         return view('decano.acta_compromiso', compact('docentesbusqueda', 'actas'));
+    }
+    
+    /**
+     * Guarda una nueva acta de compromiso
+     */
+    public function guardar_acta(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'numero_acta' => 'required|string|unique:acta_compromiso,numero_acta',
+            'fecha_generacion' => 'required|date',
+            'nombre_docente' => 'required|string|max:255',
+            'apellido_docente' => 'required|string|max:255',
+            'identificacion_docente' => 'required|string|max:20',
+            'asignatura' => 'required|string|max:255',
+            'calificacion_final' => 'required|numeric|between:0,5.00',
+            'retroalimentacion' => 'required|string',
+            'firma' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $firmaPath = null;
+        if ($request->hasFile('firma')) {
+            $firma = $request->file('firma');
+            $firmaName = time() . '_' . $firma->getClientOriginalName();
+            $firma->storeAs('public/firmas', $firmaName);
+            $firmaPath = 'firmas/' . $firmaName;
+        }
+
+        $acta = \App\Models\ActaCompromiso::create([
+            'numero_acta' => $request->numero_acta,
+            'fecha_generacion' => $request->fecha_generacion,
+            'nombre_docente' => $request->nombre_docente,
+            'apellido_docente' => $request->apellido_docente,
+            'identificacion_docente' => $request->identificacion_docente,
+            'asignatura' => $request->asignatura,
+            'calificacion_final' => $request->calificacion_final,
+            'retroalimentacion' => $request->retroalimentacion,
+            'firma_path' => $firmaPath,
+            'enviado' => false
+        ]);
+
+        return redirect()->route('decano.acta_compromiso')
+            ->with('success', 'Acta de compromiso creada exitosamente');
+    }
+
+    /**
+     * Muestra el formulario para editar un acta
+     */
+    public function editar_acta($id)
+    {
+        $acta = \App\Models\ActaCompromiso::findOrFail($id);
+        $docentesbusqueda = DB::select('CALL BuscarDocente()');
+        return view('decano.editar_acta', compact('acta', 'docentesbusqueda'));
+    }
+
+    /**
+     * Actualiza un acta existente
+     */
+    public function actualizar_acta(Request $request, $id)
+    {
+        $acta = \App\Models\ActaCompromiso::findOrFail($id);
         
+        $validator = Validator::make($request->all(), [
+            'numero_acta' => 'required|string|unique:acta_compromiso,numero_acta,' . $id,
+            'fecha_generacion' => 'required|date',
+            'nombre_docente' => 'required|string|max:255',
+            'apellido_docente' => 'required|string|max:255',
+            'identificacion_docente' => 'required|string|max:20',
+            'asignatura' => 'required|string|max:255',
+            'calificacion_final' => 'required|numeric|between:0,5.00',
+            'retroalimentacion' => 'required|string',
+            'firma' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        if ($request->hasFile('firma')) {
+            // Eliminar firma anterior si existe
+            if ($acta->firma_path) {
+                \Illuminate\Support\Facades\Storage::delete('public/' . $acta->firma_path);
+            }
+            
+            $firma = $request->file('firma');
+            $firmaName = time() . '_' . $firma->getClientOriginalName();
+            $firma->storeAs('public/firmas', $firmaName);
+            $acta->firma_path = 'firmas/' . $firmaName;
+        }
+
+        $acta->numero_acta = $request->numero_acta;
+        $acta->fecha_generacion = $request->fecha_generacion;
+        $acta->nombre_docente = $request->nombre_docente;
+        $acta->apellido_docente = $request->apellido_docente;
+        $acta->identificacion_docente = $request->identificacion_docente;
+        $acta->asignatura = $request->asignatura;
+        $acta->calificacion_final = $request->calificacion_final;
+        $acta->retroalimentacion = $request->retroalimentacion;
+        $acta->save();
+
+        return redirect()->route('decano.acta_compromiso')
+            ->with('success', 'Acta de compromiso actualizada exitosamente');
+    }
+
+    /**
+     * Elimina un acta
+     */
+    public function eliminar_acta($id)
+    {
+        $acta = \App\Models\ActaCompromiso::findOrFail($id);
+        
+        // Eliminar firma si existe
+        if ($acta->firma_path) {
+            \Illuminate\Support\Facades\Storage::delete('public/' . $acta->firma_path);
+        }
+
+        $acta->delete();
+
+        return redirect()->route('decano.acta_compromiso')
+            ->with('success', 'Acta de compromiso eliminada exitosamente');
+    }
+
+    /**
+     * Marca un acta como enviada
+     */
+    public function enviar_acta($id)
+    {
+        $acta = \App\Models\ActaCompromiso::findOrFail($id);
+        $acta->enviado = true;
+        $acta->save();
+
+        return redirect()->route('decano.acta_compromiso')
+            ->with('success', 'Acta de compromiso enviada exitosamente');
     }
     
 //alertas bajo desempeño

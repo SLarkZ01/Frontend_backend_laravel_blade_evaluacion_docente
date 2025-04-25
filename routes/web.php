@@ -36,8 +36,13 @@ Route::get("/decano", [HomeController::class, 'index'])->name('user.index');
 
 Route::get('/', [loginController::class, 'Login'])->name('user.login');
 
-
-
+// Rutas para actas de compromiso
+Route::get('/decano/acta-compromiso', [DecanoCordinadorController::class, 'acta_compromiso'])->name('decano.acta_compromiso');
+Route::post('/decano/acta-compromiso', [DecanoCordinadorController::class, 'guardar_acta'])->name('decano.guardar_acta');
+Route::get('/decano/acta-compromiso/{id}/editar', [DecanoCordinadorController::class, 'editar_acta'])->name('decano.editar_acta');
+Route::put('/decano/acta-compromiso/{id}', [DecanoCordinadorController::class, 'actualizar_acta'])->name('decano.actualizar_acta');
+Route::delete('/decano/acta-compromiso/{id}', [DecanoCordinadorController::class, 'eliminar_acta'])->name('decano.eliminar_acta');
+Route::put('/decano/acta-compromiso/{id}/enviar', [DecanoCordinadorController::class, 'enviar_acta'])->name('decano.enviar_acta');
 
 // rutas para el administrador
 Route::get('/Admin', [AdminController::class, 'Dashboard'])->name('Admin.Dashboard');

@@ -11,7 +11,17 @@ class DocenteController extends Controller
     //
     public function p_docente()
     {
-        return view('Docente.panel_docente');
+        $correo = Session::get('correo_usuario');
+
+        if (!$correo) {
+            return redirect()->route('user.login')->withErrors(['error' => 'No hay sesión activa. Inicia sesión.']);
+        }
+    
+        // Llamar al procedimiento almacenado
+        $evaluaciones = DB::select('CALL ObtenerEvaluacionesPorCorreo(?)', [$correo]);
+       // $evaluaciones = $evaluaciones[0] ?? null;
+        
+        return view('Docente.panel_docente', compact('evaluaciones'));
     }
 
     public function confi()

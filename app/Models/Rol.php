@@ -8,5 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Rol extends Model
 {
     use HasFactory;
-    protected $table='rol';
+    
+    protected $table = 'rol';
+    protected $primaryKey = 'id_rol';
+    
+    protected $fillable = [
+        'nombre',
+        'descripcion'
+    ];
+    
+    /**
+     * Get the users for the role.
+     */
+    public function usuarios()
+    {
+        return $this->hasMany(Usuario::class, 'id_rol', 'id_rol');
+    }
 }
