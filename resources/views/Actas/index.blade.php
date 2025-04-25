@@ -30,10 +30,10 @@
                         @if(count($actas) > 0)
                             @foreach($actas as $acta)
                             <tr>
-                                <td>{{ $acta->numero_acta ?? 'N/A' }}</td>
-                                <td>{{ $acta->nombre_docente ?? 'N/A' }}</td>
-                                <td>{{ $acta->fecha_generacion ?? 'N/A' }}</td>
-                                <td><span class="badge bg-{{ ($acta->calificacion < 3.5) ? 'danger' : 'success' }}">{{ $acta->calificacion ?? 'N/A' }}</span></td>
+                                <td>{{ $acta->id_acta }}</td>
+                                <td>{{ $acta->nombre_docente }}</td>
+                                <td>{{ $acta->fecha_generacion }}</td>
+                                <td><span class="badge bg-{{ ($acta->calificacion < 3.5) ? 'danger' : 'success' }}">{{ $acta->calificacion}}</span></td>
                                 <td>
                                     <a href="{{ route('actas.show', $acta->id_acta) }}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> Ver</a>
                                     <a href="{{ route('actas.edit', $acta->id_acta) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Editar</a>
