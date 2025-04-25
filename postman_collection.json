@@ -1,0 +1,810 @@
+{
+  "info": {
+    "_postman_id": "e5a9f8d6-3c5c-4e1a-8e3f-9b2c5d8e7f6a",
+    "name": "Evaluacion Docente API",
+    "description": "Collection for testing the Evaluacion Docente API endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Programas",
+      "item": [
+        {
+          "name": "Get All Programas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/programas",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "programas"]
+            },
+            "description": "Get a list of all programas"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Programa by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/programas/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "programas", "1"]
+            },
+            "description": "Get a specific programa by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Programa",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre\": \"Nuevo Programa\",\n    \"id_facultad\": 1,\n    \"id_docente\": null\n}"
+            },
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/programas",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "programas"]
+            },
+            "description": "Create a new programa"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Programa",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre\": \"Programa Actualizado\",\n    \"id_facultad\": 2,\n    \"id_docente\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/programas/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "programas", "1"]
+            },
+            "description": "Update an existing programa"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Programa",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/programas/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "programas", "1"]
+            },
+            "description": "Delete a programa"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Programa Estudiantes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/programas/1/estudiantes",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "programas", "1", "estudiantes"]
+            },
+            "description": "Get all estudiantes for a specific programa"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Programa Cursos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/programas/1/cursos",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "programas", "1", "cursos"]
+            },
+            "description": "Get all cursos for a specific programa"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for managing programas"
+    },
+    {
+      "name": "Facultades",
+      "item": [
+        {
+          "name": "Get All Facultades",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/facultades",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "facultades"]
+            },
+            "description": "Get a list of all facultades"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Facultad by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/facultades/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "facultades", "1"]
+            },
+            "description": "Get a specific facultad by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Facultad",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre\": \"Nueva Facultad\",\n    \"id_coordinacion\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/facultades",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "facultades"]
+            },
+            "description": "Create a new facultad"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Facultad",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre\": \"Facultad Actualizada\",\n    \"id_coordinacion\": 2\n}"
+            },
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/facultades/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "facultades", "1"]
+            },
+            "description": "Update an existing facultad"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Facultad",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/facultades/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "facultades", "1"]
+            },
+            "description": "Delete a facultad"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Facultad Programas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/facultades/1/programas",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "facultades", "1", "programas"]
+            },
+            "description": "Get all programas for a specific facultad"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for managing facultades"
+    },
+    {
+      "name": "Docentes",
+      "item": [
+        {
+          "name": "Get All Docentes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/docentes",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "docentes"]
+            },
+            "description": "Get a list of all docentes"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Docente by Correo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/docentes/ejemplo@correo.com",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "docentes", "ejemplo@correo.com"]
+            },
+            "description": "Get a specific docente by correo"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Docente Evaluaciones",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/docentes/ejemplo@correo.com/evaluaciones",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "docentes", "ejemplo@correo.com", "evaluaciones"]
+            },
+            "description": "Get all evaluaciones for a specific docente"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Docente Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nombre\": \"Nombre Actualizado\",\n    \"correo\": \"nuevo@correo.com\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/docentes/1/profile",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "docentes", "1", "profile"]
+            },
+            "description": "Update a docente's profile"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for managing docentes"
+    },
+    {
+      "name": "Actas de Compromiso",
+      "item": [
+        {
+          "name": "Get All Actas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/actas-compromiso",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "actas-compromiso"]
+            },
+            "description": "Get a list of all actas de compromiso"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Acta by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/actas-compromiso/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "actas-compromiso", "1"]
+            },
+            "description": "Get a specific acta de compromiso by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Acta",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"numero_acta\": \"ACT-2023-001\",\n    \"fecha_generacion\": \"2023-06-15\",\n    \"nombre_docente\": \"Juan Pérez\",\n    \"apellido_docente\": \"Gómez\",\n    \"identificacion_docente\": \"1234567890\",\n    \"asignatura\": \"Matemáticas Avanzadas\",\n    \"calificacion_final\": 3.5,\n    \"retroalimentacion\": \"Se requiere mejorar la metodología de enseñanza y la comunicación con los estudiantes.\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/actas-compromiso",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "actas-compromiso"]
+            },
+            "description": "Create a new acta de compromiso"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Acta",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"retroalimentacion\": \"Se ha observado una mejora en la metodología de enseñanza, pero aún se requiere trabajar en la comunicación con los estudiantes.\",\n    \"calificacion_final\": 3.8\n}"
+            },
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/actas-compromiso/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "actas-compromiso", "1"]
+            },
+            "description": "Update an existing acta de compromiso"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Acta",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/actas-compromiso/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "actas-compromiso", "1"]
+            },
+            "description": "Delete an acta de compromiso"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for managing actas de compromiso"
+    },
+    {
+      "name": "Alertas de Bajo Desempeño",
+      "item": [
+        {
+          "name": "Get All Alertas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/alertas-bajo-desempeno",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "alertas-bajo-desempeno"]
+            },
+            "description": "Get a list of all alertas de bajo desempeño"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Alerta by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/alertas-bajo-desempeno/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "alertas-bajo-desempeno", "1"]
+            },
+            "description": "Get a specific alerta de bajo desempeño by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Alerta",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id_facultad\": 1,\n    \"id_promedio\": 1,\n    \"id_docente\": 1,\n    \"id_curso\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/alertas-bajo-desempeno",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "alertas-bajo-desempeno"]
+            },
+            "description": "Create a new alerta de bajo desempeño"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Alerta",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id_facultad\": 2,\n    \"id_promedio\": 2,\n    \"id_docente\": 1,\n    \"id_curso\": 3\n}"
+            },
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/alertas-bajo-desempeno/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "alertas-bajo-desempeno", "1"]
+            },
+            "description": "Update an existing alerta de bajo desempeño"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Alerta",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/alertas-bajo-desempeno/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "alertas-bajo-desempeno", "1"]
+            },
+            "description": "Delete an alerta de bajo desempeño"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Alertas by Docente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/alertas-bajo-desempeno/docente/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "alertas-bajo-desempeno", "docente", "1"]
+            },
+            "description": "Get all alertas for a specific docente"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Alertas by Facultad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/alertas-bajo-desempeno/facultad/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "alertas-bajo-desempeno", "facultad", "1"]
+            },
+            "description": "Get all alertas for a specific facultad"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for managing alertas de bajo desempeño"
+    },
+    {
+      "name": "Planes de Mejora",
+      "item": [
+        {
+          "name": "Get All Planes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/planes-mejora",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "planes-mejora"]
+            },
+            "description": "Get a list of all planes de mejora"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Plan by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/planes-mejora/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "planes-mejora", "1"]
+            },
+            "description": "Get a specific plan de mejora by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Plan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id_facultad\": 1,\n    \"id_curso\": 1,\n    \"id_docente\": 1,\n    \"id_promedio\": 1,\n    \"progreso\": 0,\n    \"estado\": \"Activo\",\n    \"retroalimentacion\": \"Plan inicial para mejorar metodología de enseñanza\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/planes-mejora",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "planes-mejora"]
+            },
+            "description": "Create a new plan de mejora"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Plan",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"progreso\": 50,\n    \"estado\": \"Activo\",\n    \"retroalimentacion\": \"Se ha avanzado en la implementación de nuevas metodologías de enseñanza\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/planes-mejora/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "planes-mejora", "1"]
+            },
+            "description": "Update an existing plan de mejora"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Plan",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/planes-mejora/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "planes-mejora", "1"]
+            },
+            "description": "Delete a plan de mejora"
+          },
+          "response": []
+        },
+        {
+          "name": "Add Nota to Plan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"contenido\": \"Se ha observado mejora en la comunicación con los estudiantes\",\n    \"id_usuario\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/planes-mejora/1/notas",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "planes-mejora", "1", "notas"]
+            },
+            "description": "Add a note to an existing plan de mejora"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Plan Progress",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"progreso\": 75\n}"
+            },
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/planes-mejora/1/progreso",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "planes-mejora", "1", "progreso"]
+            },
+            "description": "Update the progress of a plan de mejora"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Plans by Docente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/planes-mejora/docente/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "planes-mejora", "docente", "1"]
+            },
+            "description": "Get all planes de mejora for a specific docente"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Plans by Facultad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public/api/planes-mejora/facultad/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "path": ["Frontend_backend_laravel_blade_evaluacion_docente", "public", "api", "planes-mejora", "facultad", "1"]
+            },
+            "description": "Get all planes de mejora for a specific facultad"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for managing planes de mejora"
+    }
+  ]
+}
