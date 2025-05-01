@@ -1,6 +1,6 @@
 # Proyecto Evaluación Docente
 
-Este repositorio contiene la implementación parcial de una **aplicación web** para la evaluación del desempeño de los docentes en una institución educativa. Actualmente, se cuenta con un **frontend** que muestra la estructura y funcionalidad básica (con datos simulados), mientras que el **backend** (en PHP/Laravel con MySQL) se integrará en fases posteriores.
+Este repositorio contiene la implementación completa de una **aplicación web** para la evaluación del desempeño de los docentes en una institución educativa. El sistema está desarrollado con **Laravel** y **Blade** como motor de plantillas, utilizando **MySQL** como base de datos.
 
 ---
 
@@ -12,7 +12,7 @@ Este repositorio contiene la implementación parcial de una **aplicación web** 
 4. [Requisitos](#requisitos)
 5. [Instalación y Ejecución](#instalación-y-ejecución)
 6. [Uso de la Aplicación](#uso-de-la-aplicación)
-7. [Contribución](#contribución)
+7. [Metodología de Desarrollo](#metodología-de-desarrollo)
 8. [Autores](#autores)
 9. [Licencia](#licencia)
 10. [Contacto](#contacto)
@@ -21,204 +21,231 @@ Este repositorio contiene la implementación parcial de una **aplicación web** 
 
 ## Descripción General
 
-El **Proyecto Evaluación Docente** busca optimizar el proceso de evaluación de los docentes a través de una plataforma que:
+El **Proyecto Evaluación Docente** optimiza el proceso de evaluación de los docentes a través de una plataforma que:
 
--   Permita a los **estudiantes** evaluar de forma anónima.
--   Brinde a los **coordinadores/decanos** la posibilidad de ingresar evaluaciones administrativas.
--   Facilite a los **docentes** la autoevaluación de su desempeño.
--   Genere **reportes**, **estadísticas** y **actas de compromiso** para el seguimiento y mejora continua.
--   Emita **alertas** y **notificaciones** ante bajo rendimiento y posibles procesos de sanción o retiro.
+- Permite a los **estudiantes** evaluar de forma anónima.
+- Brinda a los **coordinadores/decanos** la posibilidad de ingresar evaluaciones administrativas.
+- Facilita a los **docentes** la autoevaluación de su desempeño.
+- Genera **reportes**, **estadísticas** y **actas de compromiso** para el seguimiento y mejora continua.
+- Emite **alertas** y **notificaciones** ante bajo rendimiento.
+- Gestiona **procesos de sanción o retiro** según sea necesario.
 
-### Descripcion general mediante pdf
+### Documentación detallada
 
--   **Accede** a la documentacion completa mediante el pdf:  
-    [Proyecto_de_Evaluación_Docente.pdf](Documentacion/Proyecto_de_Evaluación_Docente.pdf)
+- **Accede** a la documentación completa mediante el pdf:  
+  [Proyecto_de_Evaluación_Docente.pdf](Documentacion/Proyecto_de_Evaluación_Docente.pdf)
 
--   **Accede** a la plantilla que hemos usado para el proyecto en bases de datos II:  
-    [Plantilla_de_Definición_del_Proyecto\_\_\_Base_de_Datos_II.pdf](Documentacion/Plantilla_de_Definición_del_Proyecto___Base_de_Datos_II.pdf)
-
-> **Nota:** Actualmente, el repositorio contiene mayormente la capa de **frontend** (HTML, CSS y JavaScript) con datos simulados. La integración con un **backend** (PHP, Laravel y MySQL) se llevará a cabo en futuras iteraciones.
+- **Accede** a la plantilla base del proyecto:  
+  [Plantilla_de_Definición_del_Proyecto\_\_\_Base_de_Datos_II.pdf](Documentacion/Plantilla_de_Definición_del_Proyecto___Base_de_Datos_II.pdf)
 
 ---
 
 ## Características Principales
 
--   **Autenticación básica** con roles (docente, decano, etc.) – en desarrollo.
--   **Captura de datos de evaluación** (estudiantil y administrativa) – pendiente de integración real con la base de datos.
--   **Generación de actas de compromiso** en PDF para docentes con calificaciones por debajo de un umbral (por ejemplo, 4).
--   **Seguimiento a planes de mejora** y registro de estatus (activo, cumplido, suspendido).
--   **Alertas de bajo desempeño** (nota < 3) visibles en el panel del decano.
--   **Paneles** diferenciados para cada rol (administrador, docente, etc.).
--   **Reportes e informes** con gráficas y tablas simuladas, a la espera de datos reales.
--   **Diseño modular** pensado para escalar e integrar con servicios de backend.
+- **Autenticación de usuarios** con múltiples roles (administrador, decano/coordinador, docente).
+- **Dashboard personalizado** según el rol del usuario.
+- **Panel de Administrador** con gestión de períodos de evaluación y roles.
+- **Panel de Decano/Coordinador** con:
+  - Generación y gestión de actas de compromiso
+  - Alertas de bajo desempeño docente
+  - Seguimiento a planes de mejora
+  - Procesos de sanción y/o retiro
+  - Estadísticas y reportes por facultad/programa
+- **Panel de Docente** con:
+  - Visualización de resultados de evaluación
+  - Acceso a estadísticas personales
+  - Configuración de datos personales
+- **Sistema de evaluación** completo con múltiples dimensiones y criterios.
+- **Reportes y gráficos estadísticos** en tiempo real.
 
 ---
 
 ## Estructura del Proyecto
 
-La estructura principal del repositorio incluye:
+El proyecto utiliza la estructura estándar de Laravel, con algunas particularidades:
 
 ```plaintext
-ProyectoEvaluacionDocente/
-├─ .git/                 # Carpeta de Git (versionado)
-├─ Base de datos/
-│   └─ sistema_evaluacion_docente.sql  # Script SQL (estructura de tablas)
-├─ Documentacion/
-│   └─ casos_uso_historias_usuario.md  # Documentos de requerimientos
-│   └─ Proyecto_de_Evaluación_Docente.pdf  # Documento pdf del proyecto.
-├─ images/
-│   ├─ FondoUniversidad.jpg
-│   ├─ FondoUniversidad.png
-│   └─ Logo Uniautonoma.png
-├─ PanelAdministrador/
-│   ├─ panel-admin.html
-│   ├─ admin-script.js
-│   └─ ...
-├─ PanelDocente/
-│   ├─ panel-docente.html
-│   ├─ script.js
-│   └─ ...
-├─ acta-compromiso.html
-├─ acta-script.js
-├─ alertas-bajo-desempeno.html
-├─ alertas-script.js
-├─ index.html
-├─ login.html
-├─ login.js
-├─ script.js
-├─ styles.css
-└─ README.md  # Este archivo
+Frontend_backend_laravel_blade_evaluacion_docente/
+├─ app/                      # Lógica principal de la aplicación
+│  ├─ Console/               # Comandos Artisan personalizados
+│  ├─ Exceptions/            # Manejadores de excepciones
+│  ├─ Http/                  # Controladores, Middleware, Requests
+│  ├─ Models/                # Modelos Eloquent (ActaCompromiso, ProcesoSancion, etc.)
+│  ├─ Providers/             # Service Providers
+│  ├─ Services/              # Servicios adicionales
+│  └─ View/                  # Componentes de vistas
+│
+├─ bootstrap/                # Archivos de inicio de Laravel
+├─ config/                   # Configuraciones
+├─ database/                 # Migraciones, seeders y SQL
+│  ├─ migrations/            # Estructura de tablas
+│  ├─ seeders/               # Datos iniciales
+│  └─ sql/                   # Scripts SQL y procedimientos almacenados
+│
+├─ Documentacion/            # Documentación del proyecto
+│  ├─ Proyecto_de_Evaluación_Docente.pdf
+│  └─ casos_uso_historias_usuario.md
+│
+├─ public/                   # Archivos públicos (CSS, JS, imágenes)
+│  ├─ css/                   # Hojas de estilo
+│  ├─ js/                    # JavaScript
+│  └─ images/                # Imágenes y recursos gráficos
+│
+├─ resources/                # Recursos de la aplicación
+│  ├─ css/                   # Estilos fuente
+│  ├─ js/                    # JavaScript fuente
+│  └─ views/                 # Vistas Blade
+│      ├─ Actas/             # Vistas de actas de compromiso
+│      ├─ Administrador/     # Vistas del panel de administrador
+│      ├─ components/        # Componentes reutilizables
+│      ├─ Decano/            # Vistas del panel de decano/coordinador
+│      ├─ Docente/           # Vistas del panel de docente
+│      ├─ layouts/           # Plantillas base
+│      └─ Login/             # Vistas de autenticación
+│
+├─ routes/                   # Definición de rutas
+│  ├─ api.php                # Rutas de API
+│  └─ web.php                # Rutas web
+│
+├─ storage/                  # Almacenamiento (logs, cache, archivos)
+├─ tests/                    # Pruebas automatizadas
+├─ vendor/                   # Dependencias (gestionadas por Composer)
+├─ .env                      # Configuración de entorno
+├─ composer.json             # Dependencias de PHP
+├─ package.json              # Dependencias de Node.js
+└─ README.md                 # Este archivo
 ```
-
--   La carpeta **Base de datos** contiene el script SQL para crear la estructura de la base de datos.
--   **Documentacion** incluye casos de uso e historias de usuario que sustentan los requisitos funcionales.
--   Las carpetas **PanelAdministrador** y **PanelDocente** agrupan los módulos y vistas específicos para cada rol.
--   Se incluyen recursos gráficos en la carpeta **images**, con el logo y fondos institucionales.
 
 ---
 
 ## Requisitos
 
-### Para el Frontend
+### Para ejecutar el proyecto
 
--   **Navegador web moderno** (Chrome, Firefox, Edge, Safari) con JavaScript habilitado.
--   Acceso a internet o un servidor local para cargar correctamente todos los recursos (imágenes, scripts, hojas de estilo).
-
-### Para el Backend (Futuro)
-
--   **PHP 8.x** y **Composer** (para gestionar dependencias en Laravel).
--   **MySQL 5.7+** o **MariaDB** para la base de datos.
--   **Servidor Web** (Apache o Nginx) configurado para correr aplicaciones PHP.
-
-> Actualmente, la integración con el backend aún está pendiente; el enfoque actual es el desarrollo del frontend.
+- **PHP 8.x** y **Composer** (para gestionar dependencias en Laravel).
+- **MySQL 5.7+** o **MariaDB** como sistema de gestión de base de datos.
+- **Servidor Web** (Apache o Nginx) configurado para ejecutar aplicaciones Laravel.
+- **Node.js** y **npm** para compilar assets (opcional, si se modifican los archivos JS/CSS).
+- **XAMPP**, **WAMP** o similar si se desea un entorno de desarrollo local integrado.
 
 ---
 
 ## Instalación y Ejecución
 
-### Abrir las páginas HTML directamente en tu navegador
+### Configuración del entorno local
 
--   **Abre** `index.html` o `login.html` para probar el flujo de autenticación simulado.
--   **Explora** las demás páginas (como `panel-docente.html`, `panel-admin.html`, etc.) para ver los diferentes módulos de la aplicación.
+1. **Clonar el repositorio**:
+   ```bash
+   git clone [URL-del-repositorio]
+   cd Frontend_backend_laravel_blade_evaluacion_docente
+   ```
 
-### (Opcional) Configurar un Servidor Local
+2. **Instalar dependencias de PHP**:
+   ```bash
+   composer install
+   ```
 
--   **Copia** la carpeta `ProyectoEvaluacionDocente` en el directorio raíz de tu servidor local (por ejemplo, en `htdocs` si usas XAMPP).
--   **Accede** a la aplicación mediante:  
-    [https://slarkz01.github.io/Proyecto_Evaluacion_Docente/](https://slarkz01.github.io/Proyecto_Evaluacion_Docente/)
+3. **Configurar archivo .env**:
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-### (Fase Futura) Integración con Backend
+4. **Configurar base de datos**:
+   - Crear una base de datos MySQL llamada `evaluacion_docentes`
+   - Actualizar las credenciales de la base de datos en el archivo `.env`
 
--   **Importa** el archivo `Base de datos/sistema_evaluacion_docente.sql` en tu servidor MySQL para crear la estructura de la base de datos.
--   **Configura** el proyecto Laravel (cuando se integre) para conectarlo a la base de datos.
--   **Ajusta** las rutas de API y endpoints para reemplazar los datos simulados con datos reales.
+5. **Importar la base de datos**:
+   - Puedes utilizar uno de los scripts SQL ubicados en `database/sql/` para crear la estructura de la base de datos, por ejemplo:
+   ```bash
+   mysql -u [usuario] -p evaluacion_docentes < database/sql/evaluacion_docentes.sql
+   ```
+
+6. **Ejecutar el servidor de desarrollo**:
+   ```bash
+   php artisan serve
+   ```
+
+7. **Acceder a la aplicación**:
+   - Abrir el navegador y visitar: `http://localhost:8000`
 
 ---
 
 ## Uso de la Aplicación
 
--   **Inicio de Sesión:**  
-    La página `login.html` permite ingresar un usuario y contraseña (roles simulados) para acceder al sistema.
+### Roles y Accesos
 
--   **Panel de Administrador/Decano:**
+- **Administrador**:
+  - Acceso a través de `/Admin`
+  - Gestión de períodos de evaluación
+  - Administración de roles y permisos
+  - Generación de reportes globales
 
-    -   Gestiona períodos de evaluación y administra roles.
-    -   Revisa estadísticas de rendimiento docente.
-    -   Emite alertas de bajo desempeño y genera reportes de evaluación.
+- **Decano/Coordinador**:
+  - Acceso a través de `/decano`
+  - Gestión de actas de compromiso
+  - Monitoreo de alertas de bajo desempeño
+  - Seguimiento a planes de mejora
+  - Gestión de procesos de sanción o retiro
 
--   **Panel de Docente:**
+- **Docente**:
+  - Acceso a través de `/docente`
+  - Consulta de resultados de evaluación
+  - Visualización de estadísticas personales
+  - Configuración de datos personales
 
-    -   Consulta estadísticas y resultados de sus evaluaciones.
-    -   Revisa planes de mejora y actas de compromiso (cuando corresponda).
-    -   Permite la configuración de datos personales (pendiente de persistencia real).
+### Funcionalidades Principales
 
--   **Reportes y Actas:**
-    -   Se genera un PDF para actas de compromiso en caso de calificaciones menores a 4.
-    -   Se visualizan reportes y gráficos basados en datos simulados hasta integrar el backend.
+- **Actas de Compromiso**:
+  - Creación y gestión de actas para docentes con bajo rendimiento
+  - Seguimiento de compromisos y planes de mejora
 
----
+- **Alertas de Bajo Desempeño**:
+  - Notificación automática de docentes con calificaciones por debajo del umbral
+  - Dashboard visual con indicadores de rendimiento
 
-## Requisitos y Estado del Sistema
+- **Procesos de Sanción**:
+  - Gestión de procesos disciplinarios
+  - Seguimiento a través de diferentes estados
 
-El proyecto ha sido definido con una serie de **Requisitos Funcionales (RF)** y **Requisitos No Funcionales (RNF)**, los cuales han sido documentados y analizados detalladamente. Entre ellos se destacan:
-
--   **RF01 a RF017:** Desde la autenticación de usuarios hasta el proceso de sanciones y generación de reportes. Muchos módulos están implementados parcialmente en el frontend y dependen de la futura integración del backend.
--   **RNF01 a RNF09:** Aspectos críticos como seguridad, rendimiento, usabilidad, mantenibilidad, escalabilidad, cumplimiento normativo, interoperabilidad, y aseguramiento de la calidad. Muchos de estos requisitos están en fase de desarrollo o pendientes de pruebas formales.
-
-Para mayor detalle, se incluye documentación y tablas de requisitos en la carpeta **Documentacion**.
+- **Reportes y Estadísticas**:
+  - Visualización de promedios por facultad y programa
+  - Gráficos interactivos de rendimiento docente
+  - Identificación de docentes destacados
 
 ---
 
 ## Metodología de Desarrollo
 
-El proyecto se desarrolla siguiendo una metodología ágil (por ejemplo, **Scrum**), que incluye:
+El proyecto se desarrolla siguiendo una metodología ágil (Scrum), que incluye:
 
--   **Planificación de sprints:** Definición y priorización de funcionalidades.
--   **Reuniones diarias de seguimiento:** Para coordinar avances y detectar impedimentos.
--   **Revisión y retrospectiva:** Al finalizar cada sprint, se evalúa el progreso y se ajusta el plan de trabajo.
--   **Integración Continua (CI/CD):** Se planifica implementar pipelines automatizados para pruebas y despliegue (especialmente para la futura fase de backend).
-
----
-
-## Contribución
-
-¡Las contribuciones son bienvenidas! Para contribuir al proyecto, sigue estos pasos:
-
-1. **Haz un fork** del repositorio.
-2. **Crea una rama** con el nombre de la funcionalidad o corrección:
-
-    ```bash
-    git checkout -b feature/nueva-funcionalidad
-
-    ```
-
-3. **Realiza tus cambios** y haz commits con mensajes descriptivos.
-4. **Envia un pull request** a la rama principal (main o master según corresponda).
-
-> Se **recomienda** seguir buenas prácticas de desarrollo, documentación y estilo de código. Para **cambios sustanciales**, abre primero un issue para **discutir lo que deseas modificar.**
+- **Planificación de sprints**: Definición y priorización de funcionalidades.
+- **Reuniones de seguimiento**: Para coordinar avances y detectar impedimentos.
+- **Revisión y retrospectiva**: Evaluación del progreso y ajuste del plan de trabajo.
+- **Control de versiones**: Gestión del código fuente mediante Git.
 
 ---
 
 ## Autores
 
--   **Thomas Montoya Magon** – Frontend
--   **Juan Daniel Bravo** – Frontend
--   **Alejandro Martínez Salazar** – Backend (futuro)
--   **Daniel Rivas Agredo** – Base de Datos
--   **Luisa Julieth Joaqui** – Backend y Base de Datos
+- **Thomas Montoya Magon** – Frontend y vistas Blade
+- **Juan Daniel Bravo** – Frontend y UI/UX
+- **Alejandro Martínez Salazar** – Backend Laravel
+- **Daniel Rivas Agredo** – Base de Datos y procedimientos almacenados
+- **Luisa Julieth Joaqui** – Backend y APIs
 
 ---
 
 ## Licencia
 
-Este proyecto se encuentra bajo la licencia de tu preferencia (MIT, GPL, etc.). Asegúrate de incluir un archivo `LICENSE` en la raíz del repositorio con los términos de la licencia que desees aplicar.
+Este proyecto se encuentra bajo la licencia MIT. Ver el archivo `LICENSE` para más detalles.
 
 ---
 
 ## Contacto
 
-Para preguntas, sugerencias o reportar errores, puedes crear un [issue](https://github.com/usuario/ProyectoEvaluacionDocente/issues) en el repositorio o contactar directamente a alguno de los autores.
+Para preguntas, sugerencias o reportar errores, puedes crear un issue en el repositorio o contactar directamente a alguno de los autores.
 
 ---
 
-¡Gracias por tu interés en el **Proyecto Evaluación Docente**! Con tu colaboración, podremos integrar el backend y mejorar la calidad educativa a través de un sistema de evaluación transparente, robusto y eficaz.
+¡Gracias por tu interés en el **Proyecto Evaluación Docente**! Juntos estamos contribuyendo a mejorar la calidad educativa a través de un sistema de evaluación transparente, robusto y eficaz.
