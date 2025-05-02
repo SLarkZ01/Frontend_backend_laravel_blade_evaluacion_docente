@@ -139,7 +139,7 @@ Frontend_backend_laravel_blade_evaluacion_docente/
 
 1. **Clonar el repositorio** 📥:
    ```bash
-   git clone [URL-del-repositorio]
+   git clone https://github.com/SLarkZ01/Frontend_backend_laravel_blade_evaluacion_docente.git
    cd Frontend_backend_laravel_blade_evaluacion_docente
    ```
 
