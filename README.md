@@ -32,10 +32,10 @@ El **Proyecto Evaluación Docente** optimiza el proceso de evaluación de los do
 
 ### 📚 Documentación detallada
 
-- **Accede** a la documentación completa mediante el pdf:  
+- **Accede** a la documentación completa mediante el pdf **(⚠️ DESACTUALIZADO ⚠️)**:  
   [Proyecto_de_Evaluación_Docente.pdf](Documentacion/Proyecto_de_Evaluación_Docente.pdf)
 
-- **Accede** a la plantilla base del proyecto:  
+- **Accede** a la plantilla de bases de datos del proyecto:  
   [Plantilla_de_Definición_del_Proyecto\_\_\_Base_de_Datos_II.pdf](Documentacion/Plantilla_de_Definición_del_Proyecto___Base_de_Datos_II.pdf)
 
 ---
