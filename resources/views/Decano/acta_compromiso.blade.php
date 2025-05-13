@@ -136,6 +136,53 @@
         </div>
     </div>
 
+    <!-- Lista de Actas de Compromiso -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title"><i class="fas fa-list me-2"></i>Actas de Compromiso Existentes</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Número de Acta</th>
+                                    <th>Docente</th>
+                                    <th>Fecha</th>
+                                    <th>Calificación</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(isset($actas) && count($actas) > 0)
+                                    @foreach($actas as $acta)
+                                    <tr>
+                                        <td>{{ $acta->numero_acta ?? 'N/A' }}</td>
+                                        <td>{{ $acta->nombre_docente ?? 'N/A' }}</td>
+                                        <td>{{ $acta->fecha_generacion ?? 'N/A' }}</td>
+                                        <td><span class="badge bg-danger">{{ $acta->calificacion ?? 'N/A' }}</span></td>
+                                        <td>
+                                            <a href="{{ route('decano.editar_acta', ['id' => $acta->id_acta]) }}" class="btn btn-sm btn-primary">
+                                                <i class="fas fa-edit"></i> Editar
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="5" class="text-center">No hay actas de compromiso registradas</td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Formulario de Acta de Compromiso -->
     <form action="{{ route('decano.guardar_acta') }}" method="POST" enctype="multipart/form-data" class="mb-5">
         @csrf
@@ -269,11 +316,11 @@
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('decano.editar_acta', $acta->id) }}" class="btn btn-sm btn-primary">
+                                            <a href="{{ route('decano.editar_acta', $acta->id_acta) }}" class="btn btn-sm btn-primary">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             @if(!$acta->enviado)
-                                                <form action="{{ route('decano.enviar_acta', $acta->id) }}" method="POST" class="d-inline">
+                                                <form action="{{ route('decano.enviar_acta', $acta->id_acta) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('PUT')
                                                     <button type="submit" class="btn btn-sm btn-success">
@@ -281,7 +328,7 @@
                                                     </button>
                                                 </form>
                                             @endif
-                                            <form action="{{ route('decano.eliminar_acta', $acta->id) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Está seguro de eliminar esta acta?')">
+                                            <form action="{{ route('decano.eliminar_acta', $acta->id_acta) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Está seguro de eliminar esta acta?')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger">

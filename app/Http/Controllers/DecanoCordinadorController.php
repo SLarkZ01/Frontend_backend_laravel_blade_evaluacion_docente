@@ -262,4 +262,67 @@ public function mostrarGrafica()
     {
         return view('decano.seguimiento_plan_mejora');
     }
+
+    /**
+     * Muestra el formulario para editar un acta de compromiso
+     */
+    public function editarActa($id)
+    {
+        // Obtener el acta de compromiso por ID usando el procedimiento almacenado
+        $actas = DB::select('CALL GetActaCompromisoById(?)', [$id]);
+        $acta = $actas[0] ?? null;
+        
+        if (!$acta) {
+            return redirect()->route('decano.acta_compromiso')
+                ->with('error', 'Acta de compromiso no encontrada');
+        }
+        
+        // La información del docente ya viene incluida en el resultado del procedimiento almacenado
+        $docente = (object)[
+            'id_docente' => $acta->id_docente,
+            'nombre' => $acta->nombre_docente,
+        ];
+            
+        return view('decano.editar_acta', compact('acta', 'docente'));
+    }
+
+    /**
+     * Actualiza un acta de compromiso en la base de datos
+     */
+    public function actualizarActa(Request $request, $id)
+    {
+        // Validar los datos del formulario
+        $request->validate([
+            'numero_acta' => 'required|string',
+            'fecha_generacion' => 'required|date',
+            'retroalimentacion' => 'required|string'
+        ]);
+        
+        // Actualizar el acta en la base de datos usando el procedimiento almacenado
+        $result = DB::select('CALL UpdateActaCompromiso(?, ?, ?)', [
+            $id,
+            $request->retroalimentacion,
+            $request->fecha_generacion
+        ]);
+        
+        // Si se cargó una nueva firma, procesarla y actualizar el campo de firma por separado
+        if ($request->hasFile('firma')) {
+            $firma = $request->file('firma');
+            $nombreFirma = time() . '_' . $firma->getClientOriginalName();
+            $firma->move(public_path('firmas'), $nombreFirma);
+            
+            // Actualizar solo el campo de firma
+            DB::table('acta_compromiso')
+                ->where('id_acta', $id)
+                ->update(['firma' => '/firmas/' . $nombreFirma]);
+        } elseif ($request->has('firma_actual')) {
+            // Actualizar solo el campo de firma con el valor actual
+            DB::table('acta_compromiso')
+                ->where('id_acta', $id)
+                ->update(['firma' => $request->firma_actual]);
+        }
+        
+        return redirect()->route('decano.acta_compromiso')
+            ->with('success', 'Acta de compromiso actualizada correctamente');
+    }
 }
