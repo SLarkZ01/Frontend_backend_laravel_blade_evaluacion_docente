@@ -5,9 +5,15 @@ use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\DecanoCordinadorController;
+use App\Http\Controllers\ExcelImportController;
+
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\API\ActaCompromisoController;
+
 use App\Http\Controllers\ActaCompromisoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -110,4 +116,11 @@ Route::post('/actas', [ActaCompromisoController::class, 'storeVista'])->name('ac
 Route::get('/actas/{id}/edit', [ActaCompromisoController::class, 'edit'])->name('actas.edit');
 Route::put('/actas/{id}', [ActaCompromisoController::class, 'updateVista'])->name('actas.update');
 Route::delete('/actas/{id}', [ActaCompromisoController::class, 'destroyVista'])->name('actas.destroy');
+
+
+Route::get('/cargar-excel', function () {
+    return view('cargar-excel');
+});
+
+Route::post('/importar', [ExcelImportController::class, 'importar']);
 
