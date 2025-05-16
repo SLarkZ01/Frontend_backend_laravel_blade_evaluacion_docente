@@ -16,7 +16,8 @@ use App\Http\Controllers\API\RolController;
 use App\Http\Controllers\API\ProcesoSancionController;
 use App\Http\Controllers\API\ProgramaController as APIProgramaController;
 use App\Http\Controllers\API\RolController as APIRolController;
-use App\Http\Controllers\API\UsuarioController as APIUsuarioController;     
+use App\Http\Controllers\API\ExcelImportController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
