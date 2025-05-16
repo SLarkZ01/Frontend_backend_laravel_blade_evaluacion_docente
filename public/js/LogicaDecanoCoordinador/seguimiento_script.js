@@ -1,7 +1,144 @@
 // Script específico para la página de Seguimiento a Plan de Mejora
 
 // Datos de ejemplo para actas de compromiso
-
+const actasCompromiso = [
+    {
+        id: 1,
+        docente: { nombre: 'Jimena', apellido: 'Rodríguez', identificacion: '8765902345' },
+        asignatura: 'Base de Datos',
+        calificacion: 3.5,
+        departamento: 'Ingeniería',
+        numeroActa: '1234567890',
+        fechaActa: '15/05/2023',
+        progreso: 75,
+        estado: 'activo',
+        retroalimentacion: '<p>Retroalimentación para el docente <strong>Jimena Rodríguez</strong> de la asignatura <strong>Base de Datos</strong>.</p><p>La calificación obtenida fue de <strong>3.5</strong>, lo cual está por debajo del umbral esperado de 4.0.</p><p>Se recomienda mejorar la metodología de enseñanza y actualizar el material didáctico.</p>',
+        notas: [
+            { fecha: '20/05/2023', texto: 'Se realizó reunión inicial para discutir el plan de mejora. La docente se compromete a actualizar el material didáctico.', autor: 'Coordinador Ingeniería' },
+            { fecha: '15/06/2023', texto: 'La docente ha mostrado avances significativos en la actualización del material didáctico. Se programará una nueva evaluación para el próximo mes.', autor: 'Decano Facultad' },
+            { fecha: '10/07/2023', texto: 'Se realizó evaluación de seguimiento. La calificación ha mejorado a 3.8. Se continuará con el plan de mejora.', autor: 'Coordinador Ingeniería' }
+        ]
+    },
+    {
+        id: 2,
+        docente: { nombre: 'Carlos', apellido: 'Mendoza', identificacion: '7654321098' },
+        asignatura: 'Programación',
+        calificacion: 3.8,
+        departamento: 'Ingeniería',
+        numeroActa: '2345678901',
+        fechaActa: '20/05/2023',
+        progreso: 50,
+        estado: 'activo',
+        retroalimentacion: '<p>Retroalimentación para el docente <strong>Carlos Mendoza</strong> de la asignatura <strong>Programación</strong>.</p><p>La calificación obtenida fue de <strong>3.8</strong>, lo cual está por debajo del umbral esperado de 4.0.</p><p>Se recomienda mejorar la interacción con los estudiantes y realizar más ejercicios prácticos.</p>',
+        notas: [
+            { fecha: '25/05/2023', texto: 'Se realizó reunión inicial para discutir el plan de mejora. El docente se compromete a implementar más ejercicios prácticos en clase.', autor: 'Coordinador Ingeniería' },
+            { fecha: '20/06/2023', texto: 'El docente ha implementado más ejercicios prácticos. Los estudiantes reportan mayor satisfacción.', autor: 'Director Programa Ingeniería' }
+        ]
+    },
+    {
+        id: 3,
+        docente: { nombre: 'Laura', apellido: 'Gómez', identificacion: '9876543210' },
+        asignatura: 'Matemáticas',
+        calificacion: 3.2,
+        departamento: 'Ciencias Exactas',
+        numeroActa: '3456789012',
+        fechaActa: '10/05/2023',
+        progreso: 30,
+        estado: 'activo',
+        retroalimentacion: '<p>Retroalimentación para el docente <strong>Laura Gómez</strong> de la asignatura <strong>Matemáticas</strong>.</p><p>La calificación obtenida fue de <strong>3.2</strong>, lo cual está por debajo del umbral esperado de 4.0.</p><p>Se recomienda simplificar la explicación de conceptos complejos y proporcionar más ejemplos.</p>',
+        notas: [
+            { fecha: '15/05/2023', texto: 'Se realizó reunión inicial para discutir el plan de mejora. La docente se compromete a simplificar sus explicaciones y proporcionar más ejemplos.', autor: 'Coordinador Ciencias Exactas' }
+        ]
+    },
+    {
+        id: 4,
+        docente: { nombre: 'Fernando', apellido: 'Díaz', identificacion: '8901234567' },
+        asignatura: 'Física',
+        calificacion: 3.9,
+        departamento: 'Ciencias Exactas',
+        numeroActa: '4567890123',
+        fechaActa: '05/05/2023',
+        progreso: 90,
+        estado: 'activo',
+        retroalimentacion: '<p>Retroalimentación para el docente <strong>Fernando Díaz</strong> de la asignatura <strong>Física</strong>.</p><p>La calificación obtenida fue de <strong>3.9</strong>, lo cual está por debajo del umbral esperado de 4.0.</p><p>Se recomienda mejorar la puntualidad y la organización de las clases.</p>',
+        notas: [
+            { fecha: '10/05/2023', texto: 'Se realizó reunión inicial para discutir el plan de mejora. El docente se compromete a mejorar su puntualidad y organización.', autor: 'Coordinador Ciencias Exactas' },
+            { fecha: '05/06/2023', texto: 'El docente ha mostrado una mejora significativa en su puntualidad. Las clases están mejor organizadas.', autor: 'Director Programa Ciencias' },
+            { fecha: '01/07/2023', texto: 'Se realizó evaluación de seguimiento. La calificación ha mejorado a 4.1. Se cerrará el plan de mejora en la próxima reunión.', autor: 'Decano Facultad' }
+        ]
+    },
+    {
+        id: 5,
+        docente: { nombre: 'Patricia', apellido: 'Vargas', identificacion: '7890123456' },
+        asignatura: 'Química',
+        calificacion: 3.7,
+        departamento: 'Ciencias Exactas',
+        numeroActa: '5678901234',
+        fechaActa: '25/04/2023',
+        progreso: 100,
+        estado: 'cerrado',
+        retroalimentacion: '<p>Retroalimentación para el docente <strong>Patricia Vargas</strong> de la asignatura <strong>Química</strong>.</p><p>La calificación obtenida fue de <strong>3.7</strong>, lo cual está por debajo del umbral esperado de 4.0.</p><p>Se recomienda mejorar la retroalimentación a los estudiantes y proporcionar más recursos de estudio.</p>',
+        notas: [
+            { fecha: '30/04/2023', texto: 'Se realizó reunión inicial para discutir el plan de mejora. La docente se compromete a mejorar la retroalimentación y proporcionar más recursos.', autor: 'Coordinador Ciencias Exactas' },
+            { fecha: '25/05/2023', texto: 'La docente ha implementado un sistema de retroalimentación detallada para cada evaluación. Los estudiantes reportan mayor satisfacción.', autor: 'Director Programa Ciencias' },
+            { fecha: '20/06/2023', texto: 'La docente ha creado un repositorio de recursos de estudio en línea. La participación de los estudiantes ha aumentado.', autor: 'Coordinador Ciencias Exactas' },
+            { fecha: '15/07/2023', texto: 'Se realizó evaluación final. La calificación ha mejorado a 4.2. Se cierra el plan de mejora con éxito.', autor: 'Decano Facultad Ciencias' }
+        ]
+    },
+    {
+        id: 6,
+        docente: { nombre: 'Roberto', apellido: 'Sánchez', identificacion: '6789012345' },
+        asignatura: 'Literatura',
+        calificacion: 3.4,
+        departamento: 'Humanidades',
+        numeroActa: '6789012345',
+        fechaActa: '20/04/2023',
+        progreso: 100,
+        estado: 'cerrado',
+        retroalimentacion: '<p>Retroalimentación para el docente <strong>Roberto Sánchez</strong> de la asignatura <strong>Literatura</strong>.</p><p>La calificación obtenida fue de <strong>3.4</strong>, lo cual está por debajo del umbral esperado de 4.0.</p><p>Se recomienda diversificar las lecturas y mejorar la participación en clase.</p>',
+        notas: [
+            { fecha: '25/04/2023', texto: 'Se realizó reunión inicial para discutir el plan de mejora. El docente se compromete a diversificar las lecturas y fomentar la participación.', autor: 'Coordinador Humanidades' },
+            { fecha: '20/05/2023', texto: 'El docente ha implementado un nuevo sistema de participación en clase. Los estudiantes muestran mayor interés.', autor: 'Director Programa Humanidades' },
+            { fecha: '15/06/2023', texto: 'El docente ha actualizado la lista de lecturas. Los estudiantes reportan mayor satisfacción con la diversidad de textos.', autor: 'Coordinador Humanidades' },
+            { fecha: '10/07/2023', texto: 'Se realizó evaluación final. La calificación ha mejorado a 4.0. Se cierra el plan de mejora con éxito.', autor: 'Decano Facultad Humanidades' }
+        ]
+    },
+    {
+        id: 7,
+        docente: { nombre: 'Ana', apellido: 'Martínez', identificacion: '5678901234' },
+        asignatura: 'Historia',
+        calificacion: 2.9,
+        departamento: 'Humanidades',
+        numeroActa: '7890123456',
+        fechaActa: '15/04/2023',
+        progreso: 40,
+        estado: 'pendiente',
+        retroalimentacion: '<p>Retroalimentación para el docente <strong>Ana Martínez</strong> de la asignatura <strong>Historia</strong>.</p><p>La calificación obtenida fue de <strong>2.9</strong>, lo cual está significativamente por debajo del umbral esperado de 4.0.</p><p>Se recomienda mejorar la metodología de enseñanza, actualizar el material didáctico y mejorar la interacción con los estudiantes.</p>',
+        notas: [
+            { fecha: '20/04/2023', texto: 'Se intentó realizar reunión inicial, pero la docente no asistió. Se reprogramará.', autor: 'Coordinador Humanidades' },
+            { fecha: '25/04/2023', texto: 'Se realizó reunión inicial. La docente se muestra reticente a implementar cambios. Se programará seguimiento cercano.', autor: 'Director Programa Humanidades' },
+            { fecha: '20/05/2023', texto: 'La docente ha mostrado poco avance en la implementación del plan de mejora. Se programará una reunión con el decano.', autor: 'Decano Facultad Humanidades' }
+        ]
+    },
+    {
+        id: 8,
+        docente: { nombre: 'Miguel', apellido: 'López', identificacion: '4567890123' },
+        asignatura: 'Algoritmos',
+        calificacion: 3.6,
+        departamento: 'Ingeniería',
+        numeroActa: '8901234567',
+        fechaActa: '10/04/2023',
+        progreso: 100,
+        estado: 'cerrado',
+        retroalimentacion: '<p>Retroalimentación para el docente <strong>Miguel López</strong> de la asignatura <strong>Algoritmos</strong>.</p><p>La calificación obtenida fue de <strong>3.6</strong>, lo cual está por debajo del umbral esperado de 4.0.</p><p>Se recomienda mejorar la claridad en la explicación de algoritmos complejos y proporcionar más ejemplos prácticos.</p>',
+        notas: [
+            { fecha: '15/04/2023', texto: 'Se realizó reunión inicial para discutir el plan de mejora. El docente se compromete a mejorar la claridad de sus explicaciones y proporcionar más ejemplos.', autor: 'Coordinador Ingeniería' },
+            { fecha: '10/05/2023', texto: 'El docente ha implementado nuevas técnicas de explicación. Los estudiantes reportan mayor comprensión de los temas.', autor: 'Director Programa Ingeniería' },
+            { fecha: '05/06/2023', texto: 'El docente ha creado un repositorio de ejemplos prácticos. La participación de los estudiantes ha aumentado.', autor: 'Coordinador Ingeniería' },
+            { fecha: '01/07/2023', texto: 'Se realizó evaluación final. La calificación ha mejorado a 4.1. Se cierra el plan de mejora con éxito.', autor: 'Decano Facultad Ingeniería' }
+        ]
+    }
+];
 
 // Función para cargar la tabla de seguimiento
 function cargarTablaSeguimiento(actas = actasCompromiso) {

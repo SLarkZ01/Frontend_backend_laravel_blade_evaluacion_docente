@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
-use App\Services\ActaCompromisoService;
-use App\Services\ProcesoSancionService;
 
 class DecanoCordinadorController extends Controller
 {
@@ -96,10 +94,7 @@ public function mostrarGrafica()
     public function acta_compromiso()
     {
         $docentesbusqueda = DB::select('CALL BuscarDocente()');
-        $actaService = new ActaCompromisoService();
-        $response = $actaService->getAll();
-        
-        $actas = $response['data'] ?? [];
+        $actas = \App\Models\ActaCompromiso::all();
         return view('decano.acta_compromiso', compact('docentesbusqueda', 'actas'));
     }
     
@@ -134,7 +129,7 @@ public function mostrarGrafica()
             $firmaPath = 'firmas/' . $firmaName;
         }
 
-        $data = [
+        $acta = \App\Models\ActaCompromiso::create([
             'numero_acta' => $request->numero_acta,
             'fecha_generacion' => $request->fecha_generacion,
             'nombre_docente' => $request->nombre_docente,
@@ -145,16 +140,7 @@ public function mostrarGrafica()
             'retroalimentacion' => $request->retroalimentacion,
             'firma_path' => $firmaPath,
             'enviado' => false
-        ];
-        
-        $actaService = new ActaCompromisoService();
-        $response = $actaService->create($data);
-        
-        if (!isset($response['success']) || !$response['success']) {
-            return redirect()->back()
-                ->withErrors(['error' => $response['message'] ?? 'Error al crear acta de compromiso'])
-                ->withInput();
-        }
+        ]);
 
         return redirect()->route('decano.acta_compromiso')
             ->with('success', 'Acta de compromiso creada exitosamente');
@@ -165,15 +151,7 @@ public function mostrarGrafica()
      */
     public function editar_acta($id)
     {
-        $actaService = new ActaCompromisoService();
-        $response = $actaService->getById($id);
-        
-        if (!isset($response['success']) || !$response['success']) {
-            return redirect()->route('decano.acta_compromiso')
-                ->withErrors(['error' => $response['message'] ?? 'Acta de compromiso no encontrada']);
-        }
-        
-        $acta = $response['data'] ?? null;
+        $acta = \App\Models\ActaCompromiso::findOrFail($id);
         $docentesbusqueda = DB::select('CALL BuscarDocente()');
         return view('decano.editar_acta', compact('acta', 'docentesbusqueda'));
     }
@@ -183,15 +161,7 @@ public function mostrarGrafica()
      */
     public function actualizar_acta(Request $request, $id)
     {
-        $actaService = new ActaCompromisoService();
-        $actaResponse = $actaService->getById($id);
-        
-        if (!isset($actaResponse['success']) || !$actaResponse['success']) {
-            return redirect()->route('decano.acta_compromiso')
-                ->withErrors(['error' => $actaResponse['message'] ?? 'Acta de compromiso no encontrada']);
-        }
-        
-        $acta = $actaResponse['data'] ?? null;
+        $acta = \App\Models\ActaCompromiso::findOrFail($id);
         
         $validator = Validator::make($request->all(), [
             'numero_acta' => 'required|string|unique:acta_compromiso,numero_acta,' . $id,
@@ -211,38 +181,27 @@ public function mostrarGrafica()
                 ->withInput();
         }
 
-        $firmaPath = $acta['firma_path'] ?? null;
         if ($request->hasFile('firma')) {
             // Eliminar firma anterior si existe
-            if ($firmaPath) {
-                \Illuminate\Support\Facades\Storage::delete('public/' . $firmaPath);
+            if ($acta->firma_path) {
+                \Illuminate\Support\Facades\Storage::delete('public/' . $acta->firma_path);
             }
             
             $firma = $request->file('firma');
             $firmaName = time() . '_' . $firma->getClientOriginalName();
             $firma->storeAs('public/firmas', $firmaName);
-            $firmaPath = 'firmas/' . $firmaName;
+            $acta->firma_path = 'firmas/' . $firmaName;
         }
 
-        $data = [
-            'numero_acta' => $request->numero_acta,
-            'fecha_generacion' => $request->fecha_generacion,
-            'nombre_docente' => $request->nombre_docente,
-            'apellido_docente' => $request->apellido_docente,
-            'identificacion_docente' => $request->identificacion_docente,
-            'asignatura' => $request->asignatura,
-            'calificacion_final' => $request->calificacion_final,
-            'retroalimentacion' => $request->retroalimentacion,
-            'firma_path' => $firmaPath
-        ];
-        
-        $response = $actaService->update($id, $data);
-        
-        if (!isset($response['success']) || !$response['success']) {
-            return redirect()->back()
-                ->withErrors(['error' => $response['message'] ?? 'Error al actualizar acta de compromiso'])
-                ->withInput();
-        }
+        $acta->numero_acta = $request->numero_acta;
+        $acta->fecha_generacion = $request->fecha_generacion;
+        $acta->nombre_docente = $request->nombre_docente;
+        $acta->apellido_docente = $request->apellido_docente;
+        $acta->identificacion_docente = $request->identificacion_docente;
+        $acta->asignatura = $request->asignatura;
+        $acta->calificacion_final = $request->calificacion_final;
+        $acta->retroalimentacion = $request->retroalimentacion;
+        $acta->save();
 
         return redirect()->route('decano.acta_compromiso')
             ->with('success', 'Acta de compromiso actualizada exitosamente');
@@ -251,26 +210,16 @@ public function mostrarGrafica()
     /**
      * Elimina un acta
      */
-    public function eliminar_acta($id_acta)
+    public function eliminar_acta($id)
     {
-        $actaService = new ActaCompromisoService();
-        $actaResponse = $actaService->getById($id_acta);
+        $acta = \App\Models\ActaCompromiso::findOrFail($id);
         
-        if (isset($actaResponse['success']) && $actaResponse['success']) {
-            $acta = $actaResponse['data'] ?? null;
-            
-            // Eliminar firma si existe
-            if (isset($acta['firma_path']) && $acta['firma_path']) {
-                \Illuminate\Support\Facades\Storage::delete('public/' . $acta['firma_path']);
-            }
+        // Eliminar firma si existe
+        if ($acta->firma_path) {
+            \Illuminate\Support\Facades\Storage::delete('public/' . $acta->firma_path);
         }
 
-        $response = $actaService->delete($id_acta);
-        
-        if (!isset($response['success']) || !$response['success']) {
-            return redirect()->route('decano.acta_compromiso')
-                ->withErrors(['error' => $response['message'] ?? 'Error al eliminar acta de compromiso']);
-        }
+        $acta->delete();
 
         return redirect()->route('decano.acta_compromiso')
             ->with('success', 'Acta de compromiso eliminada exitosamente');
@@ -279,15 +228,11 @@ public function mostrarGrafica()
     /**
      * Marca un acta como enviada
      */
-    public function enviar_acta($id_acta)
+    public function enviar_acta($id)
     {
-        $actaService = new ActaCompromisoService();
-        $response = $actaService->markAsSent($id_acta);
-        
-        if (!isset($response['success']) || !$response['success']) {
-            return redirect()->route('decano.acta_compromiso')
-                ->withErrors(['error' => $response['message'] ?? 'Error al enviar acta de compromiso']);
-        }
+        $acta = \App\Models\ActaCompromiso::findOrFail($id);
+        $acta->enviado = true;
+        $acta->save();
 
         return redirect()->route('decano.acta_compromiso')
             ->with('success', 'Acta de compromiso enviada exitosamente');
@@ -305,228 +250,15 @@ public function mostrarGrafica()
         return view('decano.modales_seguimiento');
     }
 
-    //proceso sancion retiro
+    //proseso sancion retiro
 
     public function psr()
     {
-        // Obtener todos los procesos de sanción usando el servicio
-        $procesoService = new ProcesoSancionService();
-        $procesosResponse = $procesoService->getAll();
-        $procesos = $procesosResponse;
-        
-        // Obtener docentes con calificaciones bajas para sugerir sanciones
-        $docentesBajoDesempeno = DB::select('CALL ObtenerDocentesCalificacionesBajas(?)', [3.00]);
-        
-        return view('decano.proceso_sancion_retiro', compact('procesos', 'docentesBajoDesempeno'));
-    }
-    
-    /**
-     * Busca procesos de sanción por nombre de docente
-     */
-    public function buscarProcesoSancion(Request $request)
-    {
-        $nombre = $request->input('nombre');
-        $procesoService = new ProcesoSancionService();
-        $response = $procesoService->searchByDocente($nombre);
-        return response()->json($response);
-    }
-    
-    /**
-     * Filtra procesos de sanción por tipo
-     */
-    public function filtrarProcesoSancionPorTipo(Request $request)
-    {
-        $tipo = $request->input('tipo_sancion');
-        $procesoService = new ProcesoSancionService();
-        $response = $procesoService->filterByTipo($tipo);
-        return response()->json($response);
-    }
-    
-    /**
-     * Filtra procesos de sanción por rango de calificación
-     */
-    public function filtrarProcesoSancionPorCalificacion(Request $request)
-    {
-        $min = $request->input('calificacion_min');
-        $max = $request->input('calificacion_max');
-        $procesoService = new ProcesoSancionService();
-        $response = $procesoService->filterByCalificacion($min, $max);
-        return response()->json($response);
-    }
-    
-    /**
-     * Guarda un nuevo proceso de sanción
-     */
-    public function guardarProcesoSancion(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'numero_resolucion' => 'required|string|unique:proceso_sancion,numero_resolucion',
-            'fecha_emision' => 'required|date',
-            'nombre_docente' => 'required|string|max:255',
-            'apellido_docente' => 'required|string|max:255',
-            'identificacion_docente' => 'required|string|max:20',
-            'asignatura' => 'required|string|max:255',
-            'calificacion_final' => 'required|numeric|between:0,5.00',
-            'tipo_sancion' => 'required|string',
-            'antecedentes' => 'required|string',
-            'fundamentos' => 'required|string',
-            'resolucion' => 'required|string',
-            'firma' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
-        $firmaPath = null;
-        if ($request->hasFile('firma')) {
-            $firma = $request->file('firma');
-            $firmaName = time() . '_' . $firma->getClientOriginalName();
-            $firma->storeAs('public/firmas', $firmaName);
-            $firmaPath = 'firmas/' . $firmaName;
-        }
-
-        $data = [
-            'numero_resolucion' => $request->numero_resolucion,
-            'fecha_emision' => $request->fecha_emision,
-            'nombre_docente' => $request->nombre_docente,
-            'apellido_docente' => $request->apellido_docente,
-            'identificacion_docente' => $request->identificacion_docente,
-            'asignatura' => $request->asignatura,
-            'calificacion_final' => $request->calificacion_final,
-            'tipo_sancion' => $request->tipo_sancion,
-            'antecedentes' => $request->antecedentes,
-            'fundamentos' => $request->fundamentos,
-            'resolucion' => $request->resolucion,
-            'firma_path' => $firmaPath
-        ];
-        
-        $procesoService = new ProcesoSancionService();
-        $response = $procesoService->create($data);
-
-        return response()->json($response);
-    }
-    
-    /**
-     * Obtiene un proceso de sanción por ID
-     */
-    public function obtenerProcesoSancion($id)
-    {
-        $procesoService = new ProcesoSancionService();
-        $response = $procesoService->getById($id);
-        
-        if (!isset($response['success']) || !$response['success']) {
-            return response()->json(['error' => $response['message'] ?? 'Proceso de sanción no encontrado'], 404);
-        }
-        
-        return response()->json($response);
-    }
-    
-    /**
-     * Actualiza un proceso de sanción
-     */
-    public function actualizarProcesoSancion(Request $request, $id)
-    {
-        $validator = Validator::make($request->all(), [
-            'numero_resolucion' => 'required|string|unique:proceso_sancion,numero_resolucion,' . $id . ',id_sancion',
-            'fecha_emision' => 'required|date',
-            'nombre_docente' => 'required|string|max:255',
-            'apellido_docente' => 'required|string|max:255',
-            'identificacion_docente' => 'required|string|max:20',
-            'asignatura' => 'required|string|max:255',
-            'calificacion_final' => 'required|numeric|between:0,5.00',
-            'tipo_sancion' => 'required|string',
-            'antecedentes' => 'required|string',
-        ]);
-
-        // Verificar si el proceso existe usando el servicio
-        $procesoService = new ProcesoSancionService();
-        $procesoResponse = $procesoService->getById($id);
-        
-        if (!isset($procesoResponse['success']) || !$procesoResponse['success']) {
-            return response()->json(['error' => 'Proceso de sanción no encontrado'], 404);
-        }
-        
-        $proceso = $procesoResponse['data'] ?? null;
-        $firmaPath = $proceso['firma_path'] ?? null;
-        
-        if ($request->hasFile('firma')) {
-            // Eliminar firma anterior si existe
-            if ($firmaPath) {
-                Storage::delete('public/' . $firmaPath);
-            }
-            
-            $firma = $request->file('firma');
-            $firmaName = time() . '_' . $firma->getClientOriginalName();
-            $firma->storeAs('public/firmas', $firmaName);
-            $firmaPath = 'firmas/' . $firmaName;
-        }
-
-        $data = [
-            'numero_resolucion' => $request->numero_resolucion,
-            'fecha_emision' => $request->fecha_emision,
-            'nombre_docente' => $request->nombre_docente,
-            'apellido_docente' => $request->apellido_docente,
-            'identificacion_docente' => $request->identificacion_docente,
-            'asignatura' => $request->asignatura,
-            'calificacion_final' => $request->calificacion_final,
-            'tipo_sancion' => $request->tipo_sancion,
-            'antecedentes' => $request->antecedentes,
-            'fundamentos' => $request->fundamentos,
-            'resolucion' => $request->resolucion,
-            'firma_path' => $firmaPath
-        ];
-        
-        $response = $procesoService->update($id, $data);
-
-        return response()->json($response);
-    }
-    
-    /**
-     * Elimina un proceso de sanción
-     */
-    public function eliminarProcesoSancion($id)
-    {
-        $procesoService = new ProcesoSancionService();
-        $procesoResponse = $procesoService->getById($id);
-        
-        if (isset($procesoResponse['success']) && $procesoResponse['success']) {
-            $proceso = $procesoResponse['data'] ?? null;
-            
-            // Eliminar firma si existe
-            if (isset($proceso['firma_path']) && $proceso['firma_path']) {
-                Storage::delete('public/' . $proceso['firma_path']);
-            }
-        } else {
-            return response()->json(['error' => 'Proceso de sanción no encontrado'], 404);
-        }
-        
-        $response = $procesoService->delete($id);
-        
-        return response()->json($response);
-    }
-    
-    /**
-     * Marca un proceso de sanción como enviado
-     */
-    public function enviarProcesoSancion($id)
-    {
-        $procesoService = new ProcesoSancionService();
-        $response = $procesoService->markAsSent($id);
-        
-        if (!isset($response['success']) || !$response['success']) {
-            return response()->json(['error' => $response['message'] ?? 'Error al marcar proceso como enviado'], 404);
-        }
-        
-        return response()->json($response);
+        return view('decano.proceso_sancion_retiro');
     }
 
-    
-    /**
-     * Marca un proceso de sanción como enviado
-     */
     //seguimiento plan de mejora
-public function spm()
+    public function spm()
     {
         return view('decano.seguimiento_plan_mejora');
     }
@@ -534,10 +266,10 @@ public function spm()
     /**
      * Muestra el formulario para editar un acta de compromiso
      */
-    public function editarActa($id_acta)
+    public function editarActa($id)
     {
         // Obtener el acta de compromiso por ID usando el procedimiento almacenado
-        $actas = DB::select('CALL GetActaCompromisoById(?)', [$id_acta]);
+        $actas = DB::select('CALL GetActaCompromisoById(?)', [$id]);
         $acta = $actas[0] ?? null;
         
         if (!$acta) {
@@ -557,7 +289,7 @@ public function spm()
     /**
      * Actualiza un acta de compromiso en la base de datos
      */
-    public function ActualizarActa(Request $request, $id)
+    public function actualizarActa(Request $request, $id)
     {
         // Validar los datos del formulario
         $request->validate([
@@ -593,5 +325,4 @@ public function spm()
         return redirect()->route('decano.acta_compromiso')
             ->with('success', 'Acta de compromiso actualizada correctamente');
     }
-
 }

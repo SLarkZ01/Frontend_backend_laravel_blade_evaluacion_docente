@@ -15,7 +15,6 @@ class ActaCompromiso extends Model
      * @var string
      */
     protected $table = 'acta_compromiso';
-    protected $primaryKey = 'id_acta';
 
     /**
      * The attributes that are mass assignable.

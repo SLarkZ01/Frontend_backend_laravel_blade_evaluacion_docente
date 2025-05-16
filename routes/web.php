@@ -5,9 +5,11 @@ use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\DecanoCordinadorController;
+use App\Http\Controllers\ExcelImportController;
+
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ActaCompromisoController;
+use App\Http\Controllers\API\ActaCompromisoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,20 +65,8 @@ Route::get('/decano/actaCompromiso', [DecanoCordinadorController::class, 'acta_c
 Route::get('/decano/alertasBajoDesempeno', [DecanoCordinadorController::class, 'abd'])->name('decano.abd');
 // modales seguimiento
 Route::get('/decano/modalesSeguimiento', [DecanoCordinadorController::class, 'seguimiento'])->name('decano.seguimiento');
-// proceso sancion retiro - rutas principales
+// proceso sancion retiro
 Route::get('/decano/procesoSancionRetiro', [DecanoCordinadorController::class, 'psr'])->name('decano.psr');
-// Add the new route with hyphenated format to match the URL in the browser
-Route::get('/decano/proceso-sancion-retiro.html', [DecanoCordinadorController::class, 'psr']);
-
-// Rutas para API de proceso de sanción
-Route::post('/decano/proceso-sancion', [DecanoCordinadorController::class, 'guardarProcesoSancion'])->name('decano.guardar_proceso_sancion');
-Route::get('/decano/proceso-sancion/{id}', [DecanoCordinadorController::class, 'obtenerProcesoSancion'])->name('decano.obtener_proceso_sancion');
-Route::put('/decano/proceso-sancion/{id}', [DecanoCordinadorController::class, 'actualizarProcesoSancion'])->name('decano.actualizar_proceso_sancion');
-Route::delete('/decano/proceso-sancion/{id}', [DecanoCordinadorController::class, 'eliminarProcesoSancion'])->name('decano.eliminar_proceso_sancion');
-Route::put('/decano/proceso-sancion/{id}/enviar', [DecanoCordinadorController::class, 'enviarProcesoSancion'])->name('decano.enviar_proceso_sancion');
-Route::get('/decano/buscar-proceso-sancion', [DecanoCordinadorController::class, 'buscarProcesoSancion'])->name('decano.buscar_proceso_sancion');
-Route::get('/decano/filtrar-proceso-sancion-tipo', [DecanoCordinadorController::class, 'filtrarProcesoSancionPorTipo'])->name('decano.filtrar_proceso_sancion_tipo');
-Route::get('/decano/filtrar-proceso-sancion-calificacion', [DecanoCordinadorController::class, 'filtrarProcesoSancionPorCalificacion'])->name('decano.filtrar_proceso_sancion_calificacion');
 // seguimiento plan de mejora
 Route::get('/decano/seguimientoPlanMejora', [DecanoCordinadorController::class, 'spm'])->name('decano.spm');
 //total de docentes
@@ -110,4 +100,11 @@ Route::post('/actas', [ActaCompromisoController::class, 'storeVista'])->name('ac
 Route::get('/actas/{id}/edit', [ActaCompromisoController::class, 'edit'])->name('actas.edit');
 Route::put('/actas/{id}', [ActaCompromisoController::class, 'updateVista'])->name('actas.update');
 Route::delete('/actas/{id}', [ActaCompromisoController::class, 'destroyVista'])->name('actas.destroy');
+
+Route::get('/cargar-excel', function () {
+    return view('cargar-excel');
+});
+
+Route::post('/importar', [ExcelImportController::class, 'importar']);
+
 
