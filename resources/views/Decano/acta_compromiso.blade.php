@@ -269,11 +269,11 @@
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('decano.editar_acta', $acta->id) }}" class="btn btn-sm btn-primary">
+                                            <a href="{{ route('decano.editar_acta', $acta->id_docente) }}" class="btn btn-sm btn-primary">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             @if(!$acta->enviado)
-                                                <form action="{{ route('decano.enviar_acta', $acta->id) }}" method="POST" class="d-inline">
+                                                <form action="{{ route('decano.enviar_acta', $acta->id_docente) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('PUT')
                                                     <button type="submit" class="btn btn-sm btn-success">
@@ -281,7 +281,7 @@
                                                     </button>
                                                 </form>
                                             @endif
-                                            <form action="{{ route('decano.eliminar_acta', $acta->id) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Está seguro de eliminar esta acta?')">
+                                            <form action="{{ route('decano.eliminar_acta', $acta->id_docente) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Está seguro de eliminar esta acta?')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger">

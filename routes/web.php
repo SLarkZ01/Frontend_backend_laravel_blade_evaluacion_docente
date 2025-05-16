@@ -7,7 +7,10 @@ use App\Http\Controllers\loginController;
 use App\Http\Controllers\DecanoCordinadorController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ExcelImportController;
+use App\Http\Controllers\ImportarController;
+use App\Http\Controllers\ImportarExcelController;
+use App\Http\Controllers\ImportarEvaluacionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +30,7 @@ Route::get("/docente/PDmejorado", [DocenteController::class, 'pde'])->name('doce
 //resultados
 Route::get("/docente/resultados", [DocenteController::class, 'result'])->name('docente.result');
 
-//Login 
+//Login
 Route::post('/login', [loginController::class, 'validation'])->name('login.process');
 
 
@@ -48,7 +51,7 @@ Route::put('/decano/acta-compromiso/{id}/enviar', [DecanoCordinadorController::c
 Route::get('/Admin', [AdminController::class, 'Dashboard'])->name('Admin.Dashboard');
 // rutas para el periodo de evaluacion
 Route::get('/Admin/periodo_evaluacion', [AdminController::class, 'periodo_evaluacion'])
-->name('admin.periodo_evaluacion'); 
+->name('admin.periodo_evaluacion');
 // rutas para los reportes
 Route::get('/Admin/reportes', [AdminController::class, 'reportes'])->name('admin.reportes_admin');
 // rutas para los roles y permisos
@@ -90,3 +93,20 @@ Route::get('/decano/grafica-promedios', [DecanoCordinadorController::class, 'mos
 Route::get('/decano/alertas', [DecanoCordinadorController::class, 'index']);
 
 
+Route::get('/importar', function () {
+    return view('importar');
+});
+
+// Route::post('/importar-excel', [ExcelImportController::class, 'importar']);
+Route::get('/cargar-excel', function () {
+    return view('cargar-excel');
+});
+
+Route::post('/importar', [ExcelImportController::class, 'importar']);
+Route::get('/cargar-excel', function () {
+    return view('cargar-excel');
+});
+
+Route::post('/importar', [ExcelImportController::class, 'importar']);
+Route::get('/buscar-docente', [DecanoCordinadorController::class, 'buscarDocente'])->name('buscar.docente');
+Route::get('/docente/{id_docente}', [App\Http\Controllers\DecanoCordinadorController::class, 'getDocente']);

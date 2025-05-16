@@ -555,10 +555,10 @@
                                                         </div>
                                                         <div>
                                                             <!-- Mostramos el nombre del docente, el curso y la calificación -->
-                                                            <h4>{{ $docente->docente }}</h4>
+                                                            <h4>{{ $docente->nombre_docente }}</h4>
                                                             <p><strong>Curso:</strong> {{ $docente->curso }}</p>
                                                             <p><strong>Calificación:</strong>
-                                                                {{ $docente->calificacion }}/5.0
+                                                                {{ $docente->promedio_total}}/5.0
                                                             </p>
                                                         </div>
                                                     </div>
