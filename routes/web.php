@@ -9,7 +9,6 @@ use App\Http\Controllers\ExcelImportController;
 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ExcelImportController;
 use App\Http\Controllers\ImportarController;
 use App\Http\Controllers\ImportarExcelController;
 use App\Http\Controllers\ImportarEvaluacionController;
