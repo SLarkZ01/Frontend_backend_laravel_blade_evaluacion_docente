@@ -93,10 +93,26 @@ public function mostrarGrafica()
 //docentes destacados
     public function acta_compromiso()
     {
-        $docentesbusqueda = DB::select('CALL BuscarDocente()');
+        $busqueda= DB::select('CALL BuscarDocente(?)', ['nombre_docente']);
+        $docentesbusqueda = collect($busqueda)->unique('nombre_docente');
         $actas = \App\Models\ActaCompromiso::all();
-        return view('decano.acta_compromiso', compact('docentesbusqueda', 'actas'));
+        return view('decano.acta_compromiso', compact('docentesbusqueda', 'actas', 'busqueda'));
     }
+    public function buscarDocente(Request $request)
+{
+    // Paso 1: Obtener el nombre desde el input (por ejemplo, un formulario con name="nombredocente")
+    $nombredocente = $request->input('nombredocente'); // o $request->nombredocente;
+
+    // Paso 2: Opcional - agregar comodines para búsqueda con LIKE
+    $nombreLike = '%' . $nombredocente . '%';
+
+    // Paso 3: Llamar al procedimiento almacenado con el valor recibido
+    $docentesbusqueda = DB::select('CALL BuscarDocente(?)', [$nombreLike]);
+
+    // Paso 4: Retornar la vista con los resultados
+    return view('docentes.resultados', compact('docentesbusqueda', 'nombredocente'));
+}
+
     
     /**
      * Guarda una nueva acta de compromiso
@@ -149,9 +165,9 @@ public function mostrarGrafica()
     /**
      * Muestra el formulario para editar un acta
      */
-    public function editar_acta($id)
+    public function editar_acta($id_docente)
     {
-        $acta = \App\Models\ActaCompromiso::findOrFail($id);
+        $acta = \App\Models\ActaCompromiso::findOrFail($id_docente);
         $docentesbusqueda = DB::select('CALL BuscarDocente()');
         return view('decano.editar_acta', compact('acta', 'docentesbusqueda'));
     }
@@ -184,7 +200,7 @@ public function mostrarGrafica()
         if ($request->hasFile('firma')) {
             // Eliminar firma anterior si existe
             if ($acta->firma_path) {
-                \Illuminate\Support\Facades\Storage::delete('public/' . $acta->firma_path);
+               
             }
             
             $firma = $request->file('firma');
