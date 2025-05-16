@@ -21,7 +21,7 @@ class ExcelImportController extends Controller
             $tipo = $request->input('tipo_datos');
             $hoja1 = $this->procesarExcel($file);
             $hoja2 = $this->procesarExcel($file);
-            $hoja3 = $this->procesarExcel($file);
+            $hoja3 = $this->procesarExcel($file,'TOTAL PROMEDIOS VS PROMCALIFICA');
             $hoja4 = $this->procesarExcel($file);
             // Procesar el archivo según su tipo
             // if ($file->getClientOriginalExtension() == 'csv') {
@@ -33,7 +33,7 @@ class ExcelImportController extends Controller
             $controller = new InsercionTablasDatosController();
            // $controller->InsertarDocentes($hoja1);
            // $controller->InsertarProgramas($hoja1);
-            $controller->InsertarCurso($hoja1);
+            $controller->InsertarCursos($hoja3);
 
             
             

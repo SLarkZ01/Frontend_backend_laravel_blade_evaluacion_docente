@@ -11,8 +11,8 @@ class DecanoCordinadorController extends Controller
 {
     //
     //total_docentes
-   
-    
+
+
         public function total_docentes()
     {
         $docentes = DB::select('CALL total_docentes()');
@@ -31,7 +31,7 @@ class DecanoCordinadorController extends Controller
     {
         // Ejecutamos el procedimiento almacenado para obtener el total de estudiantes no evaluados
         $totalEstudiantesNoEvaluaron = DB::select('CALL ObtenerTotalEstudiantesNoEvaluaron()');
-        
+
         // Pasamos la variable $totalEstudiantesNoEvaluaron a la vista
         return view('decano.totalEstudiantesNoEvaluaron', compact('totalEstudiantesNoEvaluaron'));
     }
@@ -44,7 +44,7 @@ class DecanoCordinadorController extends Controller
         return view('decano.promedio_global', compact('promedio_global'));
     }
     //promedio por facultad
-    
+
     public function obtenerPromedioPorFacultad() {
         // Ejecutamos el procedimiento almacenado
     $datos = collect(DB::select('CALL ObtenerPromedioPorFacultad()'));
@@ -53,9 +53,9 @@ class DecanoCordinadorController extends Controller
     $notas = $datos->pluck('promedio_nota');
 
 return view('graficas.facultades', compact('labels', 'promedio_nota'));
-    
+
 }
- 
+
 public function docentesDestacados()
 {
     // Ejecutar el procedimiento almacenado
@@ -85,35 +85,22 @@ public function mostrarGrafica()
     public function mostrarAlertas()
     {
         $alertas = DB::select('CALL ObtenerAlertasCalificacionesCriticas()');
-    
+
         return view('tu_vista', compact('alertas'));
     }
-    
-    
+
+
 //docentes destacados
     public function acta_compromiso()
     {
-        $busqueda= DB::select('CALL BuscarDocente(?)', ['nombre_docente']);
-        $docentesbusqueda = collect($busqueda)->unique('nombre_docente');
-        $actas = \App\Models\ActaCompromiso::all();
-        return view('decano.acta_compromiso', compact('docentesbusqueda', 'actas', 'busqueda'));
+        $docentesbusqueda = DB::select('CALL BuscarDocente()');
+        $actaService = new ActaCompromisoService();
+        $response = $actaService->getAll();
+
+        $actas = $response['data'] ?? [];
+        return view('decano.acta_compromiso', compact('docentesbusqueda', 'actas'));
     }
-    public function buscarDocente(Request $request)
-{
-    // Paso 1: Obtener el nombre desde el input (por ejemplo, un formulario con name="nombredocente")
-    $nombredocente = $request->input('nombredocente'); // o $request->nombredocente;
 
-    // Paso 2: Opcional - agregar comodines para búsqueda con LIKE
-    $nombreLike = '%' . $nombredocente . '%';
-
-    // Paso 3: Llamar al procedimiento almacenado con el valor recibido
-    $docentesbusqueda = DB::select('CALL BuscarDocente(?)', [$nombreLike]);
-
-    // Paso 4: Retornar la vista con los resultados
-    return view('docentes.resultados', compact('docentesbusqueda', 'nombredocente'));
-}
-
-    
     /**
      * Guarda una nueva acta de compromiso
      */
@@ -177,8 +164,16 @@ public function mostrarGrafica()
      */
     public function actualizar_acta(Request $request, $id)
     {
-        $acta = \App\Models\ActaCompromiso::findOrFail($id);
-        
+        $actaService = new ActaCompromisoService();
+        $actaResponse = $actaService->getById($id);
+
+        if (!isset($actaResponse['success']) || !$actaResponse['success']) {
+            return redirect()->route('decano.acta_compromiso')
+                ->withErrors(['error' => $actaResponse['message'] ?? 'Acta de compromiso no encontrada']);
+        }
+
+        $acta = $actaResponse['data'] ?? null;
+
         $validator = Validator::make($request->all(), [
             'numero_acta' => 'required|string|unique:acta_compromiso,numero_acta,' . $id,
             'fecha_generacion' => 'required|date',
@@ -199,10 +194,10 @@ public function mostrarGrafica()
 
         if ($request->hasFile('firma')) {
             // Eliminar firma anterior si existe
-            if ($acta->firma_path) {
-               
+            if ($firmaPath) {
+                \Illuminate\Support\Facades\Storage::delete('public/' . $firmaPath);
             }
-            
+
             $firma = $request->file('firma');
             $firmaName = time() . '_' . $firma->getClientOriginalName();
             $firma->storeAs('public/firmas', $firmaName);
@@ -228,11 +223,16 @@ public function mostrarGrafica()
      */
     public function eliminar_acta($id)
     {
-        $acta = \App\Models\ActaCompromiso::findOrFail($id);
-        
-        // Eliminar firma si existe
-        if ($acta->firma_path) {
-            \Illuminate\Support\Facades\Storage::delete('public/' . $acta->firma_path);
+        $actaService = new ActaCompromisoService();
+        $actaResponse = $actaService->getById($id_acta);
+
+        if (isset($actaResponse['success']) && $actaResponse['success']) {
+            $acta = $actaResponse['data'] ?? null;
+
+            // Eliminar firma si existe
+            if (isset($acta['firma_path']) && $acta['firma_path']) {
+                \Illuminate\Support\Facades\Storage::delete('public/' . $acta['firma_path']);
+            }
         }
 
         $acta->delete();
@@ -253,7 +253,7 @@ public function mostrarGrafica()
         return redirect()->route('decano.acta_compromiso')
             ->with('success', 'Acta de compromiso enviada exitosamente');
     }
-    
+
 //alertas bajo desempeño
     public function abd()
     {
@@ -282,30 +282,30 @@ public function mostrarGrafica()
     /**
      * Muestra el formulario para editar un acta de compromiso
      */
-    public function editarActa($id)
+    public function editarActa($id_acta)
     {
         // Obtener el acta de compromiso por ID usando el procedimiento almacenado
-        $actas = DB::select('CALL GetActaCompromisoById(?)', [$id]);
+        $actas = DB::select('CALL GetActaCompromisoById(?)', [$id_acta]);
         $acta = $actas[0] ?? null;
-        
+
         if (!$acta) {
             return redirect()->route('decano.acta_compromiso')
                 ->with('error', 'Acta de compromiso no encontrada');
         }
-        
+
         // La información del docente ya viene incluida en el resultado del procedimiento almacenado
         $docente = (object)[
             'id_docente' => $acta->id_docente,
             'nombre' => $acta->nombre_docente,
         ];
-            
+
         return view('decano.editar_acta', compact('acta', 'docente'));
     }
 
     /**
      * Actualiza un acta de compromiso en la base de datos
      */
-    public function actualizarActa(Request $request, $id)
+    public function ActualizarActa(Request $request, $id)
     {
         // Validar los datos del formulario
         $request->validate([
@@ -313,20 +313,20 @@ public function mostrarGrafica()
             'fecha_generacion' => 'required|date',
             'retroalimentacion' => 'required|string'
         ]);
-        
+
         // Actualizar el acta en la base de datos usando el procedimiento almacenado
         $result = DB::select('CALL UpdateActaCompromiso(?, ?, ?)', [
             $id,
             $request->retroalimentacion,
             $request->fecha_generacion
         ]);
-        
+
         // Si se cargó una nueva firma, procesarla y actualizar el campo de firma por separado
         if ($request->hasFile('firma')) {
             $firma = $request->file('firma');
             $nombreFirma = time() . '_' . $firma->getClientOriginalName();
             $firma->move(public_path('firmas'), $nombreFirma);
-            
+
             // Actualizar solo el campo de firma
             DB::table('acta_compromiso')
                 ->where('id_acta', $id)
@@ -337,8 +337,9 @@ public function mostrarGrafica()
                 ->where('id_acta', $id)
                 ->update(['firma' => $request->firma_actual]);
         }
-        
+
         return redirect()->route('decano.acta_compromiso')
             ->with('success', 'Acta de compromiso actualizada correctamente');
     }
+
 }
