@@ -10,25 +10,130 @@ class InsercionTablasDatosController extends Controller
     {
         // Eliminar la cabecera (primera fila)
         // unset($datos[6]);
-        $id = 6;
+      
 
         foreach ($datos as $fila) {
             // Ajustar índices a la estructura del Excel
             $nombre = $fila[2] ?? '';         // Columna C: Nombre del docente
             $codigo = trim($fila[7] ?? '');   // Columna E: Código del docente
-            $id_usuario = DB::select('CALL ObtenerIdUsuarioPorNombre(?)', [$nombre]);
-            $id_usuario = $resultado[0]->id_usuario ?? null;
+
+            $id_usuario = DB::select('CALL ObtenerIdUsuarioPorNombre(?)', [$nombre]); 
+            $id_usuario = $id_usuario[0]->id_usuario ?? null;
 
             // Insertar docente en la base de datos
-            DB::insert('INSERT INTO docente (id_docente, id_usuario, cod_docente) VALUES (?,?,?)', [
-                $id,
+            DB::insert('INSERT INTO docente (id_usuario, cod_docente) VALUES (?,?)', [
                 $id_usuario,
                 $codigo
             ]);
-            $id++;
         }
     }
+    public function InsertarProgramas(array $datos): void
+{
+    foreach ($datos as $fila) {
+        // Ajustar índices a la estructura del Excel
+        $nombreFacultad = 'Facultad de Derecho';
+        $nombrePrograma = $fila[1] ?? '';
+        $nombreDocente = $fila[2] ?? '';
 
+        // Verificar si ya existe un programa con ese nombre
+        $existe = DB::table('programas')->where('nombre', $nombreFacultad)->exists();
+        if ($existe) {
+            continue; // Saltar esta fila si el programa ya existe
+        }
+
+        // Obtener ID del docente
+        $id_docente = DB::select('CALL ObtenerIdDocentePorNombre(?)', [$nombreDocente]);
+        $id_docente = $id_docente[0]->id_docente ?? null;
+
+        // Obtener ID de la facultad 
+        $id_falcultad = DB::select('CALL ObtenerIdFacultadPorNombre(?)', [$nombreFacultad]);
+        $id_falcultad = $id_falcultad[0]->id_falcultad ?? null;
+
+        // Insertar programa en la base de datos
+        DB::insert('INSERT INTO programas (id_docente,nombre,id_facultad) VALUES (?,?,?)', [
+            $id_docente,
+            $nombrePrograma,
+            $id_falcultad
+        ]);
+    }
+}
+
+    public function InsertarEstudiantesNoEvaluaronCurso(array $datos): void
+    {
+        // Eliminar la cabecera (primera fila)
+        // unset($datos[6]);
+       
+
+        foreach ($datos as $fila) {
+            // Ajustar índices a la estructura del Excel
+            $semestre = $fila[2] ?? '';     
+            $cod_estudiante = $fila[3] ?? '';  
+            $nombre = $fila[4] ?? '';  
+            $email = $fila[5] ?? '';  
+            $codigo_curso = $fila[6] ?? ''; 
+            $nombre_curso = $fila[7] ?? ''; 
+           
+
+            $id_facultad = DB::select('CALL ObtenerIdFacultadPorNombre(?)', [$nombre]); 
+            $id_facultad = $resultado[0]->id_facultad ?? null;
+
+            $id_programa = DB::select('CALL ObtenerIdProgramaPorNombre(?)', [$nombre]); 
+            $id_programa = $resultado[0]->id_programa ?? null;
+
+            
+
+            // Insertar docente en la base de datos
+            DB::insert('INSERT INTO programas ( id_facultad,id_programa,semestre,cod_estudiante,nombre,email,codigo_curso,nombre_curso) VALUES (?,?,?,?,?,?,?,?)', [
+                $id_facultad,
+                $id_programa,
+                $semestre,
+                $cod_estudiante,
+                $email,
+                $codigo_curso,
+                $nombre_curso
+            ]);
+        
+        }
+    }
+   public function InsertarCursos(array $datos): void
+{
+    foreach ($datos as $fila) {
+
+        $codigo = $fila[4]; // fecha de inicio
+        $nombre = $fila[5]; // fecha de fin
+        $facultad = $fila[2];
+        $docente=$fila[3];
+        $id_facultad = DB::select('CALL ObtenerIdFacultadPorNombre(?)', [$facultad]); // id_programa
+        $id_docente = DB::select('CALL ObtenerIdDocentePorNombre(?)', [$facultad]); // id_programa
+
+        DB::insert('INSERT INTO cursos (codigo,nombre,id_programa,id_docente ) VALUES (?,?,?,?)', [
+            $codigo,
+            $nombre,
+            $id_facultad,
+            $id_docente
+        ]);
+    }
+}
+    public function insertarEvaluaciones(array $datos): void
+   {
+      foreach ($datos as $fila) {
+
+        $codigo = $fila[4]; // fecha de inicio
+        $nombre = $fila[5]; // fecha de fin
+        $facultad = $fila[2];
+        $docente=$fila[3];
+        $id_facultad = DB::select('CALL ObtenerIdFacultadPorNombre(?)', [$facultad]); // id_programa
+        $id_docente = DB::select('CALL ObtenerIdDocentePorNombre(?)', [$facultad]); // id_programa
+
+        DB::insert('INSERT INTO evaluaciones (id_docente,id_curso,id_periodo,autoevaluacion,evaluacion_decano,evaluacion_estudiantes
+,promedio_total ) VALUES (?,?,?,?)', [
+            $codigo,
+            $nombre,
+            $id_facultad,
+            $id_docente
+        ]);
+     }
+   }
     public function InsertarComentarios(array $datos): void
 
     {
@@ -156,20 +261,20 @@ public function insertarDocentesNoEvaluados(array $datos): void
         $id_curso= DB::select('CALL ObtenerIdCursoPorNombre(?)', [$nombreCurso]); // id_curso
         $id_curso = $resultado[0]->id_curso ?? null; // id_curso
         
-        DB::insert('INSERT INTO docentes_no_evaluados (id_docente_No_Evaluado,id_evaluacion,id_facultad,id_coordinacion,id_programa,id_curso) VALUES (?, ?, ?, ?, ?,?)', [
-                $id_docente_No_Evaluado, // id_promedio
+        DB::insert('INSERT INTO docentes_no_evaluados (id_evaluacion,id_facultad,id_coordinacion,id_programa,id_curso) VALUES (?, ?, ?, ?, ?,?)', [
+               
                 $id_facultad ,
                 $id_facultad , 
                 $id_coordinacion,
                 $id_programa,
                 $id_curso
             ]);
-        $id_docente_No_Evaluado++;
+       
     }
                 
     }
-public function insertarPeriodosAcademicos(array $datos): void
-{
+  public function insertarPeriodosAcademicos(array $datos): void
+   {
     foreach ($datos as $fila) {
 
         $fecha_inicio = $fila[8]; // fecha de inicio
@@ -179,47 +284,10 @@ public function insertarPeriodosAcademicos(array $datos): void
             $fecha_inicio,
             $fecha_fin
         ]);
-        $id_periodo_academico++;
+      
     }
+  }
+ 
 }
-public function insertarCursos(array $datos): void
-{
-    foreach ($datos as $fila) {
+    
 
-        $codigo = $fila[4]; // fecha de inicio
-        $nombre = $fila[5]; // fecha de fin
-        $facultad = $fila[2];
-        $docente=$fila[3];
-        $id_facultad = DB::select('CALL ObtenerIdFacultadPorNombre(?)', [$facultad]); // id_programa
-        $id_docente = DB::select('CALL ObtenerIdDocentePorNombre(?)', [$facultad]); // id_programa
-
-        DB::insert('INSERT INTO cursos (codigo,nombre,id_programa,id_docente ) VALUES (?,?,?,?)', [
-            $codigo,
-            $nombre,
-            $id_facultad,
-            $id_docente
-        ]);
-    }
-}
-public function insertarEvaluaciones(array $datos): void
-{
-    foreach ($datos as $fila) {
-
-        $codigo = $fila[4]; // fecha de inicio
-        $nombre = $fila[5]; // fecha de fin
-        $facultad = $fila[2];
-        $docente=$fila[3];
-        $id_facultad = DB::select('CALL ObtenerIdFacultadPorNombre(?)', [$facultad]); // id_programa
-        $id_docente = DB::select('CALL ObtenerIdDocentePorNombre(?)', [$facultad]); // id_programa
-
-        DB::insert('INSERT INTO evaluaciones (id_docente,id_curso,id_periodo,autoevaluacion,evaluacion_decano,evaluacion_estudiantes
-,promedio_total ) VALUES (?,?,?,?)', [
-            $codigo,
-            $nombre,
-            $id_facultad,
-            $id_docente
-        ]);
-    }
-}
-
-}

@@ -5,6 +5,8 @@ use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\DecanoCordinadorController;
+use App\Http\Controllers\ExcelImportController;
+
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExcelImportController;
@@ -78,6 +80,10 @@ Route::get('/decanato/total_docente', [DecanoCordinadorController::class, 'total
 Route::get('/decano/totalNoEvaluados', [DecanoCordinadorController::class, 'totalNoEvaluados'])->name('decano.totalNoEvaluados');
 //esrtudiantes no evaluados
 Route::get('/decano/totalEstudiantesNoEvaluaron', [DecanoCordinadorController::class, 'totalEstudiantesNoEvaluaron'])->name('decano.totalEstudiantesNoEvaluaron');
+// editar acta de compromiso
+Route::get('/decano/editar-acta/{id}', [DecanoCordinadorController::class, 'editarActa'])->name('decano.editar_acta');
+// actualizar acta de compromiso
+Route::put('/decano/actualizar-acta/{id}', [DecanoCordinadorController::class, 'actualizarActa'])->name('decano.actualizar_acta');
 //promedio por facultad
 Route::get('/decano/promedio_global', [DecanoCordinadorController::class, 'promedio_global'])->name('decano.promedio_global');
  //promedio por facultad graficado

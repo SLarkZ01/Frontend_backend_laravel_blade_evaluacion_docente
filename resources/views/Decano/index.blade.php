@@ -102,7 +102,7 @@
                     </div>
                     <div>
                         <h6 class="card-title text-muted mb-1">Total de Docentes</h6>
-                        <h2 class="display-5 fw-bold mb-0"> {{ $total_docentes }} </h2>
+                        <h2 class="display-5 fw-bold mb-0">  {{$total_docentes }} </h2>
                         <p class="card-text text-muted small mb-0">Docentes en el departamento</p>
                     </div>
                 </div>

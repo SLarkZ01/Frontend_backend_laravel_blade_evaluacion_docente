@@ -19,31 +19,38 @@ class ExcelImportController extends Controller
             // Obtener el archivo
             $file = $request->file('archivo');
             $tipo = $request->input('tipo_datos');
-
+            $hoja1 = $this->procesarExcel($file);
+            $hoja2 = $this->procesarExcel($file);
+            $hoja3 = $this->procesarExcel($file);
+            $hoja4 = $this->procesarExcel($file);
             // Procesar el archivo según su tipo
-            if ($file->getClientOriginalExtension() == 'csv') {
-                $datos = $this->procesarCSV($file);
-            } else {
-                // Para archivos Excel, usamos una biblioteca nativa de PHP
-                $datos = $this->procesarExcel($file);
-            }
-            (new InsercionTablasDatosController())->InsertarDocentes($datos);
+            // if ($file->getClientOriginalExtension() == 'csv') {
+            //     $datos = $this->procesarCSV($file);
+            // } else {
+            //     // Para archivos Excel, usamos una biblioteca nativa de PHP
+            //     $datos = $this->procesarExcel($file);
+            // }
+            $controller = new InsercionTablasDatosController();
+           // $controller->InsertarDocentes($hoja1);
+           // $controller->InsertarProgramas($hoja1);
+            $controller->InsertarCurso($hoja1);
 
-
+            
+            
             if ($request->ajax() || $request->wantsJson()) {
                 return response()->json(['mensaje' => 'Importación completada correctamente'], 200);
             }
-
+            
             return redirect()->back()->with('success', 'Importación completada correctamente');
         } catch (Exception $e) {
             if ($request->ajax() || $request->wantsJson()) {
                 return response()->json(['error' => 'Error al importar: ' . $e->getMessage()], 500);
             }
-
+            
             return redirect()->back()->with('error', 'Error al importar: ' . $e->getMessage());
         }
     }
-
+    
     /**
      * Procesa un archivo CSV
      */
@@ -51,7 +58,7 @@ class ExcelImportController extends Controller
     {
         $datos = [];
         $handle = fopen($file->getRealPath(), 'r');
-
+        
         if ($handle !== false) {
             // Leer línea por línea
             while (($data = fgetcsv($handle, 1000, ',')) !== false) {
@@ -59,10 +66,10 @@ class ExcelImportController extends Controller
             }
             fclose($handle);
         }
-
+        
         return $datos;
     }
-
+    
     /**
      * Procesa un archivo Excel usando funciones nativas
      */
@@ -93,52 +100,9 @@ class ExcelImportController extends Controller
     return $datos;
 }
 
+  
+    
+ 
 
-
-    private function InsertarDocentes(array $datos): void
-{
-    // Eliminar la cabecera (primera fila)
-    //unset($datos[6]);
-       $id=6;
-
-    foreach ($datos as $fila) {
-        // Ajustar índices a la estructura del Excel
-        $nombre = $fila[2] ?? '';        // Columna C: Nombre del docente
-        $codigo = trim($fila[7] ?? '');   // Columna E: Código del docente
-        $id_usuario= DB::select('CALL ObtenerIdUsuarioPorNombre(?)', [$nombre]);
-        $id_usuario = $resultado[0]->id_usuario ?? null;
-        // Insertar docente en la base de datos
-        DB::insert('INSERT INTO docente (id_docente,id_usuario,cod_docente) VALUES (?,?,?)', [
-             $id,
-             $id_usuario,
-             $codigo
-        ]);
-        $id++;
-    }
-
-}
-public function InsertarComentarios(array $datos): void
-{
-     foreach ($datos as $fila) {
-            $id_comentario = $fila[0]; // id_comentario
-            $tipo= $fila[1]; // tipo
-            $id_docente = DB::select(' ObtenerComentariosPorDocente ?', [$id_docente]); // id_docente
-            $id_programa= $fila[3]; // id_programa
-            $id_coordinacion= $fila[4];// id_coordinacion
-            $comentario1 = $fila[5]; // comentario1
-            $comentario2= $fila[6]; // comentario2
-            DB::insert('INSERT INTO comentarios (id_comentario, tipo, id_docente, id_programa, id_coordinacion, comentario1, comentario2) VALUES (?, ?, ?, ?, ?, ?, ?)', [
-            $id_comentario, // id_comentario
-            $tipo, // tipo
-            $id_docente, // id_docente
-            $id_programa, // id_programa
-            $id_coordinacion, // id_coordinacion
-            $comentario1, // comentario1
-            $comentario2, // comentario2
-            ]);
-            $id_comentario++;
-        }
-    }
-
-
+    
 }
