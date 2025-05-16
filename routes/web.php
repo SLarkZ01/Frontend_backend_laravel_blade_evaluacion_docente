@@ -9,7 +9,11 @@ use App\Http\Controllers\ExcelImportController;
 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\API\ActaCompromisoController;
+
+use App\Http\Controllers\ActaCompromisoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -113,10 +117,10 @@ Route::get('/actas/{id}/edit', [ActaCompromisoController::class, 'edit'])->name(
 Route::put('/actas/{id}', [ActaCompromisoController::class, 'updateVista'])->name('actas.update');
 Route::delete('/actas/{id}', [ActaCompromisoController::class, 'destroyVista'])->name('actas.destroy');
 
+
 Route::get('/cargar-excel', function () {
     return view('cargar-excel');
 });
 
 Route::post('/importar', [ExcelImportController::class, 'importar']);
-
 
