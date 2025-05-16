@@ -10,9 +10,9 @@ use App\Http\Controllers\ExcelImportController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\API\ActaCompromisoController;
+use App\Http\Controllers\API\ActaCompromisoController as ApiActaController;
+use App\Http\Controllers\ActaCompromisoController   as WebActaController;
 
-use App\Http\Controllers\ActaCompromisoController;
 
 /*
 |--------------------------------------------------------------------------
