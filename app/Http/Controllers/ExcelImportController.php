@@ -19,15 +19,22 @@ class ExcelImportController extends Controller
             // Obtener el archivo
             $file = $request->file('archivo');
             $tipo = $request->input('tipo_datos');
-            
+            $hoja1 = $this->procesarExcel($file);
+            $hoja2 = $this->procesarExcel($file);
+            $hoja3 = $this->procesarExcel($file);
+            $hoja4 = $this->procesarExcel($file);
             // Procesar el archivo según su tipo
-            if ($file->getClientOriginalExtension() == 'csv') {
-                $datos = $this->procesarCSV($file);
-            } else {
-                // Para archivos Excel, usamos una biblioteca nativa de PHP
-                $datos = $this->procesarExcel($file);
-            }
-            (new InsercionTablasDatosController())->InsertarDocentes($datos);
+            // if ($file->getClientOriginalExtension() == 'csv') {
+            //     $datos = $this->procesarCSV($file);
+            // } else {
+            //     // Para archivos Excel, usamos una biblioteca nativa de PHP
+            //     $datos = $this->procesarExcel($file);
+            // }
+            $controller = new InsercionTablasDatosController();
+           // $controller->InsertarDocentes($hoja1);
+           // $controller->InsertarProgramas($hoja1);
+            $controller->InsertarCurso($hoja1);
+
             
             
             if ($request->ajax() || $request->wantsJson()) {
