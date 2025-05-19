@@ -20,9 +20,11 @@ class ExcelImportController extends Controller
             $file = $request->file('archivo');
             $tipo = $request->input('tipo_datos');
             $hoja1 = $this->procesarExcel($file);
-            $hoja2 = $this->procesarExcel($file);
+            $hoja2 = $this->procesarExcel($file,'COMENTARIOS');
             $hoja3 = $this->procesarExcel($file,'TOTAL PROMEDIOS VS PROMCALIFICA');
-            $hoja4 = $this->procesarExcel($file);
+            $hoja4 = $this->procesarExcel($file,'ESTUD NO EVALUARON CURSOS');
+            $hoja5 = $this->procesarExcel($file,'DOCENTES NO EVALUARON CURSOS');
+            $hoja6 = $this->procesarExcel($file,'DOCENTES NO AUTOEVAL GENERAL');
             // Procesar el archivo según su tipo
             // if ($file->getClientOriginalExtension() == 'csv') {
             //     $datos = $this->procesarCSV($file);
@@ -31,9 +33,16 @@ class ExcelImportController extends Controller
             //     $datos = $this->procesarExcel($file);
             // }
             $controller = new InsercionTablasDatosController();
-           // $controller->InsertarDocentes($hoja1);
-           // $controller->InsertarProgramas($hoja1);
-            $controller->InsertarCursos($hoja3);
+             $controller->InsertarDocentes($hoja1);
+             $controller->InsertarProgramas($hoja1);
+             $controller->InsertarCursos($hoja3);
+             $controller->InsertarPeriodosAcademicos($hoja5);
+             $controller->InsertarEvaluaciones($hoja1);
+             $controller->InsertarDocentesNoAutoEvaluados($hoja6);
+             $controller->InsertarEstudiantesNoEvaluaronCurso($hoja4);
+             $controller->InsertarComentarios($hoja2);
+             $controller->InsertarPromedios($hoja3);
+             
 
             
             

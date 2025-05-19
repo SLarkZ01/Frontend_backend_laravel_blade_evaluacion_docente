@@ -93,12 +93,10 @@ public function mostrarGrafica()
     
     
 //docentes destacados
-    public function acta_compromiso()
-    {
-        $docentesbusqueda = DB::select('CALL BuscarDocente()');
-        $actaService = new ActaCompromisoService();
-        $response = $actaService->getAll();
-        
+  public function acta_compromiso()
+
+    {   $id_docente = request('id_docente');
+        $docentesbusqueda = DB::select('CALL BuscarDocente(?)', [$id_docente]);
         $actas = $response['data'] ?? [];
         return view('decano.acta_compromiso', compact('docentesbusqueda', 'actas'));
     }
