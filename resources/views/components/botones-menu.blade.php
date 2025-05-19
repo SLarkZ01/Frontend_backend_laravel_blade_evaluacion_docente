@@ -40,13 +40,6 @@
             <i class="fa fa-ellipsis-h"></i>
         </span>
         <h4 class="text-section">Configuración</h4>
-    </li>
-    <li class="nav-item">
-        <a href="#profile">
-            <i class="fas fa-user"></i>
-            <p>Mi Perfil</p>
-        </a>
-    </li>
     <li class="nav-item">
         <a href="{{ route('user.login') }}">
             <i class="fas fa-sign-out-alt"></i>
@@ -54,3 +47,4 @@
         </a>
     </li>
 </ul>
+

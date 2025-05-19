@@ -135,6 +135,14 @@ Frontend_backend_laravel_blade_evaluacion_docente/
 
 ## 🚀 Instalación y Ejecución
 
+### Requisitos previos
+
+- 🐘 **PHP 8.1** o superior (requerido por el proyecto)
+- 🐬 **MySQL 5.7+** o **MariaDB**
+- 🔄 **Composer** (versión 2.x recomendada)
+- 🟢 **Node.js** (16.x o superior) y **npm**
+- 🌐 **Servidor web** (Apache/Nginx) o **XAMPP/WAMP/MAMP**
+
 ### Configuración del entorno local
 
 1. **Clonar el repositorio** 📥:
@@ -148,29 +156,101 @@ Frontend_backend_laravel_blade_evaluacion_docente/
    composer install
    ```
 
-3. **Configurar archivo .env** ⚙️:
+3. **Instalar dependencias de JavaScript** 📦:
+   ```bash
+   npm install
+   ```
+
+4. **Configurar archivo .env** ⚙️:
    ```bash
    cp .env.example .env
    php artisan key:generate
    ```
 
-4. **Configurar base de datos** 🗄️:
+5. **Configurar base de datos** 🗄️:
    - Crear una base de datos MySQL llamada `evaluacion_docentes`
-   - Actualizar las credenciales de la base de datos en el archivo `.env`
+   - Editar el archivo `.env` con tus credenciales de base de datos:
+     ```
+     DB_CONNECTION=mysql
+     DB_HOST=127.0.0.1
+     DB_PORT=3306
+     DB_DATABASE=evaluacion_docentes
+     DB_USERNAME=tu_usuario
+     DB_PASSWORD=tu_contraseña
+     ```
 
-5. **Importar la base de datos** 💾:
-   - Puedes utilizar uno de los scripts SQL ubicados en `database/sql/` para crear la estructura de la base de datos, por ejemplo:
+6. **Configurar la base de datos** (tienes dos opciones) 💾:
+
+   **Opción A: Usar migraciones y seeders de Laravel**
    ```bash
-   mysql -u [usuario] -p evaluacion_docentes < database/sql/evaluacion_docentes.sql
+   php artisan migrate --seed
    ```
 
-6. **Ejecutar el servidor de desarrollo** 🖥️:
+   **Opción B: Importar directamente el script SQL**
+   - Usando la línea de comandos:
+     ```bash
+     mysql -u [usuario] -p evaluacion_docentes < database/sql/evaluacion_docentes.sql
+     ```
+   - O usando PHPMyAdmin:
+     1. Accede a PHPMyAdmin (generalmente en http://localhost/phpmyadmin)
+     2. Selecciona la base de datos `evaluacion_docentes`
+     3. Ve a la pestaña "Importar"
+     4. Selecciona el archivo `database/sql/evaluacion_docentes.sql`
+     5. Haz clic en "Importar"
+
+7. **Importar procedimientos almacenados** 📊:
    ```bash
-   php artisan serve
+   mysql -u [usuario] -p evaluacion_docentes < database/sql/procedimientos.sql
+   mysql -u [usuario] -p evaluacion_docentes < database/sql/acta_compromiso_procedures.sql
+   mysql -u [usuario] -p evaluacion_docentes < database/sql/proceso_sancion_procedures.sql
    ```
 
-7. **Acceder a la aplicación** 🌐:
-   - Abrir el navegador y visitar: `http://localhost:8000`
+8. **Compilar los activos** 🎨:
+   ```bash
+   npm run build
+   ```
+
+9. **Establecer permisos adecuados** (solo en entornos Unix/Linux) 🔒:
+   ```bash
+   chmod -R 775 storage bootstrap/cache
+   ```
+
+10. **Ejecutar el servidor de desarrollo** 🖥️:
+    ```bash
+    php artisan serve
+    ```
+
+11. **Acceder a la aplicación** 🌐:
+    - Abrir el navegador y visitar: `http://localhost:8000`
+
+### Configuración alternativa con XAMPP/WAMP
+
+1. **Instalar el proyecto en la carpeta htdocs**:
+   - Clonar o descargar el repositorio en la carpeta htdocs (por defecto en `C:/xampp/htdocs/` o similar)
+
+2. **Seguir los pasos 2-8** de la configuración anterior.
+
+3. **Configurar un VirtualHost** (opcional pero recomendado):
+   - Editar el archivo `httpd-vhosts.conf` de Apache
+   - Añadir una configuración como esta:
+     ```apache
+     <VirtualHost *:80>
+         DocumentRoot "C:/xampp/htdocs/Frontend_backend_laravel_blade_evaluacion_docente/public"
+         ServerName evaluacion-docente.local
+         <Directory "C:/xampp/htdocs/Frontend_backend_laravel_blade_evaluacion_docente/public">
+             Options Indexes FollowSymLinks
+             AllowOverride All
+             Require all granted
+         </Directory>
+     </VirtualHost>
+     ```
+   - Añadir `127.0.0.1 evaluacion-docente.local` al archivo hosts
+
+4. **Reiniciar Apache**
+
+5. **Acceder a la aplicación** 🌐:
+   - A través de `http://evaluacion-docente.local` o
+   - A través de `http://localhost/Frontend_backend_laravel_blade_evaluacion_docente/public`
 
 ---
 

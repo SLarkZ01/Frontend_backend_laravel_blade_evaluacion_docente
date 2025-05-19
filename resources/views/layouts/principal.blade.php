@@ -29,6 +29,10 @@
             <x-slot name="menu">
                 @yield('menu-sidebar')
             </x-slot>
+
+            <x-slot name="perfil">
+                @yield('name-perfil')
+            </x-slot>
         
             {{-- Contenido principal de cada vista --}}
             @yield('contenido')
