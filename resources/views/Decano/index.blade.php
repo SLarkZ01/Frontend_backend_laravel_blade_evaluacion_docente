@@ -44,18 +44,20 @@
     </span>
     <h4 class="text-section">Configuración</h4>
 </li>
-<li class="nav-item">
-    <a href="#profile">
-        <i class="fas fa-user"></i>
-        <p>Mi Perfil</p>
-    </a>
-</li>
+
 <li class="nav-item">
     <a href="{{ route('user.login') }}">
         <i class="fas fa-sign-out-alt"></i>
         <p>Cerrar Sesión</p>
     </a>
 </li>
+@endsection
+@section('name-perfil')
+<span>
+    Jose Jimenez
+<span class="user-level">Decano</span>
+<span class="caret"></span>
+</span>
 @endsection
 @section('contenido')
 <!-- Encabezado y bienvenida -->
