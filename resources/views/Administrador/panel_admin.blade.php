@@ -37,19 +37,19 @@
             <i class="fa fa-ellipsis-h"></i>
         </span>
         <h4 class="text-section">Configuración</h4>
-    </li>
-    <li class="nav-item">
-        <a href="#profile">
-            <i class="fas fa-user"></i>
-            <p>Mi Perfil</p>
-        </a>
-    </li>
     <li class="nav-item">
         <a href="{{ route('user.login') }}">
             <i class="fas fa-sign-out-alt"></i>
             <p>Cerrar Sesión</p>
         </a>
     </li>
+@endsection
+@section('name-perfil')
+<span>
+    Nelson Javier
+<span class="user-level">Administrador</span>
+<span class="caret"></span>
+</span>
 @endsection
 @section('contenido')
 
@@ -147,8 +147,9 @@
                                                 <h6 class="mb-1">Gestión de Usuarios</h6>
                                                 <p class="mb-0 text-muted">Administrar usuarios y roles</p>
                                             </div>
-                                            <a href="roles-permisos.html"
-                                                class="ms-auto btn btn-sm btn-outline-primary">Ir</a>
+                                            <a href="{{ route('admin.roles_permisos') }}" class="ms-auto btn btn-sm btn-outline-primary">
+                                                Ir
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3">
