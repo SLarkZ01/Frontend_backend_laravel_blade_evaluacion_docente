@@ -1,15 +1,18 @@
 <?php
+
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\DecanoCordinadorController;
 use App\Http\Controllers\ExcelImportController;
+
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\API\ActaCompromisoController as ApiActaController;
 use App\Http\Controllers\ActaCompromisoController   as WebActaController;
-use App\Http\Controllers\ProfileController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,31 +24,6 @@ use App\Http\Controllers\ProfileController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-// Mostrar la página de bienvenida como página principal
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// Mantener la ruta de procesamiento de login original para compatibilidad
-Route::post('/login-original', [loginController::class, 'validation'])->name('login.process.original');
-
-Route::get("/decano", [HomeController::class, 'index'])->name('user.index')->middleware('auth');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__.'/auth.php';
-
-
-//rutas antes de instalar laravel breeze
 //principio docente
 Route::get("/docente", [DocenteController::class, 'p_docente'])->name('docente.p_docente');
 //configuracion docente
@@ -62,7 +40,7 @@ Route::post('/login', [loginController::class, 'validation'])->name('login.proce
 
 Route::get("/decano", [HomeController::class, 'index'])->name('user.index');
 
-Route::get('/login-page', [loginController::class, 'Login'])->name('user.login');
+Route::get('/', [loginController::class, 'Login'])->name('user.login');
 
 // Rutas para actas de compromiso
 Route::get('/decano/acta-compromiso', [DecanoCordinadorController::class, 'acta_compromiso'])->name('decano.acta_compromiso');

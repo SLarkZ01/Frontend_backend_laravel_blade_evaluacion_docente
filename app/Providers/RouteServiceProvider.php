@@ -14,10 +14,31 @@ class RouteServiceProvider extends ServiceProvider
      * The path to your application's "home" route.
      *
      * Typically, users are redirected here after authentication.
+     * En nuestro caso, la redirección se maneja en el controlador según el rol del usuario.
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/dashboard';
+    
+    /**
+     * Obtiene la ruta de inicio según el rol del usuario.
+     *
+     * @param int $role_id
+     * @return string
+     */
+    public static function getHomeByRole(int $role_id): string
+    {
+        switch ($role_id) {
+            case 1:
+                return route('user.index');
+            case 2:
+                return route('docente.p_docente');
+            case 3:
+                return route('Admin.Dashboard');
+            default:
+                return self::HOME;
+        }
+    }
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

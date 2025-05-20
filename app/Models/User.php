@@ -13,14 +13,30 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
+     * La tabla asociada con el modelo.
+     *
+     * @var string
+     */
+    protected $table = 'usuarios';
+
+    /**
+     * La clave primaria asociada con la tabla.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id_usuario';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'nombre',
+        'correo',
+        'contrasena',
+        'id_rol',
+        'activo'
     ];
 
     /**
@@ -29,17 +45,35 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
+        'contrasena',
         'remember_token',
     ];
 
     /**
-     * The attributes that should be cast.
+     * Get the name of the email column.
      *
-     * @var array<string, string>
+     * @return string
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+    public function getEmailAttribute()
+    {
+        return $this->correo;
+    }
+
+    /**
+     * Get the password for the user.
+     *
+     * @return string
+     */
+    public function getAuthPassword()
+    {
+        return $this->contrasena;
+    }
+
+    /**
+     * Get the role that owns the user.
+     */
+    public function rol()
+    {
+        return $this->belongsTo(Rol::class, 'id_rol', 'id_rol');
+    }
 }

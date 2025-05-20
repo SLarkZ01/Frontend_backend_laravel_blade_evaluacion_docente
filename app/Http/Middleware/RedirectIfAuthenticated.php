@@ -21,7 +21,9 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                // Redirigir según el rol del usuario utilizando el método getHomeByRole
+                $user = Auth::guard($guard)->user();
+                return redirect(RouteServiceProvider::getHomeByRole($user->id_rol));
             }
         }
 
