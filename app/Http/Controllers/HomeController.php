@@ -27,8 +27,9 @@ class HomeController extends Controller
         $labels = collect($promedios)->pluck('facultad');
         $notas = collect($promedios)->pluck('promedio_nota');
         $docentes = DB::select('CALL ObtenerDocentesDestacados()');
-        $docentesUnicos = collect($docentes)->unique('docente');
-        $docentesbusqueda = DB::select('CALL BuscarDocente()');
+        $docentesUnicos = collect($docentes)->unique('nombre_docente');
+        $busqueda= DB::select('CALL BuscarDocente(?)', ['nombre_docente']);
+        $docentesbusqueda = collect($busqueda)->unique('nombre_docente');
         $promedios = DB::select('CALL ObtenerPromedioNotasPorFacultad()');
         $alertas = DB::select('CALL ObtenerAlertasCalificacionesCriticas()');
 
@@ -75,7 +76,7 @@ class HomeController extends Controller
             $promedio_global_p = 0;
         }
         // Pasa la variable a la vista
-        return view('Decano.index', compact('total_docentes', 'totalNoEvaluados', 'totalEstudiantesNoEvaluaron', 'promedio_global_p', 'promedios', 'labels', 'notas', 'docentes', 'docentesUnicos', 'docentesbusqueda','promedios','alertas'));
+        return view('Decano.index', compact('total_docentes', 'totalNoEvaluados', 'totalEstudiantesNoEvaluaron', 'promedio_global_p', 'promedios', 'labels', 'notas', 'docentes', 'docentesUnicos','promedios','alertas'));
     }
     //total docentes no evaluados
 

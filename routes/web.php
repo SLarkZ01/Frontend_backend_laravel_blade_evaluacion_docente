@@ -1,10 +1,11 @@
 <?php
-
+use App\Http\Controllers\API\ActaCompromisoController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\DecanoCordinadorController;
+use App\Http\Controllers\Actas;
 use App\Http\Controllers\ExcelImportController;
 
 use App\Http\Controllers\AuthController;
@@ -99,7 +100,7 @@ Route::get('/decano/editar-acta/{id}', [DecanoCordinadorController::class, 'edit
 Route::put('/decano/actualizar-acta/{id}', [DecanoCordinadorController::class, 'actualizarActa'])->name('decano.actualizar_acta');
 //promedio por facultad
 Route::get('/decano/promedio_global', [DecanoCordinadorController::class, 'promedio_global'])->name('decano.promedio_global');
- //promedio por facultad graficado
+//promedio por facultad graficado
 Route::get('/decano/promedio-facultad-ultimo-periodo', [DecanoCordinadorController::class, 'obtenerPromedioPorFacultad']);
 Route::get('/decano/promedio-facultad', [DecanoCordinadorController::class, 'mostrarGraficoFacultades'])->name('decano.mostrarGraficoFacultades');
 

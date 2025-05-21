@@ -58,27 +58,28 @@
                     </div>
 
                     <!-- Selector de materia -->
-                    <div class="card dashboard-card mb-4">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-md-6">
-                                    <label for="materiaSelect" class="form-label">Elige una materia para visualizar las
-                                        estadísticas</label>
-                                    <select class="form-select" id="materiaSelect">
-                                        <option value="" selected disabled>Selecciona una materia</option>
-                                        <option value="algebra">Álgebra Lineal</option>
-                                        <option value="calculo">Cálculo Diferencial</option>
-                                        <option value="matematicas">Matemáticas Avanzadas</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 text-end">
-                                    <button class="btn btn-primary" id="generarDatosBtn">
-                                        <i class="fas fa-sync-alt me-2"></i>Generar datos aleatorios
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Selector de materia -->
+<div class="card dashboard-card mb-4">
+    <div class="card-body">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <label for="materiaSelect" class="form-label">Elige una materia para visualizar las estadísticas</label>
+                <select class="form-select" id="materiaSelect">
+                    <option value="" selected disabled>Selecciona una materia</option>
+                    @foreach ($notasCursos as $curso)
+                        <option value="{{ $curso->nombre_curso }}">{{ $curso->nombre_curso }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-6 text-end">
+                <button class="btn btn-primary" id="generarDatosBtn">
+                    <i class="fas fa-sync-alt me-2"></i>Generar datos aleatorios
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
                     <!-- Visualización de materia seleccionada -->
                     <div id="visualizacionMateria" class="mb-4" style="display: none;">
