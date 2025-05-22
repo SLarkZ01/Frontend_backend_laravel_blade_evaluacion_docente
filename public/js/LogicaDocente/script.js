@@ -32,6 +32,8 @@ function generarDatasets(tiposSeleccionados, tipoGrafico) {
     }));
 }
 
+
+
 // Renderizar gráfico
 function renderChart(tipoGrafico, tiposSeleccionados) {
     const ctx = document.getElementById('miGrafico').getContext('2d');
@@ -142,8 +144,9 @@ function generarDatosAleatorios() {
     }
     
     // Actualizar las evaluaciones semestrales
-    document.getElementById('evaluacionS1').textContent = chartData.datasets[0].data[3].toFixed(1) + '/5.0';
-    document.getElementById('evaluacionS2').textContent = chartData.datasets[1].data[3].toFixed(1) + '/5.0';
+    //document.getElementById('evaluacionS1').textContent = chartData.datasets[0].data[3].toFixed(1) + '/5.0';
+    //document.getElementById('evaluacionS2').textContent = chartData.datasets[1].data[3].toFixed(1) + '/5.0';
+   
     
     // Generar datos para la tabla
     const tablaEvaluaciones = document.getElementById('tablaEvaluaciones');
@@ -818,123 +821,123 @@ function generarComentariosAleatorios() {
 }
 
 // Configurar los event listeners cuando se carga la página
-document.addEventListener('DOMContentLoaded', function() {
-    // Configurar el selector de materias
-    const materiaSelect = document.getElementById('materiaSelect');
-    const visualizacionMateria = document.getElementById('visualizacionMateria');
-    const nombreMateria = document.getElementById('nombreMateria');
+// document.addEventListener('DOMContentLoaded', function() {
+//     // Configurar el selector de materias
+//     const materiaSelect = document.getElementById('materiaSelect');
+//     const visualizacionMateria = document.getElementById('visualizacionMateria');
+//     const nombreMateria = document.getElementById('nombreMateria');
     
-    if (materiaSelect) {
-        materiaSelect.addEventListener('change', function() {
-            if (this.value) {
-                visualizacionMateria.style.display = 'block';
-                nombreMateria.textContent = this.options[this.selectedIndex].text;
+//     if (materiaSelect) {
+//         materiaSelect.addEventListener('change', function() {
+//             if (this.value) {
+//                 visualizacionMateria.style.display = 'block';
+//                 nombreMateria.textContent = this.options[this.selectedIndex].text;
                 
-                // Inicializar o actualizar el gráfico
-                inicializarGrafico();
+//                 // Inicializar o actualizar el gráfico
+//                 inicializarGrafico();
                 
-                // Generar datos aleatorios iniciales
-                generarDatosAleatorios();
-            } else {
-                visualizacionMateria.style.display = 'none';
-            }
-        });
-    }
+//                 // Generar datos aleatorios iniciales
+//                 generarDatosAleatorios();
+//             } else {
+//                 visualizacionMateria.style.display = 'none';
+//             }
+//         });
+//     }
     
-    // Configurar el botón de generar datos aleatorios
-    const generarDatosBtn = document.getElementById('generarDatosBtn');
-    if (generarDatosBtn) {
-        generarDatosBtn.addEventListener('click', function() {
-            generarDatosAleatorios();
-            if (document.getElementById('mainChart')) {
-                updateChart();
-            }
-        });
-    }
+//     // Configurar el botón de generar datos aleatorios
+//     const generarDatosBtn = document.getElementById('generarDatosBtn');
+//     if (generarDatosBtn) {
+//         generarDatosBtn.addEventListener('click', function() {
+//             generarDatosAleatorios();
+//             if (document.getElementById('mainChart')) {
+//                 updateChart();
+//             }
+//         });
+//     }
     
-    // Inicializar el gráfico principal si estamos en la página de resultados o panel docente
-    if (document.getElementById('mainChart')) {
-        updateChart();
+//     // Inicializar el gráfico principal si estamos en la página de resultados o panel docente
+//     if (document.getElementById('mainChart')) {
+//         updateChart();
         
-        // Generar comentarios aleatorios si estamos en la página de resultados
-        if (document.getElementById('comentariosContainer')) {
-            generarComentariosAleatorios();
-        }
+//         // Generar comentarios aleatorios si estamos en la página de resultados
+//         if (document.getElementById('comentariosContainer')) {
+//             generarComentariosAleatorios();
+//         }
         
-        // Configurar los botones de tipo de gráfico
-        document.querySelectorAll('.chart-type-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                chartType = this.getAttribute('data-type');
-                updateChart();
+//         // Configurar los botones de tipo de gráfico
+//         document.querySelectorAll('.chart-type-btn').forEach(btn => {
+//             btn.addEventListener('click', function() {
+//                 chartType = this.getAttribute('data-type');
+//                 updateChart();
                 
-                // Efecto visual de selección
-                document.querySelectorAll('.chart-type-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-    }
+//                 // Efecto visual de selección
+//                 document.querySelectorAll('.chart-type-btn').forEach(b => b.classList.remove('active'));
+//                 this.classList.add('active');
+//             });
+//         });
+//     }
     
-    // Event listeners para los selectores de filtro
-    const yearFilter = document.getElementById('yearFilter');
-    const semesterFilter = document.getElementById('semesterFilter');
-    const updateChartBtn = document.getElementById('updateChartBtn');
-    const yearSelect = document.getElementById('yearSelect');
-    const semesterSelect = document.getElementById('semesterSelect');
-    const chartTypeSelect = document.getElementById('chartType');
+//     // Event listeners para los selectores de filtro
+//     const yearFilter = document.getElementById('yearFilter');
+//     const semesterFilter = document.getElementById('semesterFilter');
+//     const updateChartBtn = document.getElementById('updateChartBtn');
+//     const yearSelect = document.getElementById('yearSelect');
+//     const semesterSelect = document.getElementById('semesterSelect');
+//     const chartTypeSelect = document.getElementById('chartType');
     
-    if (yearFilter) {
-        yearFilter.addEventListener('change', function() {
-            if (updateChartBtn) {
-                // Si hay botón de actualizar, no actualizamos automáticamente
-            } else {
-                updateChart();
-            }
-        });
-    }
+//     if (yearFilter) {
+//         yearFilter.addEventListener('change', function() {
+//             if (updateChartBtn) {
+//                 // Si hay botón de actualizar, no actualizamos automáticamente
+//             } else {
+//                 updateChart();
+//             }
+//         });
+//     }
     
-    if (semesterFilter) {
-        semesterFilter.addEventListener('change', function() {
-            if (updateChartBtn) {
-                // Si hay botón de actualizar, no actualizamos automáticamente
-            } else {
-                updateChart();
-            }
-        });
-    }
+//     if (semesterFilter) {
+//         semesterFilter.addEventListener('change', function() {
+//             if (updateChartBtn) {
+//                 // Si hay botón de actualizar, no actualizamos automáticamente
+//             } else {
+//                 updateChart();
+//             }
+//         });
+//     }
     
-    if (updateChartBtn) {
-        updateChartBtn.addEventListener('click', function() {
-            // Añadir efecto de carga
-            this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Actualizando...';
-            this.disabled = true;
+//     if (updateChartBtn) {
+//         updateChartBtn.addEventListener('click', function() {
+//             // Añadir efecto de carga
+//             this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Actualizando...';
+//             this.disabled = true;
             
-            // Simular tiempo de carga
-            setTimeout(() => {
-                updateChart();
-                this.innerHTML = 'Actualizar';
-                this.disabled = false;
-            }, 800);
-        });
-    }
+//             // Simular tiempo de carga
+//             setTimeout(() => {
+//                 updateChart();
+//                 this.innerHTML = 'Actualizar';
+//                 this.disabled = false;
+//             }, 800);
+//         });
+//     }
     
-    if (yearSelect) {
-        yearSelect.addEventListener('change', updateChart);
-    }
+//     if (yearSelect) {
+//         yearSelect.addEventListener('change', updateChart);
+//     }
     
-    if (semesterSelect) {
-        semesterSelect.addEventListener('change', updateChart);
-    }
+//     if (semesterSelect) {
+//         semesterSelect.addEventListener('change', updateChart);
+//     }
     
-    if (chartTypeSelect) {
-        chartTypeSelect.addEventListener('change', function() {
-            chartType = this.value;
-            updateChart();
-        });
-    }
+//     if (chartTypeSelect) {
+//         chartTypeSelect.addEventListener('change', function() {
+//             chartType = this.value;
+//             updateChart();
+//         });
+//     }
     
-    // Asignar la función downloadResults al objeto window para que sea accesible desde HTML
-    window.downloadResults = downloadResults;
-});
+//     // Asignar la función downloadResults al objeto window para que sea accesible desde HTML
+//     window.downloadResults = downloadResults;
+// });
 
 // Función para añadir efectos de hover a los elementos
 function addHoverEffects() {
@@ -968,6 +971,28 @@ function addHoverEffects() {
         });
     });
 }
+ document.addEventListener('DOMContentLoaded', function () {
+    const selectMateria = document.getElementById('materiaSelect');
+    const nombreMateria = document.getElementById('nombreMateria');
+    const evaluacionS1 = document.getElementById('evaluacionS1'); // Docente
+    const evaluacionS2 = document.getElementById('evaluacionS2'); // Notas curso
+
+    selectMateria.addEventListener('change', function () {
+        const selectedOption = selectMateria.options[selectMateria.selectedIndex];
+
+        // Obtiene valores desde data-attributes
+        const nombre = selectedOption.value;
+        const promEvDocente = selectedOption.getAttribute('data-promEvaluacionDocente');
+        const promNotasCurso = selectedOption.getAttribute('data-promNotasCurso');
+
+        // Asigna los valores en el DOM
+        nombreMateria.textContent = nombre;
+        evaluacionS1.textContent = `${parseFloat(promEvDocente).toFixed(1)}/6`;
+        evaluacionS2.textContent = `${parseFloat(promNotasCurso).toFixed(1)}/5.0`;
+    });
+        // 🔥 Esto fuerza a que se actualice la primera vez si ya hay una opción seleccionada
+    selectMateria.dispatchEvent(new Event('change'));
+});
 
 // Llamar a la función para añadir efectos de hover cuando se carga la página
 document.addEventListener('DOMContentLoaded', addHoverEffects);
