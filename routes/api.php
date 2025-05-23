@@ -16,7 +16,7 @@ use App\Http\Controllers\API\RolController;
 use App\Http\Controllers\API\ProcesoSancionController;
 use App\Http\Controllers\API\ProgramaController as APIProgramaController;
 use App\Http\Controllers\API\RolController as APIRolController;
-use App\Http\Controllers\API\UsuarioController as APIUsuarioController;     
+use App\Http\Controllers\API\UsuarioController as APIUsuarioController;
 use App\Http\Controllers\API\ExcelImportController;
 
 
@@ -30,20 +30,35 @@ use App\Http\Controllers\API\ExcelImportController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+use App\Http\Controllers\Api\GestionRolesController;
+use App\Http\Controllers\Api\GestionUsuarios;
 
+// Route::apiResource('usuarios', GestionUsuarios::class);
+// Route::post('/usuarios', [UsuarioController::class, 'store']);
+
+// Route::apiResource('roles', GestionRolesController::class);
+
+
+Route::get('/usuarios', [GestionUsuarios::class, 'index'])->name('usuarios.index');
+Route::post('/usuarios', [GestionUsuarios::class, 'store'])->name('usuarios.store');
+Route::get('/usuarios/{usuario}', [GestionUsuarios::class, 'show'])->name('usuarios.show');
+Route::put('/usuarios/{usuario}', [GestionUsuarios::class, 'update'])->name('usuarios.update');
+Route::patch('/usuarios/{usuario}', [GestionUsuarios::class, 'update'])->name('usuarios.patch');
+Route::delete('/usuarios/{usuario}', [GestionUsuarios::class, 'destroy'])->name('usuarios.destroy');
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 
-Route::post('/importar', [ExcelImportController::class, 'importar']);
+// Route::post('/importar', [ExcelImportController::class, 'importar']);
 
 
 // Acta de Compromiso API Routes
 Route::prefix('actas-compromiso')->group(function () {
-    Route::get('/', [ActaCompromisoController::class, 'index']);
-    Route::get('/{id}', [ActaCompromisoController::class, 'show']);
-    Route::post('/', [ActaCompromisoController::class, 'store']);
+    Route::get('/', [ActaCompromisoController::class, 'index'])->name('decano.actas_index');
+    Route::get('/{id}', [ActaCompromisoController::class, 'show'])->name('decano.ver_acta');
+     Route::get('/{id}/editar', [ActaCompromisoController::class, 'edit'])->name('decano.acta_compromiso_edit');
+    Route::post('/', [ActaCompromisoController::class, 'store'])->name('guardar.acta_compromiso');
     Route::put('/{id}', [ActaCompromisoController::class, 'update']);
     Route::delete('/{id}', [ActaCompromisoController::class, 'destroy']);
 });
@@ -67,14 +82,14 @@ Route::prefix('evaluaciones')->group(function () {
 });
 
 // Facultades API Routes
-Route::prefix('facultades')->group(function () {
-    Route::get('/', [FacultadController::class, 'index']);
-    Route::get('/{id}', [FacultadController::class, 'show']);
-    Route::post('/', [FacultadController::class, 'store']);
-    Route::put('/{id}', [FacultadController::class, 'update']);
-    Route::delete('/{id}', [FacultadController::class, 'destroy']);
-    Route::get('/{id}/programas', [FacultadController::class, 'programas']);
-});
+// Route::prefix('facultades')->group(function () {
+//     Route::get('/', [FacultadController::class, 'index']);
+//     Route::get('/{id}', [FacultadController::class, 'show']);
+//     Route::post('/', [FacultadController::class, 'store']);
+//     Route::put('/{id}', [FacultadController::class, 'update']);
+//     Route::delete('/{id}', [FacultadController::class, 'destroy']);
+//     Route::get('/{id}/programas', [FacultadController::class, 'programas']);
+// });
 
 // Estudiantes API Routes
 Route::prefix('estudiantes')->group(function () {
@@ -90,7 +105,8 @@ Route::prefix('estudiantes')->group(function () {
 Route::prefix('usuarios')->group(function () {
     Route::get('/', [UsuarioController::class, 'index']);
     Route::get('/{id}', [UsuarioController::class, 'show']);
-    Route::post('/', [UsuarioController::class, 'store']);
+    Route::post('/usuarios', [UsuarioController::class, 'store']);
+    // Route::post('/', [UsuarioController::class, 'store']);
     Route::put('/{id}', [UsuarioController::class, 'update']);
     Route::delete('/{id}', [UsuarioController::class, 'destroy']);
 });
@@ -155,14 +171,14 @@ Route::prefix('evaluaciones')->group(function () {
 });
 
 // Facultades API Routes
-Route::prefix('facultades')->group(function () {
-    Route::get('/', [FacultadController::class, 'index']);
-    Route::get('/{id}', [FacultadController::class, 'show']);
-    Route::post('/', [FacultadController::class, 'store']);
-    Route::put('/{id}', [FacultadController::class, 'update']);
-    Route::delete('/{id}', [FacultadController::class, 'destroy']);
-    Route::get('/{id}/programas', [FacultadController::class, 'programas']);
-});
+// Route::prefix('facultades')->group(function () {
+//     Route::get('/', [FacultadController::class, 'index']);
+//     Route::get('/{id}', [FacultadController::class, 'show']);
+//     Route::post('/', [FacultadController::class, 'store']);
+//     Route::put('/{id}', [FacultadController::class, 'update']);
+//     Route::delete('/{id}', [FacultadController::class, 'destroy']);
+//     Route::get('/{id}/programas', [FacultadController::class, 'programas']);
+// });
 
 // Estudiantes API Routes
 Route::prefix('estudiantes')->group(function () {
@@ -250,3 +266,6 @@ Route::prefix('procesos-sancion')->group(function () {
     Route::get('/filtrar/calificacion', [ProcesoSancionController::class, 'filtrarPorCalificacion']);
     Route::get('/docentes/bajo-desempeno', [ProcesoSancionController::class, 'docentesBajoDesempeno']);
 });
+// Route::post('/actas/compromiso', [ActaCompromisoController::class, 'store']);
+// // Route::post('/actas-compromiso', [ActaCompromisoController::class, 'guardar']);
+

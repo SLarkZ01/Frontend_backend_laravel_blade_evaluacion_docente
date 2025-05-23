@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\API;
-
 use App\Http\Controllers\Controller;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Http\JsonResponse;
 class UsuarioController extends Controller
 {
     /**
@@ -16,13 +15,15 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $usuarios = Usuario::all();
-        return response()->json([
-            'success' => true,
-            'data' => $usuarios
-        ]);
+{
+    try {
+        $usuarios = DB::select("CALL ObtenerTodosLosUsuarios()");
+        return response(view('roles_permisos', compact('usuarios'))); // 👈 Vista Blade
+    } catch (\Exception $e) {
+        return response()->view('errors.general', ['error' => $e->getMessage()], 500);
     }
+}
+
 
     /**
      * Store a newly created resource in storage.
@@ -30,38 +31,49 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+     public function store(Request $request): JsonResponse
     {
-        $validator = Validator::make($request->all(), [
-            'id_rol' => 'required|exists:rol,id_rol',
+        $request->validate([
             'nombre' => 'required|string|max:255',
-            'correo' => 'required|string|email|max:255|unique:usuarios',
+            'apellido' => 'required|string|max:255',
+            'correo' => 'required|email|unique:usuarios,correo',
             'contrasena' => 'required|string|min:6',
-            'activo' => 'boolean'
+            'id_rol' => 'required|integer',
+            'tipo_usuario' => 'required|string|in:docente,coordinador,administrador',
+            'activo' => 'required|boolean',
+            'identificacion' => 'required|string|max:255',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Validation Error',
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
-        $usuario = new Usuario();
-        $usuario->id_rol = $request->id_rol;
-        $usuario->nombre = $request->nombre;
-        $usuario->correo = $request->correo;
-        $usuario->contrasena = $request->contrasena; // Consider hashing this password
-        $usuario->activo = $request->has('activo') ? $request->activo : true;
-        $usuario->save();
-
-        return response()->json([
+        try {
+            // Llamada al procedimiento SIN parámetro de salida
+            DB::statement("CALL CrearUsuario(?, ?, ?, ?, ?, ?, ?, ?)", [
+                $request->id_rol,
+                $request->activo,
+                $request->nombre,
+                $request->apellido,
+                $request->correo,
+                $request->contrasena,
+                $request->identificacion,
+                $request->tipo_usuario
+            ]);
+             return response()->json([
             'success' => true,
-            'message' => 'Usuario creado exitosamente',
-            'data' => $usuario
+            'message' => 'Usuario creado correctamente',
+            'data' => $request->all()
         ], 201);
+
+        //     return response()->json([
+        //         'mensaje' => 'Usuario creado exitosamente'
+        //     ], 201);
+
+        // } catch (\Exception $e) {
+        //     return response()->json([
+        //         'mensaje' => 'Error al crear el usuario',
+        //         'error' => $e->getMessage()
+        //     ], 500);
+        }
     }
+
 
     /**
      * Display the specified resource.
@@ -93,48 +105,79 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $usuario = Usuario::find($id);
+    /**
+ * Update the specified resource in storage.
+ */
+/**
+ * Update the specified resource in storage.
+ */
+public function update(Request $request, string $id): JsonResponse
+{
+    try {
+        // Validación básica
+        $rules = [
+            'nombre' => 'required|string|max:255',
+            'correo' => 'required|email',
+            'id_rol' => 'required|integer',
+            'tipo_usuario' => 'required|string|in:docente,coordinador,administrador',
+            'activo' => 'required|boolean',
+        ];
         
-        if (!$usuario) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Usuario no encontrado'
-            ], 404);
+        // Si se incluye contraseña, validarla
+        if ($request->has('contrasena') && !empty($request->contrasena)) {
+            $rules['contrasena'] = 'required|string|min:6';
         }
-
-        $validator = Validator::make($request->all(), [
-            'id_rol' => 'exists:rol,id_rol',
-            'nombre' => 'string|max:255',
-            'correo' => 'string|email|max:255|unique:usuarios,correo,' . $id . ',id_usuario',
-            'contrasena' => 'string|min:6',
-            'activo' => 'boolean'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Validation Error',
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
-        if ($request->has('id_rol')) $usuario->id_rol = $request->id_rol;
-        if ($request->has('nombre')) $usuario->nombre = $request->nombre;
-        if ($request->has('correo')) $usuario->correo = $request->correo;
-        if ($request->has('contrasena')) $usuario->contrasena = $request->contrasena; // Consider hashing
-        if ($request->has('activo')) $usuario->activo = $request->activo;
         
-        $usuario->save();
+        $validatedData = $request->validate($rules);
+
+        // Opción 1: Si actualizaste el procedimiento para incluir apellido
+        if ($request->has('apellido')) {
+            DB::statement("CALL ActualizarUsuarioInfo(?, ?, ?, ?, ?, ?, ?)", [
+                $id,
+                $request->nombre,
+                $request->apellido,
+                $request->correo,
+                $request->id_rol,
+                $request->tipo_usuario,
+                $request->activo
+            ]);
+        } else {
+            // Opción 2: Si mantienes el procedimiento actual (sin apellido)
+            DB::statement("CALL ActualizarUsuarioInfo(?, ?, ?, ?, ?, ?)", [
+                $id,
+                $request->nombre,
+                $request->correo,
+                $request->id_rol,
+                $request->tipo_usuario,
+                $request->activo
+            ]);
+        }
+        
+        // Si se debe actualizar la contraseña
+        if ($request->has('contrasena') && !empty($request->contrasena)) {
+            $contrasenaHash = bcrypt($request->contrasena);
+            DB::statement("CALL ActualizarPasswordUsuario(?, ?)", [
+                $id,
+                $contrasenaHash
+            ]);
+        }
 
         return response()->json([
-            'success' => true,
-            'message' => 'Usuario actualizado exitosamente',
-            'data' => $usuario
-        ]);
-    }
+            'mensaje' => 'Usuario actualizado correctamente'
+        ], 200);
 
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        return response()->json([
+            'mensaje' => 'Error de validación',
+            'errors' => $e->errors()
+        ], 422);
+    } catch (\Exception $e) {
+        return response()->json([
+            'mensaje' => 'Error al actualizar el usuario',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
     /**
      * Remove the specified resource from storage.
      *

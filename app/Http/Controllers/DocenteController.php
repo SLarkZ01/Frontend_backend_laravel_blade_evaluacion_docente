@@ -36,6 +36,8 @@ class DocenteController extends Controller
 
     public function result()
     {
-        return view('Docente.resultados');
+        $correo = Session::get('correo_usuario');
+        $notasCursos = DB::select('CALL ObtenerCursosPorCorreo(?)', [$correo]);
+        return view('Docente.resultados', compact('notasCursos'));
     }
 }

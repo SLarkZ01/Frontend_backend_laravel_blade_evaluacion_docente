@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('usuarios', function (Blueprint $table) {
             $table->id('id_usuario'); // Clave primaria
-            $table->unsignedBigInteger('id_rol'); // Asegurar que sea el mismo tipo
+            $table->integer('id_rol'); // Asegurar que sea el mismo tipo
             $table->boolean('activo')->default(true);
             $table->string('nombre', 255);
             $table->string('correo', 255)->unique();
             $table->string('contrasena', 255);
             $table->timestamps();
-        
+
             // Clave foránea correctamente definida
             $table->foreign('id_rol')->references('id_rol')->on('rol')->onDelete('cascade');
         });

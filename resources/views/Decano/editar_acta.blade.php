@@ -82,7 +82,7 @@
     @endif
 
     <!-- Formulario de Edición de Acta de Compromiso -->
-    <form action="{{ route('decano.actualizar_acta', $acta->id) }}" method="POST" enctype="multipart/form-data" class="mb-5">
+    <form action="{{ route('decano.actualizar_acta', $acta->id_acta) }}" method="POST" enctype="multipart/form-data" class="mb-5">
         @csrf
         @method('PUT')
         <div class="card">

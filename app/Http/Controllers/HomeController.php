@@ -11,8 +11,9 @@ class HomeController extends Controller
 
 
     public function index()
+     // Llamar al procedimiento almacenado
     { // Llamar al procedimiento almacenado
-    { // Llamar al procedimiento almacenado
+        //return 1;
         $resultado = DB::select('CALL total_docentes()');
 
         // Ejecutamos el procedimiento almacenado para obtener el total de docentes no evaluados
@@ -30,7 +31,7 @@ class HomeController extends Controller
         $docentesUnicos = collect($docentes)->unique('nombre_docente');
         $busqueda= DB::select('CALL BuscarDocente(?)', ['nombre_docente']);
         $docentesbusqueda = collect($busqueda)->unique('nombre_docente');
-    
+
 
         $promedios = DB::select('CALL ObtenerPromedioNotasPorFacultad()');
         $alertas = DB::select('CALL ObtenerAlertasCalificacionesCriticas()');
@@ -85,6 +86,4 @@ class HomeController extends Controller
     //total docentes no evaluados
 
 
-
-}
 }

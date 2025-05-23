@@ -16,19 +16,14 @@ class ActaCompromisoController extends Controller
      */
     public function index()
     {
-        try {
-            $actas = DB::select('CALL GetActasCompromiso()');
-            return response()->json([
-                'success' => true,
-                'data' => $actas,
-                'message' => 'Actas de compromiso retrieved successfully'
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Error retrieving actas de compromiso: ' . $e->getMessage()
-            ], 500);
-        }
+        
+    $actas = DB::select('CALL GetActasCompromiso()');
+
+    return response()->json([
+        'success' => true,
+        'data' => $actas,
+        'message' => 'Actas de compromiso retrieved successfully'
+    ]);
     }
 
     /**
@@ -69,44 +64,51 @@ class ActaCompromisoController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
-    {
-        try {
-            $validator = Validator::make($request->all(), [
-                'id_docente' => 'required|integer',
-                'id_facultad' => 'required|integer',
-                'id_promedio' => 'required|integer',
-                'retroalimentacion' => 'required|string',
-                'fecha_generacion' => 'required|date'
-            ]);
+{
+    try {
+        $validator = Validator::make($request->all(), [
+            'fecha_generacion' => 'required|date',
+            'nombre_docente' => 'required|string',
+            'apellido_docente' => 'required|string',
+            'identificacion_docente' => 'required|string',
+            'curso' => 'required|string',
+            'promedio_total' => 'required|numeric',
+            'retroalimentacion' => 'required|string'
+        ]);
 
-            if ($validator->fails()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Validation error',
-                    'errors' => $validator->errors()
-                ], 422);
-            }
-
-            $result = DB::select('CALL CreateActaCompromiso(?, ?, ?, ?, ?)', [
-                $request->id_docente,
-                $request->id_facultad,
-                $request->id_promedio,
-                $request->retroalimentacion,
-                $request->fecha_generacion
-            ]);
-
-            return response()->json([
-                'success' => true,
-                'data' => $result[0],
-                'message' => 'Acta de compromiso created successfully'
-            ], 201);
-        } catch (\Exception $e) {
+        if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'message' => 'Error creating acta de compromiso: ' . $e->getMessage()
-            ], 500);
+                'message' => 'Validation error',
+                'errors' => $validator->errors()
+            ], 422);
         }
+
+        $result = DB::select('CALL CreateActaCompromiso(?, ?, ?, ?, ?, ?, ?)', [
+            $request->fecha_generacion,
+            $request->nombre_docente,
+            $request->apellido_docente,
+            $request->identificacion_docente,
+            $request->curso,
+            $request->promedio_total,
+            $request->retroalimentacion
+        ]);
+        
+        
+
+        return response()->json([
+            'success' => true,
+            'data' => $result[0],
+            'message' => 'Acta de compromiso creada correctamente'
+        ], 201);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Error al crear el acta de compromiso: ' . $e->getMessage()
+        ], 500);
     }
+}
 
     /**
      * Update the specified acta de compromiso in storage.
