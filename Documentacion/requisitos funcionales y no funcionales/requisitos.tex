@@ -1,0 +1,439 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{longtable}
+\usepackage{array}
+\begin{document}
+
+\section*{Requisitos Funcionales}
+
+\subsection*{RF01 - Autenticación y Inicio de Sesión de Usuarios}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Backend: Alejandro Martínez, Luisa Joaqui \\ 
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Coordinador Seguridad Universidad \\
+Objetivos Asociados & Garantizar acceso controlado \\
+Requisitos Asociados & N/A \\
+Descripción & Inicio de sesión de usuarios con roles (Estudiante, Docente, Decano, etc.), autenticación segura con contraseñas encriptadas. \\
+Importancia & Alta \\
+Urgencia & Alta \\
+Estado & Implementado (parcial) \\
+Estabilidad & En desarrollo \\
+Comentarios & Actualmente solo autenticación básica con roles fijos. Previsto con Laravel y MySQL. \\
+\end{longtable}
+
+\subsection*{RF02 - Datos de Evaluación Estudiantil}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.1 \\
+Autores & Backend: Alejandro Martínez, Luisa Joaqui \\ 
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Coordinador Regulaciones Evaluación Docente \\
+Objetivos Asociados & Recopilar retroalimentación \\
+Requisitos Asociados & RF01 \\
+Descripción & Pedir los datos específicos que se van a manejar y recibir de la base de datos de la universidad. \\
+Importancia & Alta \\
+Urgencia & Alta \\
+Estado & No implementado \\
+Estabilidad & Pendiente \\
+Comentarios & Sin módulo. Datos reales y almacenamiento seguro previsto en backend con PHP y Laravel. \\
+\end{longtable}
+
+\subsection*{RF03 - Datos de Evaluación del Decano/Coordinador}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Backend: Alejandro Martínez, Luisa Joaqui \\ 
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Coordinador \\
+Objetivos Asociados & Incluir perspectiva administrativa \\
+Requisitos Asociados & RF01 \\
+Descripción & Pedir los datos específicos que se van a manejar y recibir de la base de datos de la universidad. \\
+Importancia & Alta \\
+Urgencia & Media \\
+Estado & No implementado \\
+Estabilidad & Pendiente \\
+Comentarios & Falta implementar formularios para evaluación directa. Se prevé integración en el backend. \\
+\end{longtable}
+
+\subsection*{RF04 - Cálculo de Estadísticas de Rendimiento Docente por Parte del Decano}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Backend: Alejandro Martínez, Luisa Joaqui \\ 
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Coordinador \\
+Objetivos Asociados & Generar nota final docente \\
+Requisitos Asociados & RF02, RF03, RF04 \\
+Descripción & Generar promedio final de 0 a 5 ponderando estudiantes (50\%), Decano/Coordinador (30\%) y autoevaluación (20\%). Filtros según desempeño y materia. \\
+Importancia & Alta \\
+Urgencia & Alta \\
+Estado & Implementado (parcial) \\
+Estabilidad & En desarrollo \\
+Comentarios & Pendiente mejorar interfaz y obtener más estadísticas. \\
+\end{longtable}
+
+\subsection*{RF05 - Cálculo de Estadísticas de Rendimiento Docente por Parte del Docente}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Backend: Alejandro Martínez, Luisa Joaqui \\ 
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Coordinador \\
+Objetivos Asociados & Generar nota final docente \\
+Requisitos Asociados & RF02, RF03, RF04 \\
+Descripción & Generar promedio final por cada materia, de 0 a 5 ponderando estudiantes (50\%), Decano/Coordinador (30\%) y autoevaluación (20\%). Filtros por notas, semestres, año y representación gráfica. \\
+Importancia & Alta \\
+Urgencia & Alta \\
+Estado & Implementado (parcial) \\
+Estabilidad & En desarrollo \\
+Comentarios & Falta implementar lógica en backend con PHP y Laravel. \\
+\end{longtable}
+
+\subsection*{RF06 - Generación de Acta de Compromiso}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Frontend: Thomas Montoya, Juan Daniel Bravo \\ 
+        & Backend: Alejandro Martínez, Luisa Joaqui \\
+Fuentes & Coordinador \\
+Objetivos Asociados & Formalizar plan de mejora \\
+Requisitos Asociados & RF05 \\
+Descripción & Generar documento de compromisos y acciones de mejora para docentes con nota menor a 4, con firma digital o aceptación. Guardar historial del docente. \\
+Importancia & Alta \\
+Urgencia & Media \\
+Estado & Implementado \\
+Estabilidad & Estable \\
+Comentarios & Generación de PDF funcional en frontend. Integración en backend pendiente para almacenamiento y registro histórico. Falta guardar historial del docente. \\
+\end{longtable}
+
+\subsection*{RF07 - Seguimiento a Plan de Mejora}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Frontend: Thomas Montoya, Juan Daniel Bravo \\ 
+        & Backend: Alejandro Martínez, Luisa Joaqui \\
+Fuentes & Coordinador \\
+Objetivos Asociados & Asegurar mejora continua docente \\
+Requisitos Asociados & RF06 \\
+Descripción & Registrar revisiones mensuales del plan, actualizar estatus (activo, cumplido, suspendido), y enviar recordatorios al docente. \\
+Importancia & Alta \\
+Urgencia & Media \\
+Estado & Implementado \\
+Estabilidad & Estable \\
+Comentarios & Datos simulados en frontend, se espera persistencia y notificaciones reales en backend. Falta establecer más el concepto de plan de mejora. \\
+\end{longtable}
+
+\subsection*{RF08 - Reportes e Informes de Evaluación}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Frontend: Thomas Montoya, Juan Daniel Bravo \\ 
+        & Backend: Alejandro Martínez, Luisa Joaqui \\ 
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Coordinador \\
+Objetivos Asociados & Analizar datos globales de evaluación \\
+Requisitos Asociados & RF05 \\
+Descripción & Generar informes y estadísticas con gráficos y tablas. Filtros por período y exportación a PDF/CSV. \\
+Importancia & Media \\
+Urgencia & Baja \\
+Estado & Implementado \\
+Estabilidad & Estable \\
+Comentarios & Faltan exportación a CSV/PDF y datos auténticos; actualmente usa simulaciones. Se espera implementarlo en el Backend. \\
+\end{longtable}
+
+\subsection*{RF09 - Alertas de Bajo Desempeño}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Frontend: Thomas Montoya, Juan Daniel Bravo \\ 
+        & Backend: Alejandro Martínez, Luisa Joaqui \\ 
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Coordinador \\
+Objetivos Asociados & Identificar bajo desempeño docente \\
+Requisitos Asociados & RF05 \\
+Descripción & Notificaciones automáticas para docentes con nota < 3, incluyendo correos y reporte especial. \\
+Importancia & Alta \\
+Urgencia & Alta \\
+Estado & Implementado \\
+Estabilidad & Estable \\
+Comentarios & Genera alertas por el momento solo en el panel del Decano; no hay envío fuera del sistema. Prevista implementación en backend. Falta implementar alerta en el panel docente. \\
+\end{longtable}
+
+\subsection*{RF10 - Visualización de Comentarios (Ciego)}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Frontend: Thomas Montoya, Juan Daniel Bravo \\ 
+        & Backend: Alejandro Martínez, Luisa Joaqui \\ 
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Coordinador (Confidencialidad) \\
+Objetivos Asociados & Garantizar confidencialidad \\
+Requisitos Asociados & RF02 \\
+Descripción & Mostrar comentarios estudiantiles agregados sin revelar identidades manteniendo su privacidad y seguridad. \\
+Importancia & Alta \\
+Urgencia & Alta \\
+Estado & Implementado \\
+Estabilidad & Estable \\
+Comentarios & Datos ficticios actualmente. Se espera integración real y manejo seguro de identidades en backend. Pendiente si se implementa. Probablemente lo quitemos. \\
+\end{longtable}
+
+\subsection*{RF11 - Historial de Evaluaciones}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Frontend: Thomas Montoya, Juan Daniel Bravo \\ 
+        & Backend: Alejandro Martínez, Luisa Joaqui \\ 
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Coordinador \\
+Objetivos Asociados & Monitorear evolución de evaluaciones \\
+Requisitos Asociados & RF02, RF03, RF04, RF05 \\
+Descripción & Almacenar y mostrar evaluaciones de semestres pasados, con filtros por semestre, programa y docente. Se mostrará en el panel Docente. \\
+Importancia & Media \\
+Urgencia & Media \\
+Estado & No implementado \\
+Estabilidad & Pendiente \\
+Comentarios & Previsto almacenamiento y consulta de evaluaciones históricas con backend. \\
+\end{longtable}
+
+\subsection*{RF12 - Gestión de Roles y Permisos}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Frontend: Thomas Montoya, Juan Daniel Bravo \\ 
+        & Backend: Alejandro Martínez, Luisa Joaqui \\
+Fuentes & Política interna de TI \\
+Objetivos Asociados & Asignación correcta de privilegios \\
+Requisitos Asociados & RF01 \\
+Descripción & Crear, modificar y eliminar roles y permisos de usuarios, con control granular a módulos. Implementar en el panel administrador. \\
+Importancia & Alta \\
+Urgencia & Alta \\
+Estado & Implementado (parcial) \\
+Estabilidad & En desarrollo \\
+Comentarios & Interfaz funcional para roles, sin persistencia ni control granular avanzado. Completar en backend. \\
+\end{longtable}
+
+\subsection*{RF13 - Notificaciones y Alertas Generales}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Backend: Alejandro Martínez, Luisa Joaqui \\ 
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Coordinador \\
+Objetivos Asociados & Mantener informados a usuarios \\
+Requisitos Asociados & RF09 \\
+Descripción & Notificaciones para actas, seguimiento, desempeño vía correo o panel interno. \\
+Importancia & Media \\
+Urgencia & Media \\
+Estado & No implementado \\
+Estabilidad & Pendiente \\
+Comentarios & Solo se maneja alerta de bajo desempeño (RF09); previsto sistema general en backend (envío de correos, panel de alertas). \\
+\end{longtable}
+
+\subsection*{RF14 - Auditoría y Registro de Eventos}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Frontend: Thomas Montoya, Juan Daniel Bravo \\ 
+        & Backend: Alejandro Martínez, Luisa Joaqui \\ 
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Normativa interna de auditoría \\
+Objetivos Asociados & Garantizar la trazabilidad \\
+Requisitos Asociados & RF01, RF02, RF12 \\
+Descripción & Registrar acciones críticas (evaluaciones, modificaciones de usuarios, roles) en un registro con fecha, usuario y descripción. Roles autorizados pueden ver estos registros. \\
+Importancia & Alta \\
+Urgencia & Media \\
+Estado & No implementado \\
+Estabilidad & Pendiente \\
+Comentarios & No existe módulo de auditoría en el prototipo frontend. Previsto en backend con registro y mecanismos de respaldo. \\
+\end{longtable}
+
+\subsection*{RF15 - Módulo de Soporte y Ayuda}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Frontend: Thomas Montoya, Juan Bravo \\ 
+        & Backend: Alejandro Martínez \\
+Fuentes & Buenas prácticas de usabilidad \\
+Objetivos Asociados & Orientar a usuarios \\
+Requisitos Asociados & N/A \\
+Descripción & Sección de ayuda o manual de usuario con FAQs, tutoriales, guías rápidas según rol (Docente, Decano, etc.). \\
+Importancia & Baja \\
+Urgencia & Baja \\
+Estado & No implementado \\
+Estabilidad & Pendiente \\
+Comentarios & El prototipo no cuenta con módulo de ayuda/FAQs. Podría añadirse en etapas posteriores. \\
+\end{longtable}
+
+\subsection*{RF16 - Panel de Indicadores y Dashboard de Evaluación}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Frontend: Thomas Montoya, Juan Daniel Bravo \\ 
+        & Backend: Alejandro Martínez, Luisa Joaqui \\ 
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Necesidad gerencial \\
+Objetivos Asociados & Visión global de evaluación docente \\
+Requisitos Asociados & RF05, RF08, RF09 \\
+Descripción & Dashboard con indicadores clave: porcentaje de docentes evaluados, promedio general, docentes en plan de mejora, tendencias de notas, etc. Actualización periódica o en tiempo real con visualizaciones gráficas. \\
+Importancia & Media \\
+Urgencia & Media \\
+Estado & Implementado (parcial) \\
+Estabilidad & En desarrollo \\
+Comentarios & Dashboards con gráficas simuladas en frontend. Falta integración con datos reales y actualización automática, prevista en backend. \\
+\end{longtable}
+
+\subsection*{RF17 - Proceso de Sanciones / Retiro de Docentes (Bajo Rendimiento)}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Frontend: Thomas Montoya, Juan Daniel Bravo \\ 
+        & Backend: Alejandro Martínez, Luisa Joaqui \\ 
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Reglamentos universitarios \\
+Objetivos Asociados & Formalizar proceso de sanción \\
+Requisitos Asociados & RF06, RF07, RF09 \\
+Descripción & Iniciar proceso de sanción para docentes con bajo rendimiento persistente (ej. <3.0 por 2-3 semestres). Documentar criterios objetivos y generar acta de no renovación. \\
+Importancia & Alta \\
+Urgencia & Baja \\
+Estado & Implementado (parcial) \\
+Estabilidad & En desarrollo \\
+Comentarios & Se deben mostrar notificaciones en el panel docente para aquellos docentes que están en proceso de sanción. \\
+\end{longtable}
+
+\section*{Requisitos No Funcionales}
+
+\subsection*{RNF01 - Seguridad y Confidencialidad}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Backend: Alejandro Martínez, Luisa Joaqui \\
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Políticas de la Univ., Req. Ministerio Ed. \\
+Objetivos Asociados & Proteger información sensible y la identidad \\
+Requisitos Asociados & RF02, RF10, RF15 \\
+Descripción & Cifrado de datos en tránsito y reposo, restringiendo accesos según roles autorizados. Un rol no puede acceder a otro. \\
+Importancia & Alta \\
+Urgencia & Alta \\
+Estado & Parcial \\
+Estabilidad & En desarrollo \\
+Comentarios & Actualmente no hay cifrado. Previsto en backend con Laravel y MySQL. \\
+\end{longtable}
+
+\subsection*{RNF02 - Rendimiento}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Backend: Alejandro Martínez, Luisa Joaqui \\
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Estándares internos \\
+Objetivos Asociados & Garantizar respuesta rápida \\
+Requisitos Asociados & N/A \\
+Descripción & Operaciones críticas deben completarse en menos de 3 segundos el 70\% de las veces. Uso de monitoreo, optimización de consultas, caché y pruebas de carga periódicas. \\
+Importancia & Media \\
+Urgencia & Media \\
+Estado & Parcial \\
+Estabilidad & En desarrollo \\
+Comentarios & Respuesta rápida en pruebas básicas. Sin pruebas de carga formales. Previsto monitoreo continuo en backend. \\
+\end{longtable}
+
+\subsection*{RNF03 - Usabilidad}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Frontend: Thomas Montoya, Juan Daniel Bravo \\
+Fuentes & Manual de estilo Univ. \\
+Objetivos Asociados & Facilitar uso a usuarios con diferentes niveles \\
+Requisitos Asociados & N/A \\
+Descripción & Diseño intuitivo, menús claros, diseño responsive y ayuda contextual. Pruebas de usabilidad con estudiantes/docentes y alineación con diseño institucional. \\
+Importancia & Media \\
+Urgencia & Media \\
+Estado & Implementado (parcial) \\
+Estabilidad & En desarrollo \\
+Comentarios & Interfaz responsiva desarrollada. Faltan retroalimentación de usuarios y pruebas de accesibilidad. \\
+\end{longtable}
+
+\subsection*{RNF04 - Mantenibilidad}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Frontend: Thomas Montoya, Juan Daniel Bravo \\
+        & Backend: Alejandro Martínez, Luisa Joaqui \\
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Buenas prácticas de desarrollo \\
+Objetivos Asociados & Facilitar actualizaciones y correcciones \\
+Requisitos Asociados & N/A \\
+Descripción & Código documentado, modularizado, con separación de capas y patrones de diseño. Uso de Git. \\
+Importancia & Media \\
+Urgencia & Baja \\
+Estado & Parcial \\
+Estabilidad & En desarrollo \\
+Comentarios & Código modular. Falta documentación formal y pruebas unitarias extensas. \\
+\end{longtable}
+
+\subsection*{RNF05 - Escalabilidad}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Frontend: Thomas Montoya, Juan Daniel Bravo \\
+        & Backend: Alejandro Martínez, Luisa Joaqui \\
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Requerimientos de TI \\
+Objetivos Asociados & Soportar crecimiento en usuarios/evaluaciones \\
+Requisitos Asociados & N/A \\
+Descripción & Diseño modular con posibilidad de escalabilidad. \\
+Importancia & Media \\
+Urgencia & Baja \\
+Estado & No implementado \\
+Estabilidad & Pendiente \\
+Comentarios & No contemplada escalabilidad en prototipo frontend. Se planificará con backend usando una arquitectura flexible. \\
+\end{longtable}
+
+\subsection*{RNF06 - Cumplimiento Normativo}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Frontend: Thomas Montoya, Juan Daniel Bravo \\
+        & Backend: Alejandro Martínez, Luisa Joaqui \\
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Reglamentos Universitarios \\
+Objetivos Asociados & Asegurar alineación con regulaciones \\
+Requisitos Asociados & N/A \\
+Descripción & Cumplir con normativas del Ministerio de Educación y políticas universitarias, especialmente en protección de datos. Validación periódica de requisitos legales y documentación. \\
+Importancia & Alta \\
+Urgencia & Alta \\
+Estado & No implementado \\
+Estabilidad & Pendiente \\
+Comentarios & Falta verificar formalmente cumplimiento de normativas. Crítico para evitar riesgos legales. \\
+\end{longtable}
+
+\subsection*{RNF07 - Interoperabilidad y Extensibilidad}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Backend: Alejandro Martínez, Luisa Joaqui \\
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Directrices TI, Entrevista \\
+Objetivos Asociados & Facilitar integración con otros sistemas \\
+Requisitos Asociados & RF01 \\
+Descripción & Que el programa sea capaz de trabajar en conjunto con otros sistemas como la página de la universidad, Moodle, entre otros. Además, que se pueda ampliar con otros servicios o APIs, por ejemplo, con AWS. \\
+Importancia & Media \\
+Urgencia & Media \\
+Estado & Parcial \\
+Estabilidad & En desarrollo \\
+Comentarios & Aplicación es modular y permite APIs, pero falta integración real con sistemas externos. Prevista en backend. \\
+\end{longtable}
+
+\subsection*{RNF08 - Plan de Continuidad y Recuperación}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Frontend: Thomas Montoya, Juan Daniel Bravo \\
+        & Backend: Alejandro Martínez, Luisa Joaqui \\
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Buenas prácticas TI, Políticas Univ. \\
+Objetivos Asociados & Garantizar continuidad ante eventos críticos \\
+Requisitos Asociados & RNF02, RNF01 \\
+Descripción & Planes para recuperación ante desastres: realizar backups cifrados en distintas ubicaciones y simulacros periódicos. \\
+Importancia & Alta \\
+Urgencia & Media \\
+Estado & No implementado \\
+Estabilidad & Pendiente \\
+Comentarios & Copias de seguridad con GitHub. \\
+\end{longtable}
+
+\subsection*{RNF09 - Aseguramiento de la Calidad (QA y Testing)}
+\begin{longtable}{>{\bfseries}l p{0.8\textwidth}}
+Versión & 1.00 \\
+Autores & Frontend: Thomas Montoya, Juan Bravo \\
+        & Backend: Alejandro Martínez, Luisa Joaqui \\
+        & Bases de Datos: Daniel Rivas, Luisa Joaqui \\
+Fuentes & Buenas prácticas desarrollo, Estándares \\
+Objetivos Asociados & Garantizar calidad del software \\
+Requisitos Asociados & RNF05 \\
+Descripción & Estrategias de testing (unitario, integración, end-to-end) con QA continuo. Automatización en CI/CD, pruebas de usabilidad y registro de incidencias. \\
+Importancia & Media \\
+Urgencia & Media \\
+Estado & Parcial \\
+Estabilidad & En desarrollo \\
+Comentarios & Realizadas pruebas manuales en frontend. No hay pruebas automatizadas ni CI/CD. Crucial para estabilidad del sistema. \\
+\end{longtable}
+
+\end{document}
