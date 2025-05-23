@@ -38,20 +38,21 @@
         </span>
         <h4 class="text-section">Configuración</h4>
     </li>
+   
     <li class="nav-item">
         <a href="{{ route('user.login') }}">
             <i class="fas fa-sign-out-alt"></i>
             <p>Cerrar Sesión</p>
         </a>
     </li>
-@endsection
 
-@section('name-perfil')
+    @section('name-perfil')
     <span>
         Nelson Javier
-        <span class="user-level">Administrador</span>
-        <span class="caret"></span>
+    <span class="user-level">Administrador</span>
+    <span class="caret"></span>
     </span>
+    @endsection
 @endsection
 
 @section('contenido')

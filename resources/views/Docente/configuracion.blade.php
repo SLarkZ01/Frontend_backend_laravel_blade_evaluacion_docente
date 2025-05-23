@@ -39,14 +39,14 @@
             <p>Cerrar Sesión</p>
         </a>
     </li>
-@endsection
 @section('name-perfil')
-<span>
-    Mariano Closs
-<span class="user-level">Docente</span>
-<span class="caret"></span>
-</span>
-@endsection
+    <span>
+        Mariano Closs
+    <span class="user-level">Docente</span>
+    <span class="caret"></span>
+    </span>
+    @endsection
+    @endsection
 @section('contenido')
     <div class="container-fluid p-0">
         <div class="row g-0">
