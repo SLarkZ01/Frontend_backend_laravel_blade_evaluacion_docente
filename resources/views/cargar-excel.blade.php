@@ -6,8 +6,160 @@
     <title>Cargar Excel - Sistema de Evaluación Docente</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, 
+                #1e3c72 0%, 
+                #2a5298 50%, 
+                #274584 75%, 
+                #1e3c72 100%
+            );
+            background-size: 400% 400%;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .floating-shapes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.08);
+            animation: float 6s ease-in-out infinite;
+            font-size: 4rem;
+            transition: all 0.3s ease;
+        }
+
+        .shape i {
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.05));
+        }
+
+        .shape:nth-child(1) {
+            left: 5%;
+            top: 15%;
+            font-size: 6rem;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            right: 10%;
+            top: 25%;
+            font-size: 4.5rem;
+            animation-delay: 1s;
+        }
+
+        .shape:nth-child(3) {
+            left: 15%;
+            bottom: 20%;
+            font-size: 5rem;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(4) {
+            right: 20%;
+            bottom: 25%;
+            font-size: 4rem;
+            animation-delay: 1.5s;
+        }
+
+        .shape:nth-child(5) {
+            left: 40%;
+            top: 60%;
+            font-size: 5.5rem;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0);
+            }
+            50% { 
+                transform: translateY(-15px);
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 15px;
+        }
+
+        .card-header {
+            background: #1e3c72 !important;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 1.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.4);
+        }
+
+        .form-control, .form-select {
+            border-radius: 8px;
+            padding: 0.8rem;
+            border: 1px solid rgba(30, 60, 114, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #1e3c72;
+            box-shadow: 0 0 0 0.2rem rgba(30, 60, 114, 0.25);
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
 </head>
-<body class="bg-light">
+<body>
+    <div class="floating-shapes">
+        <div class="shape">
+            <i class="fas fa-file-excel"></i>
+        </div>
+        <div class="shape">
+            <i class="fas fa-table"></i>
+        </div>
+        <div class="shape">
+            <i class="fas fa-chart-bar"></i>
+        </div>
+        <div class="shape">
+            <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="shape">
+            <i class="fas fa-chart-pie"></i>
+        </div>
+    </div>
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
